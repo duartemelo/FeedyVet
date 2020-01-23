@@ -21,7 +21,10 @@ class App extends Component {
             <img src={logo} alt="Logo" className="feedy-logo-img"></img>
           </div>
           <div className="form-inline">
-            <button className="button login" onClick={this.LoginButtonHandler}>
+            <button
+              className="button login"
+              onClick={this.LoginButtonHandlerTrue}
+            >
               Login
             </button>
 
@@ -42,12 +45,17 @@ class App extends Component {
             Uma maneira tecnológica de cuidares dos teus animais.
           </div>
         </div>
-        {this.state.displayLogin && <Login></Login>}
+        {this.state.displayLogin === true && <Login></Login>}
       </div>
     );
   }
-  LoginButtonHandler = () => {
+  LoginButtonHandlerTrue = () => {
     this.state.displayLogin = true;
+    this.forceUpdate();
+  };
+  LogginButtonHandlerFalse = () => {
+    this.state.displayLogin = false;
+    this.forceUpdate();
   };
 }
 
