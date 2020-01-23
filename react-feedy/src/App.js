@@ -45,7 +45,9 @@ class App extends Component {
             Uma maneira tecnológica de cuidares dos teus animais.
           </div>
         </div>
-        {this.state.displayLogin === true && <Login></Login>}
+        {this.state.displayLogin === true && (
+          <Login handlerDown={this.LogginButtonHandlerFalse}>></Login>
+        )}
       </div>
     );
   }

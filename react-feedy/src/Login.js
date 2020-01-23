@@ -1,9 +1,9 @@
 import React from "react";
 
-const Login = () => {
+const Login = (props) => {
   return (
-    <div>
-      <h1>Test</h1>
+    <div className="form-div">
+      <div onClick={() => props.handlerDown()}>X</div>
     </div>
   );
 };
