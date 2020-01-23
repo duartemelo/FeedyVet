@@ -5,8 +5,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import Login from "./Login";
-import Register from "./Register";
 import NotFound from "./notfound";
 
 const routing = (
@@ -15,7 +13,7 @@ const routing = (
       <Switch>
         <Route exact path="/" component={App} />
         
-        <Route path="/register" component={Register} />
+        
         <Route component={NotFound} />
       </Switch>
     </div>
