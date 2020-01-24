@@ -12,8 +12,6 @@ class App extends Component {
     this.state = {
       displayLogin: false,
       displayRegister: false,
-      loginHeight: 300,
-      registerHeight: 500,
       loginButtonClasses: "button login",
       registerButtonClasses: "button register"
     };
@@ -57,7 +55,7 @@ class App extends Component {
         {this.state.displayLogin === true && (
           <Login
             handlerDown={this.LogginButtonHandlerFalse}
-            height={this.state.loginHeight}
+            height={300}
           >
             >
           </Login>
@@ -65,7 +63,7 @@ class App extends Component {
         {this.state.displayRegister === true && (
           <Register
             handlerDown={this.RegisterButtonHandlerFalse}
-            height={this.state.registerHeight}
+            height={500}
           >
             >
           </Register>

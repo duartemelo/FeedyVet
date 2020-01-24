@@ -89,3 +89,23 @@ body {
 .cursor-not-allowed {
   cursor: not-allowed !important;
 }
+
+.register-form {
+  margin-bottom: 50px;
+}
+
+.close-button {
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 30px;
+  background-color: #3680C1;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+  line-height: 30px;
+  float: right;
+  margin-right: 10px;
+  margin-top: 10px;
+  font-size: 13px;
+}
