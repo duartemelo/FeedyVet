@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import "./App.css";
 import logo from "./Images/Logo_2_1600.png";
 import dogchilling from "./Images/dog_chilling.png";
@@ -49,22 +48,16 @@ class App extends Component {
             ></img>
           </div>
           <div className="subtitle">
-            Uma maneira tecnológica de cuidares dos teus animais.
+            Transmissão de informação facilitada do veterinário para o cliente.
           </div>
         </div>
         {this.state.displayLogin === true && (
-          <Login
-            handlerDown={this.LogginButtonHandlerFalse}
-            height={300}
-          >
+          <Login handlerDown={this.LogginButtonHandlerFalse} height={350}>
             >
           </Login>
         )}
         {this.state.displayRegister === true && (
-          <Register
-            handlerDown={this.RegisterButtonHandlerFalse}
-            height={500}
-          >
+          <Register handlerDown={this.RegisterButtonHandlerFalse} height={500}>
             >
           </Register>
         )}
@@ -73,30 +66,42 @@ class App extends Component {
   }
   LoginButtonHandlerTrue = () => {
     if (this.state.displayRegister === false) {
-      this.state.displayLogin = true;
-      this.state.loginButtonClasses += " cursor-not-allowed";
-      this.state.registerButtonClasses += " cursor-not-allowed";
+      this.setState({
+        displayLogin: true,
+        loginButtonClasses:
+          this.state.loginButtonClasses + " cursor-not-allowed",
+        registerButtonClasses:
+          this.state.registerButtonClasses + " cursor-not-allowed"
+      });
       this.forceUpdate();
     }
   };
   LogginButtonHandlerFalse = () => {
-    this.state.displayLogin = false;
-    this.state.loginButtonClasses = "button login";
-    this.state.registerButtonClasses = "button register";
+    this.setState({
+      displayLogin: false,
+      loginButtonClasses: "button login",
+      registerButtonClasses: "button register"
+    });
     this.forceUpdate();
   };
   RegisterButtonHandlerTrue = () => {
     if (this.state.displayLogin === false) {
-      this.state.displayRegister = true;
-      this.state.loginButtonClasses += " cursor-not-allowed";
-      this.state.registerButtonClasses += " cursor-not-allowed";
+      this.setState({
+        displayRegister: true,
+        loginButtonClasses:
+          this.state.loginButtonClasses + " cursor-not-allowed",
+        registerButtonClasses:
+          this.state.registerButtonClasses + " cursor-not-allowed"
+      });
       this.forceUpdate();
     }
   };
   RegisterButtonHandlerFalse = () => {
-    this.state.displayRegister = false;
-    this.state.loginButtonClasses = "button login";
-    this.state.registerButtonClasses = "button register";
+    this.setState({
+      displayRegister: false,
+      loginButtonClasses: "button login",
+      registerButtonClasses: "button register"
+    });
     this.forceUpdate();
   };
 }

@@ -66,7 +66,7 @@ body {
 .form-div {
   position: absolute;
   width: 100%;
-  max-width: 400px;
+  max-width: 350px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 999;
@@ -105,7 +105,51 @@ body {
   text-align: center;
   line-height: 30px;
   float: right;
-  margin-right: 10px;
-  margin-top: 10px;
+  margin-right: 15px;
+  margin-top: 15px;
   font-size: 13px;
+}
+
+.input {
+  width: 100%;
+  max-width: 200px;
+  border: none;
+  background-color: #fff;
+  border-radius: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  padding: 10px 0px 10px 10px;
+  font-size: 15px;
+}
+
+.input:focus {
+  outline: 0;
+}
+
+.form-login-button {
+  border-radius: 5px;
+  width: 100%;
+  max-width: 200px;
+  height: 35px;
+  border: none;
+  background-color: #3680C1;
+  color: #fff;
+  font-size: 15px;
+  display: block;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0px 3px 6px rgb(177, 177, 177);
+}
+
+.form-login-button:focus {
+  outline: 0;
+}
+
+.login-title {
+  color: #3680C1;
+  text-align: center;
+  margin-top: 75px;
 }
