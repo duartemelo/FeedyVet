@@ -10,7 +10,7 @@ class App extends Component {
     super(props);
     this.state = {
       displayLogin: false,
-      displayRegister: false,
+      displayRegister: true,
       loginButtonClasses: "button login",
       registerButtonClasses: "button register"
     };
@@ -57,7 +57,7 @@ class App extends Component {
           </Login>
         )}
         {this.state.displayRegister === true && (
-          <Register handlerDown={this.RegisterButtonHandlerFalse} height={500}>
+          <Register handlerDown={this.RegisterButtonHandlerFalse} height={450}>
             >
           </Register>
         )}

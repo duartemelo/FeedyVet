@@ -6,7 +6,7 @@ const Login = props => {
       <div className="close-button" onClick={() => props.handlerDown()}>
         Fechar
       </div>
-      <div className="login-title">Estamos quase lá...</div>
+      <div className="form-title">Estamos quase lá...</div>
       <input
         className="input"
         placeholder="Utilizador"
