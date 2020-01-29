@@ -10,15 +10,16 @@ class App extends Component {
     super(props);
     this.state = {
       displayLogin: false,
-      displayRegister: true,
+      displayRegister: false,
       loginButtonClasses: "button login",
-      registerButtonClasses: "button register"
+      registerButtonClasses: "button register",
+      appClasses: "App"
     };
   }
 
   render() {
     return (
-      <div className="App">
+      <div className={this.state.appClasses}>
         <div className="navbar">
           <div className="brand feedy-logo-div">
             <img src={logo} alt="Logo" className="feedy-logo-img"></img>
@@ -71,7 +72,8 @@ class App extends Component {
         loginButtonClasses:
           this.state.loginButtonClasses + " cursor-not-allowed",
         registerButtonClasses:
-          this.state.registerButtonClasses + " cursor-not-allowed"
+          this.state.registerButtonClasses + " cursor-not-allowed",
+        appClasses: this.state.appClasses + " App-blur"
       });
       this.forceUpdate();
     }
@@ -80,7 +82,8 @@ class App extends Component {
     this.setState({
       displayLogin: false,
       loginButtonClasses: "button login",
-      registerButtonClasses: "button register"
+      registerButtonClasses: "button register",
+      appClasses: "App"
     });
     this.forceUpdate();
   };
@@ -91,7 +94,8 @@ class App extends Component {
         loginButtonClasses:
           this.state.loginButtonClasses + " cursor-not-allowed",
         registerButtonClasses:
-          this.state.registerButtonClasses + " cursor-not-allowed"
+          this.state.registerButtonClasses + " cursor-not-allowed",
+        appClasses: this.state.appClasses + " App-blur"
       });
       this.forceUpdate();
     }
@@ -100,7 +104,8 @@ class App extends Component {
     this.setState({
       displayRegister: false,
       loginButtonClasses: "button login",
-      registerButtonClasses: "button register"
+      registerButtonClasses: "button register",
+      appClasses: "App"
     });
     this.forceUpdate();
   };

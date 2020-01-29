@@ -68,13 +68,20 @@ body {
   width: 100%;
   max-width: 350px;
   left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
   z-index: 999;
-  top: 100px;
   background-color: #F0F0F0;
   box-shadow: 2px 2px 5px rgb(165, 165, 165);
   border-radius: 5px;
   animation: form-appearing 0.4s ease;
+}
+
+@media (max-height: 450px) {
+  .form-div {
+    top: 20px;
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes form-appearing {
@@ -152,4 +159,10 @@ body {
   color: #3680C1;
   text-align: center;
   margin-top: 75px;
+}
+
+.App-blur>*:not(.form-div) {
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+  transition: 0.3s ease;
 }
