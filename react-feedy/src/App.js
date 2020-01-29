@@ -4,6 +4,8 @@ import logo from "./Images/Logo_2_1600.png";
 import dogchilling from "./Images/dog_chilling.png";
 import Login from "./Login";
 import Register from "./Register";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
 class App extends Component {
   constructor(props) {
@@ -13,55 +15,67 @@ class App extends Component {
       displayRegister: false,
       loginButtonClasses: "button login",
       registerButtonClasses: "button register",
-      appClasses: "App"
+      landingContainerClasses: "landing-container"
     };
   }
 
   render() {
     return (
-      <div className={this.state.appClasses}>
-        <div className="navbar">
-          <div className="brand feedy-logo-div">
-            <img src={logo} alt="Logo" className="feedy-logo-img"></img>
-          </div>
-          <div className="form-inline">
-            <button
-              className={this.state.loginButtonClasses}
-              onClick={this.LoginButtonHandlerTrue}
-            >
-              Login
-            </button>
+      <div className="App">
+        <div className={this.state.landingContainerClasses}>
+          <div className="navbar">
+            <div className="brand feedy-logo-div">
+              <img src={logo} alt="Logo" className="feedy-logo-img"></img>
+            </div>
+            <div className="form-inline">
+              <button
+                className={this.state.loginButtonClasses}
+                onClick={this.LoginButtonHandlerTrue}
+              >
+                Login
+              </button>
 
-            <button
-              className={this.state.registerButtonClasses}
-              onClick={this.RegisterButtonHandlerTrue}
+              <button
+                className={this.state.registerButtonClasses}
+                onClick={this.RegisterButtonHandlerTrue}
+              >
+                Registo
+              </button>
+            </div>
+          </div>
+          <div className="center-container">
+            <div>
+              <img
+                src={dogchilling}
+                alt="Dog chilling"
+                className="dog-image"
+              ></img>
+            </div>
+            <div className="subtitle">
+              Transmissão de informação facilitada do veterinário para o
+              cliente.
+            </div>
+          </div>
+          {this.state.displayLogin === true && (
+            <Login handlerDown={this.LogginButtonHandlerFalse} height={350}>
+              >
+            </Login>
+          )}
+          {this.state.displayRegister === true && (
+            <Register
+              handlerDown={this.RegisterButtonHandlerFalse}
+              height={450}
             >
-              Registo
-            </button>
+              >
+            </Register>
+          )}
+          <div className="arrow-div">
+            <FontAwesomeIcon icon={faArrowDown} />
           </div>
         </div>
-        <div className="center-container">
-          <div>
-            <img
-              src={dogchilling}
-              alt="Dog chilling"
-              className="dog-image"
-            ></img>
-          </div>
-          <div className="subtitle">
-            Transmissão de informação facilitada do veterinário para o cliente.
-          </div>
+        <div className="information-container">
+          <div class="container-title">Info</div>
         </div>
-        {this.state.displayLogin === true && (
-          <Login handlerDown={this.LogginButtonHandlerFalse} height={350}>
-            >
-          </Login>
-        )}
-        {this.state.displayRegister === true && (
-          <Register handlerDown={this.RegisterButtonHandlerFalse} height={450}>
-            >
-          </Register>
-        )}
       </div>
     );
   }
@@ -73,7 +87,8 @@ class App extends Component {
           this.state.loginButtonClasses + " cursor-not-allowed",
         registerButtonClasses:
           this.state.registerButtonClasses + " cursor-not-allowed",
-        appClasses: this.state.appClasses + " App-blur"
+        landingContainerClasses:
+          this.state.landingContainerClasses + " outside-blur"
       });
       this.forceUpdate();
     }
@@ -83,7 +98,8 @@ class App extends Component {
       displayLogin: false,
       loginButtonClasses: "button login",
       registerButtonClasses: "button register",
-      appClasses: "App"
+
+      landingContainerClasses: "landing-container"
     });
     this.forceUpdate();
   };
@@ -95,7 +111,8 @@ class App extends Component {
           this.state.loginButtonClasses + " cursor-not-allowed",
         registerButtonClasses:
           this.state.registerButtonClasses + " cursor-not-allowed",
-        appClasses: this.state.appClasses + " App-blur"
+        landingContainerClasses:
+          this.state.landingContainerClasses + " outside-blur"
       });
       this.forceUpdate();
     }
@@ -105,7 +122,8 @@ class App extends Component {
       displayRegister: false,
       loginButtonClasses: "button login",
       registerButtonClasses: "button register",
-      appClasses: "App"
+
+      landingContainerClasses: "landing-container"
     });
     this.forceUpdate();
   };

@@ -161,8 +161,60 @@ body {
   margin-top: 75px;
 }
 
-.App-blur>*:not(.form-div) {
+.outside-blur>*:not(.form-div) {
   filter: blur(2px);
   -webkit-filter: blur(2px);
   transition: 0.3s ease;
+}
+
+.arrow-div {
+  text-align: center;
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+  font-size: 18px;
+  color: #3680C1;
+  padding-bottom: 15px;
+  animation: arrow-animation 1s infinite;
+}
+
+@keyframes arrow-animation {
+  0% {
+    padding-bottom: 15px;
+  }
+  50% {
+    padding-bottom: 20px;
+  }
+  100% {
+    padding-bottom: 15px;
+  }
+}
+
+@media (max-height: 500px) {
+  .arrow-div {
+    display: none;
+  }
+}
+
+.landing-container {
+  position: relative;
+  height: 100vh;
+  min-height: 500px;
+}
+
+.information-container {
+  /*background-color: blue;*/
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  min-height: 500px;
+  background-color: rgb(240, 240, 240);
+}
+
+.container-title {
+  font-weight: 400;
+  text-align: center;
+  font-size: 20px;
+  margin-top: 10px;
+  position: relative;
 }
