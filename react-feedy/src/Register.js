@@ -1,10 +1,12 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 const Register = props => {
   return (
     <div className="form-div" style={{ height: props.height }}>
       <div className="close-button" onClick={() => props.handlerDown()}>
-        Fechar
+        <FontAwesomeIcon icon={faTimesCircle} />
       </div>
       <div className="form-title">Bem-vindo!</div>
       <input
