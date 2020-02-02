@@ -15,14 +15,16 @@ class App extends Component {
       displayRegister: false,
       loginButtonClasses: "button login",
       registerButtonClasses: "button register",
-      landingContainerClasses: "landing-container"
+      blurClasses: "",
+      landingContainerClasses: "landing-container",
+      informationContainerClasses: ""
     };
   }
 
   render() {
     return (
-      <div className="App">
-        <div className={this.state.landingContainerClasses}>
+      <div className={this.bodyClasses}>
+        <div className={"landing-container " + this.state.blurClasses}>
           <div className="navbar">
             <div className="brand feedy-logo-div">
               <img src={logo} alt="Logo" className="feedy-logo-img"></img>
@@ -51,9 +53,9 @@ class App extends Component {
                 className="dog-image"
               ></img>
             </div>
+            <div className="title">Veterinários next-level!</div>
             <div className="subtitle">
-              Transmissão de informação facilitada do veterinário para o
-              cliente.
+              Diminuimos distâncias entre os estabelecimentos e os clientes.
             </div>
           </div>
           {this.state.displayLogin === true && (
@@ -73,8 +75,8 @@ class App extends Component {
             <FontAwesomeIcon icon={faArrowDown} />
           </div>
         </div>
-        <div className="information-container">
-          <div class="container-title">Info</div>
+        <div className={"information-container " + this.state.blurClasses}>
+          <div className="container-title">Info</div>
         </div>
       </div>
     );
@@ -87,9 +89,9 @@ class App extends Component {
           this.state.loginButtonClasses + " cursor-not-allowed",
         registerButtonClasses:
           this.state.registerButtonClasses + " cursor-not-allowed",
-        landingContainerClasses:
-          this.state.landingContainerClasses + " outside-blur"
+        blurClasses: this.state.blurClasses + "outside-blur"
       });
+      this.LockScroll(true);
       this.forceUpdate();
     }
   };
@@ -99,8 +101,9 @@ class App extends Component {
       loginButtonClasses: "button login",
       registerButtonClasses: "button register",
 
-      landingContainerClasses: "landing-container"
+      blurClasses: ""
     });
+    this.LockScroll(false);
     this.forceUpdate();
   };
   RegisterButtonHandlerTrue = () => {
@@ -111,9 +114,9 @@ class App extends Component {
           this.state.loginButtonClasses + " cursor-not-allowed",
         registerButtonClasses:
           this.state.registerButtonClasses + " cursor-not-allowed",
-        landingContainerClasses:
-          this.state.landingContainerClasses + " outside-blur"
+        blurClasses: this.state.blurClasses + "outside-blur"
       });
+      this.LockScroll(true);
       this.forceUpdate();
     }
   };
@@ -123,9 +126,17 @@ class App extends Component {
       loginButtonClasses: "button login",
       registerButtonClasses: "button register",
 
-      landingContainerClasses: "landing-container"
+      blurClasses: ""
     });
+    this.LockScroll(false);
     this.forceUpdate();
+  };
+  LockScroll = varbool => {
+    if (varbool === true && window.innerHeight > 500) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
   };
 }
 
