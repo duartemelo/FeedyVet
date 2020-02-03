@@ -6,6 +6,7 @@ import Login from "./Login";
 import Register from "./Register";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 class App extends Component {
   constructor(props) {
@@ -43,6 +44,9 @@ class App extends Component {
               >
                 Registo
               </button>
+              <div className="mobile-menu-icon-div">
+                <FontAwesomeIcon icon={faBars} className="mobile-menu-icon" />
+              </div>
             </div>
           </div>
           <div className="center-container">
