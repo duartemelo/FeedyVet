@@ -203,11 +203,7 @@ body {
   }
 }
 
-@media (max-height: 500px) {
-  .arrow-div {
-    display: none;
-  }
-}
+
 
 .landing-container {
   position: relative;
@@ -221,7 +217,7 @@ body {
   width: 100%;
   height: 100vh;
   min-height: 500px;
-  background-color: rgb(240, 240, 240);
+  background-color: rgb(245, 245, 245);
 }
 
 .container-title {
