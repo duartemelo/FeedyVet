@@ -4,6 +4,7 @@ import logo from "./Images/Logo_2_1600.png";
 import dogchilling from "./Images/dog_chilling.png";
 import Login from "./Login";
 import Register from "./Register";
+import MobileMenu from "./MobileMenu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
@@ -14,6 +15,8 @@ class App extends Component {
     this.state = {
       displayLogin: false,
       displayRegister: false,
+      displayMobileMenu: false /*Change to false later*/,
+      navbarButtonsDisable: false,
       loginButtonClasses: "button login",
       registerButtonClasses: "button register",
       blurClasses: "",
@@ -45,7 +48,11 @@ class App extends Component {
                 Registo
               </button>
               <div className="mobile-menu-icon-div">
-                <FontAwesomeIcon icon={faBars} className="mobile-menu-icon" />
+                <FontAwesomeIcon
+                  icon={faBars}
+                  className="mobile-menu-icon"
+                  onClick={this.MobileMenuOpen}
+                />
               </div>
             </div>
           </div>
@@ -62,6 +69,8 @@ class App extends Component {
               Diminuimos distâncias entre os estabelecimentos e os clientes.
             </div>
           </div>
+
+          {this.state.displayMobileMenu === true && <MobileMenu></MobileMenu>}
           {this.state.displayLogin === true && (
             <Login handlerDown={this.LogginButtonHandlerFalse} height={350}>
               >
@@ -86,57 +95,75 @@ class App extends Component {
     );
   }
   LoginButtonHandlerTrue = () => {
-    if (this.state.displayRegister === false) {
-      this.setState({
-        displayLogin: true,
-        loginButtonClasses:
-          this.state.loginButtonClasses + " cursor-not-allowed",
-        registerButtonClasses:
-          this.state.registerButtonClasses + " cursor-not-allowed",
-        blurClasses: this.state.blurClasses + "outside-blur"
-      });
-      this.LockScroll(true);
-      this.forceUpdate();
+    if (this.state.navbarButtonsDisable === false) {
+      if (this.state.displayRegister === false) {
+        this.setState({
+          displayLogin: true,
+          navbarButtonsDisable: true,
+          loginButtonClasses:
+            this.state.loginButtonClasses + " cursor-not-allowed",
+          registerButtonClasses:
+            this.state.registerButtonClasses + " cursor-not-allowed",
+          blurClasses: this.state.blurClasses + "outside-blur"
+        });
+        this.LockScroll(true);
+        this.forceUpdate();
+      }
     }
   };
   LogginButtonHandlerFalse = () => {
-    this.setState({
-      displayLogin: false,
-      loginButtonClasses: "button login",
-      registerButtonClasses: "button register",
-
-      blurClasses: ""
-    });
-    this.LockScroll(false);
-    this.forceUpdate();
-  };
-  RegisterButtonHandlerTrue = () => {
-    if (this.state.displayLogin === false) {
+    if (this.state.navbarButtonsDisable === true) {
       this.setState({
-        displayRegister: true,
-        loginButtonClasses:
-          this.state.loginButtonClasses + " cursor-not-allowed",
-        registerButtonClasses:
-          this.state.registerButtonClasses + " cursor-not-allowed",
-        blurClasses: this.state.blurClasses + "outside-blur"
+        displayLogin: false,
+        navbarButtonsDisable: false,
+        loginButtonClasses: "button login",
+        registerButtonClasses: "button register",
+
+        blurClasses: ""
       });
-      this.LockScroll(true);
+      this.LockScroll(false);
       this.forceUpdate();
     }
   };
+  RegisterButtonHandlerTrue = () => {
+    if (this.state.navbarButtonsDisable === false) {
+      if (this.state.displayLogin === false) {
+        this.setState({
+          displayRegister: true,
+          navbarButtonsDisable: true,
+          loginButtonClasses:
+            this.state.loginButtonClasses + " cursor-not-allowed",
+          registerButtonClasses:
+            this.state.registerButtonClasses + " cursor-not-allowed",
+          blurClasses: this.state.blurClasses + "outside-blur"
+        });
+        this.LockScroll(true);
+        this.forceUpdate();
+      }
+    }
+  };
   RegisterButtonHandlerFalse = () => {
-    this.setState({
-      displayRegister: false,
-      loginButtonClasses: "button login",
-      registerButtonClasses: "button register",
+    if (this.state.navbarButtonsDisable === true) {
+      this.setState({
+        displayRegister: false,
+        navbarButtonsDisable: false,
+        loginButtonClasses: "button login",
+        registerButtonClasses: "button register",
 
-      blurClasses: ""
+        blurClasses: ""
+      });
+      this.LockScroll(false);
+      this.forceUpdate();
+    }
+  };
+  MobileMenuOpen = () => {
+    this.setState({
+      displayMobileMenu: true
     });
-    this.LockScroll(false);
-    this.forceUpdate();
+    this.LockScroll(true);
   };
   LockScroll = varbool => {
-    if (varbool === true && window.innerHeight > 500) {
+    if (varbool === true) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
