@@ -4,13 +4,12 @@ import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 const MobileMenu = props => {
   return (
-    <div className="mobile-menu">
+    <div className={props.stateClasses}>
       <div className="close-button" onClick={() => props.handlerDown()}>
         <FontAwesomeIcon icon={faTimesCircle} />
       </div>
     </div>
   );
-
 };
 
 export default MobileMenu;

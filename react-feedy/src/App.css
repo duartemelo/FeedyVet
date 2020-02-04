@@ -81,6 +81,19 @@ body {
   animation: mobile-menu-appearing 0.4s ease;
 }
 
+.mobile-menu-leaving-animation {
+  animation: mobile-menu-disappearing 0.4s ease;
+}
+
+@keyframes mobile-menu-disappearing {
+  0% {
+    right: 0;
+  }
+  100% {
+    right: -100%;
+  }
+}
+
 @keyframes mobile-menu-appearing {
   0% {
     right: -100%;
@@ -118,6 +131,28 @@ body {
   animation: form-appearing 0.4s ease;
 }
 
+.form-div-disappearing{
+  animation: form-disappearing 0.4s ease;
+}
+
+@keyframes form-appearing {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes form-disappearing {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 @media (max-height: 450px) {
   .form-div {
     top: 20px;
@@ -149,15 +184,6 @@ body {
   }
   .feedy-logo-div {
     margin-top: 0;
-  }
-}
-
-@keyframes form-appearing {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
   }
 }
 

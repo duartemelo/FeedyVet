@@ -21,7 +21,9 @@ class App extends Component {
       registerButtonClasses: "button register",
       blurClasses: "",
       landingContainerClasses: "landing-container",
-      informationContainerClasses: ""
+      informationContainerClasses: "",
+      MobileMenuClasses: "mobile-menu",
+      formsClasses: "form-div"
     };
   }
 
@@ -71,10 +73,17 @@ class App extends Component {
           </div>
 
           {this.state.displayMobileMenu === true ? (
-            <MobileMenu handlerDown={this.MobileMenuClose}></MobileMenu>
+            <MobileMenu
+              handlerDown={this.MobileMenuClose}
+              stateClasses={this.state.MobileMenuClasses}
+            ></MobileMenu>
           ) : null}
           {this.state.displayLogin === true ? (
-            <Login handlerDown={this.LogginButtonHandlerFalse} height={350}>
+            <Login
+              handlerDown={this.LogginButtonHandlerFalse}
+              height={350}
+              stateClasses={this.state.formsClasses}
+            >
               >
             </Login>
           ) : null}
@@ -82,6 +91,7 @@ class App extends Component {
             <Register
               handlerDown={this.RegisterButtonHandlerFalse}
               height={450}
+              stateClasses={this.state.formsClasses}
             >
               >
             </Register>
@@ -108,24 +118,34 @@ class App extends Component {
             this.state.registerButtonClasses + " cursor-not-allowed",
           blurClasses: this.state.blurClasses + "outside-blur"
         });
-        this.LockScroll(true);
-        this.forceUpdate();
+
+        if (window.innerHeight > 350) {
+          this.LockScroll(true);
+        }
       }
     }
   };
   LogginButtonHandlerFalse = () => {
-    if (this.state.navbarButtonsDisable === true) {
-      this.setState({
-        displayLogin: false,
-        navbarButtonsDisable: false,
-        loginButtonClasses: "button login",
-        registerButtonClasses: "button register",
+    this.setState({
+      formsClasses: this.state.formsClasses + " form-div-disappearing"
+    });
 
-        blurClasses: ""
-      });
-      this.LockScroll(false);
-      this.forceUpdate();
-    }
+    setTimeout(
+      function() {
+        if (this.state.navbarButtonsDisable === true) {
+          this.setState({
+            displayLogin: false,
+            navbarButtonsDisable: false,
+            loginButtonClasses: "button login",
+            registerButtonClasses: "button register",
+            formsClasses: "form-div",
+            blurClasses: ""
+          });
+          this.LockScroll(false);
+        }
+      }.bind(this),
+      400
+    );
   };
   RegisterButtonHandlerTrue = () => {
     if (this.state.navbarButtonsDisable === false) {
@@ -139,24 +159,33 @@ class App extends Component {
             this.state.registerButtonClasses + " cursor-not-allowed",
           blurClasses: this.state.blurClasses + "outside-blur"
         });
-        this.LockScroll(true);
-        this.forceUpdate();
+        if (window.innerHeight > 450) {
+          this.LockScroll(true);
+        }
       }
     }
   };
   RegisterButtonHandlerFalse = () => {
-    if (this.state.navbarButtonsDisable === true) {
-      this.setState({
-        displayRegister: false,
-        navbarButtonsDisable: false,
-        loginButtonClasses: "button login",
-        registerButtonClasses: "button register",
+    this.setState({
+      formsClasses: this.state.formsClasses + " form-div-disappearing"
+    });
 
-        blurClasses: ""
-      });
-      this.LockScroll(false);
-      this.forceUpdate();
-    }
+    setTimeout(
+      function() {
+        if (this.state.navbarButtonsDisable === true) {
+          this.setState({
+            displayRegister: false,
+            navbarButtonsDisable: false,
+            loginButtonClasses: "button login",
+            registerButtonClasses: "button register",
+            formsClasses: "form-div",
+            blurClasses: ""
+          });
+          this.LockScroll(false);
+        }
+      }.bind(this),
+      400
+    );
   };
   MobileMenuOpen = () => {
     this.setState({
@@ -166,9 +195,20 @@ class App extends Component {
   };
   MobileMenuClose = () => {
     this.setState({
-      displayMobileMenu: false
+      MobileMenuClasses:
+        this.state.MobileMenuClasses + " mobile-menu-leaving-animation"
     });
-    this.LockScroll(false);
+
+    setTimeout(
+      function() {
+        this.setState({
+          displayMobileMenu: false,
+          MobileMenuClasses: "mobile-menu"
+        });
+        this.LockScroll(false);
+      }.bind(this),
+      400
+    );
   };
   LockScroll = varbool => {
     if (varbool === true) {

@@ -4,7 +4,7 @@ import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 const Login = props => {
   return (
-    <div className="form-div" style={{ height: props.height }}>
+    <div className={props.stateClasses} style={{ height: props.height }}>
       <div className="close-button" onClick={() => props.handlerDown()}>
         <FontAwesomeIcon icon={faTimesCircle} />
       </div>
