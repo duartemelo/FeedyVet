@@ -70,20 +70,22 @@ class App extends Component {
             </div>
           </div>
 
-          {this.state.displayMobileMenu === true && <MobileMenu></MobileMenu>}
-          {this.state.displayLogin === true && (
+          {this.state.displayMobileMenu === true ? (
+            <MobileMenu handlerDown={this.MobileMenuClose}></MobileMenu>
+          ) : null}
+          {this.state.displayLogin === true ? (
             <Login handlerDown={this.LogginButtonHandlerFalse} height={350}>
               >
             </Login>
-          )}
-          {this.state.displayRegister === true && (
+          ) : null}
+          {this.state.displayRegister === true ? (
             <Register
               handlerDown={this.RegisterButtonHandlerFalse}
               height={450}
             >
               >
             </Register>
-          )}
+          ) : null}
           <div className="arrow-div">
             <FontAwesomeIcon icon={faArrowDown} />
           </div>
@@ -161,6 +163,12 @@ class App extends Component {
       displayMobileMenu: true
     });
     this.LockScroll(true);
+  };
+  MobileMenuClose = () => {
+    this.setState({
+      displayMobileMenu: false
+    });
+    this.LockScroll(false);
   };
   LockScroll = varbool => {
     if (varbool === true) {
