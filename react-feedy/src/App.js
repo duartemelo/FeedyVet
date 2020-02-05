@@ -115,8 +115,12 @@ class App extends Component {
             <img src={updated} alt="Updated image" className="info-image"></img>
           </div>
         </div>
+
         <div className={"information-container " + this.state.blurClasses}>
-          <div className="left-column">
+          <div className="left-column-i">
+            <img src={appimage} alt="App image" className="info-image"></img>
+          </div>
+          <div className="right-column-i">
             <div className="info-text-container">
               <div className="info-main-text">Simples, interativo</div>
               <div className="info-sub-text">
@@ -124,8 +128,11 @@ class App extends Component {
               </div>
             </div>
           </div>
-          <div className="right-column">
-            <img src={appimage} alt="App image" className="info-image"></img>
+        </div>
+
+        <div className={"promo-container " + this.state.blurClasses}>
+          <div className="container-title">
+            Veterinários, do que é que estão à espera?
           </div>
         </div>
       </div>

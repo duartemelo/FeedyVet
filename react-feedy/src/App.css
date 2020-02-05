@@ -301,20 +301,20 @@ body {
 }
 
 .information-container {
-  /*background-color: blue;*/
   position: relative;
   width: 100%;
   max-width: 1500px;
   height: 500px;
-  /*meh*/
 }
 
 .container-title {
   font-weight: 400;
   text-align: center;
-  font-size: 20px;
-  margin-top: 10px;
-  position: relative;
+  width: 100%;
+  font-size: 23px;
+  margin-top: 25px;
+  position: absolute;
+  color: #333;
 }
 
 .info-image {
@@ -330,6 +330,17 @@ body {
   /*background-color: red;*/
 }
 
+.left-column-i {
+  height: 500px;
+  width: 50%;
+  float: left;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
 .right-column {
   height: 500px;
   width: 50%;
@@ -339,6 +350,12 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+}
+
+.right-column-i {
+  height: 500px;
+  width: 50%;
+  float: right;
 }
 
 .info-text-container {
@@ -363,9 +380,19 @@ body {
     height: 160px;
     float: none;
   }
+  .left-column-i {
+    width: 100%;
+    height: 500px;
+    float: none;
+  }
   .right-column {
     width: 100%;
     height: 500px;
+    float: none;
+  }
+  .right-column-i {
+    width: 100%;
+    height: 300px;
     float: none;
   }
   .information-container {
@@ -385,4 +412,8 @@ body {
     margin-left: 0;
     text-align: center;
   }
+}
+
+.promo-container {
+  height: 600px;
 }
