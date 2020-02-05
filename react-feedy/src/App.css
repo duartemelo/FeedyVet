@@ -2,6 +2,10 @@
   
 }*/
 
+html, body {
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'Ubuntu', sans-serif;
 }
@@ -69,12 +73,12 @@ body {
 }
 
 .mobile-menu {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   width: 40%;
   max-width: 300px;
-  min-width: 100px;
+  min-width: 150px;
   height: 100vh;
   z-index: 9999;
   background-color: rgb(245, 245, 245);
@@ -118,7 +122,7 @@ body {
 }
 
 .form-div {
-  position: absolute;
+  position: fixed;
   width: 100%;
   max-width: 350px;
   left: 50%;
@@ -131,7 +135,13 @@ body {
   animation: form-appearing 0.4s ease;
 }
 
-.form-div-disappearing{
+@media only screen and (max-height: 450px) {
+  .form-div {
+    position: absolute;
+  }
+}
+
+.form-div-disappearing {
   animation: form-disappearing 0.4s ease;
 }
 
@@ -292,11 +302,11 @@ body {
 
 .information-container {
   /*background-color: blue;*/
-  position: absolute;
+  position: relative;
   width: 100%;
-  height: 100vh;
-  min-height: 500px;
-  background-color: rgb(245, 245, 245);
+  max-width: 1500px;
+  height: 500px;
+  /*meh*/
 }
 
 .container-title {
@@ -305,4 +315,74 @@ body {
   font-size: 20px;
   margin-top: 10px;
   position: relative;
+}
+
+.info-image {
+  width: 100%;
+  max-width: 400px;
+  display: block;
+}
+
+.left-column {
+  height: 500px;
+  width: 50%;
+  float: left;
+  /*background-color: red;*/
+}
+
+.right-column {
+  height: 500px;
+  width: 50%;
+  float: right;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-text-container {
+  position: absolute;
+}
+
+.info-main-text {
+  font-size: 25px;
+  margin-left: 70px;
+  margin-top: 200px;
+  font-weight: 400;
+}
+
+.info-sub-text {
+  margin-left: 70px;
+  font-weight: 300;
+}
+
+@media (max-width: 900px) {
+  .left-column {
+    width: 100%;
+    height: 160px;
+    float: none;
+  }
+  .right-column {
+    width: 100%;
+    height: 500px;
+    float: none;
+  }
+  .information-container {
+    height: auto;
+  }
+  .info-text-container {
+    width: 100vw;
+  }
+  .info-main-text {
+    font-size: 22px;
+    margin-top: 60px;
+    margin-left: 0;
+    text-align: center;
+  }
+  .info-sub-text {
+    font-size: 17.6px;
+    margin-left: 0;
+    text-align: center;
+  }
 }

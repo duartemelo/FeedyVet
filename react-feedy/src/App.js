@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./App.css";
 import logo from "./Images/Logo_2_1600.png";
 import dogchilling from "./Images/dog_chilling.png";
+import updated from "./Images/updated.png";
+import appimage from "./Images/app2.png";
 import Login from "./Login";
 import Register from "./Register";
 import MobileMenu from "./MobileMenu";
@@ -66,9 +68,9 @@ class App extends Component {
                 className="dog-image"
               ></img>
             </div>
-            <div className="title">Veterinários next-level!</div>
+            <div className="title">FeedyVet - Aplicação Web e Móvel</div>
             <div className="subtitle">
-              Diminuimos distâncias entre os estabelecimentos e os clientes.
+              Diminuímos distâncias entre veterinários e clientes.
             </div>
           </div>
 
@@ -101,7 +103,30 @@ class App extends Component {
           </div>
         </div>
         <div className={"information-container " + this.state.blurClasses}>
-          <div className="container-title">Info</div>
+          <div className="left-column">
+            <div className="info-text-container">
+              <div className="info-main-text">Sempre ao teu dispor</div>
+              <div className="info-sub-text">
+                Gestão e notificações dos teus animais no teu telemóvel.
+              </div>
+            </div>
+          </div>
+          <div className="right-column">
+            <img src={updated} alt="Updated image" className="info-image"></img>
+          </div>
+        </div>
+        <div className={"information-container " + this.state.blurClasses}>
+          <div className="left-column">
+            <div className="info-text-container">
+              <div className="info-main-text">Simples, interativo</div>
+              <div className="info-sub-text">
+                Sem informação redundante, a aplicação foca-se nos teus animais.
+              </div>
+            </div>
+          </div>
+          <div className="right-column">
+            <img src={appimage} alt="App image" className="info-image"></img>
+          </div>
         </div>
       </div>
     );
