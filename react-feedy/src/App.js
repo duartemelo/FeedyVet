@@ -25,6 +25,7 @@ class App extends Component {
       landingContainerClasses: "landing-container",
       informationContainerClasses: "",
       MobileMenuClasses: "mobile-menu",
+      MobileMenuIconClasses: "mobile-menu-icon",
       formsClasses: "form-div"
     };
   }
@@ -54,7 +55,7 @@ class App extends Component {
               <div className="mobile-menu-icon-div">
                 <FontAwesomeIcon
                   icon={faBars}
-                  className="mobile-menu-icon"
+                  className={this.state.MobileMenuIconClasses}
                   onClick={this.MobileMenuOpen}
                 />
               </div>
@@ -156,6 +157,8 @@ class App extends Component {
             this.state.loginButtonClasses + " cursor-not-allowed",
           registerButtonClasses:
             this.state.registerButtonClasses + " cursor-not-allowed",
+          MobileMenuIconClasses:
+            this.state.MobileMenuIconClasses + " cursor-not-allowed",
           blurClasses: this.state.blurClasses + "outside-blur"
         });
 
@@ -179,6 +182,7 @@ class App extends Component {
             loginButtonClasses: "button login",
             registerButtonClasses: "button register",
             formsClasses: "form-div",
+            MobileMenuIconClasses: "mobile-menu-icon",
             blurClasses: ""
           });
           this.LockScroll(false);
@@ -197,6 +201,8 @@ class App extends Component {
             this.state.loginButtonClasses + " cursor-not-allowed",
           registerButtonClasses:
             this.state.registerButtonClasses + " cursor-not-allowed",
+          MobileMenuIconClasses:
+            this.state.MobileMenuIconClasses + " cursor-not-allowed",
           blurClasses: this.state.blurClasses + "outside-blur"
         });
         if (window.innerHeight > 450) {
@@ -219,6 +225,7 @@ class App extends Component {
             loginButtonClasses: "button login",
             registerButtonClasses: "button register",
             formsClasses: "form-div",
+            MobileMenuIconClasses: "mobile-menu-icon",
             blurClasses: ""
           });
           this.LockScroll(false);

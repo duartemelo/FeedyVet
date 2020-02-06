@@ -12,6 +12,7 @@ body {
 
 .button {
   border-radius: 5px;
+  margin-top: 10px;
   width: 118px;
   height: 35px;
   border: none;
@@ -441,6 +442,7 @@ body {
   background-color: rgb(245, 245, 245);
   width: 100%;
   font-size: 20px;
+  color: #333;
 }
 
 .mobile-menu-button:focus {
