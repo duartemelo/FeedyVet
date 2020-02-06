@@ -110,6 +110,8 @@ class App extends Component {
               <div className="info-main-text">Sempre ao teu dispor</div>
               <div className="info-sub-text">
                 Gestão e notificações dos teus animais no teu telemóvel.
+                <br />
+                Acede ao menu do teu amigo de quatro patas facilmente.
               </div>
             </div>
           </div>
@@ -124,9 +126,12 @@ class App extends Component {
           </div>
           <div className="right-column-i">
             <div className="info-text-container">
-              <div className="info-main-text">Simples, interativo</div>
+              <div className="info-main-text">Simples e prático</div>
               <div className="info-sub-text">
                 Sem informação redundante, a aplicação foca-se nos teus animais.
+                <br />
+                Simples de perceber o funcionamento da App.
+                <br />
               </div>
             </div>
           </div>

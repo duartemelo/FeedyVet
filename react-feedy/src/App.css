@@ -328,7 +328,6 @@ body {
   height: 500px;
   width: 50%;
   float: left;
-  /*background-color: red;*/
 }
 
 .left-column-i {
@@ -361,12 +360,13 @@ body {
 
 .info-text-container {
   position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .info-main-text {
   font-size: 25px;
   margin-left: 70px;
-  margin-top: 200px;
   font-weight: 400;
 }
 
@@ -401,6 +401,8 @@ body {
   }
   .info-text-container {
     width: 100vw;
+    top: unset;
+    transform: unset;
   }
   .info-main-text {
     font-size: 22px;
