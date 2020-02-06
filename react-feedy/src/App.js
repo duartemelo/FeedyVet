@@ -78,6 +78,8 @@ class App extends Component {
             <MobileMenu
               handlerDown={this.MobileMenuClose}
               stateClasses={this.state.MobileMenuClasses}
+              loginHandler={this.LoginButtonHandlerTrue}
+              registerHandler={this.RegisterButtonHandlerTrue}
             ></MobileMenu>
           ) : null}
           {this.state.displayLogin === true ? (
@@ -132,12 +134,13 @@ class App extends Component {
 
         <div className={"promo-container " + this.state.blurClasses}>
           <div className="container-title">
-            Veterinários, do que é que estão à espera?
+            <a className="fw400">Veterinários</a>, do que é que estão à espera?
           </div>
         </div>
       </div>
     );
   }
+
   LoginButtonHandlerTrue = () => {
     if (this.state.navbarButtonsDisable === false) {
       if (this.state.displayRegister === false) {

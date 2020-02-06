@@ -18,6 +18,7 @@ const Register = props => {
         className="input"
         placeholder="E-mail"
         style={{ marginTop: 15 }}
+        type="email"
       ></input>
       <input
         className="input"
