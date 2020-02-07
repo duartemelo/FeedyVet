@@ -2,12 +2,13 @@
   
 }*/
 
-html, body {
+html,
+body {
   overflow-x: hidden;
 }
 
 body {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
 }
 
 .button {
@@ -29,13 +30,13 @@ body {
 }
 
 .login {
-  background-color: #3680C1;
+  background-color: #3680c1;
   color: #fff;
 }
 
 .register {
-  background-color: #E1E1E1;
-  color: #3680C1;
+  background-color: #e1e1e1;
+  color: #3680c1;
   margin-left: 30px;
   margin-right: 50px;
 }
@@ -129,7 +130,7 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 999;
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
   box-shadow: 2px 2px 5px rgb(165, 165, 165);
   border-radius: 5px;
   animation: form-appearing 0.4s ease;
@@ -209,7 +210,7 @@ body {
   padding-left: 10px;
   padding-right: 10px;
   height: 30px;
-  background-color: #3680C1;
+  background-color: #3680c1;
   border-radius: 5px;
   color: #fff;
   cursor: pointer;
@@ -245,7 +246,7 @@ body {
   max-width: 200px;
   height: 35px;
   border: none;
-  background-color: #3680C1;
+  background-color: #3680c1;
   color: #fff;
   font-size: 15px;
   display: block;
@@ -260,12 +261,12 @@ body {
 }
 
 .form-title {
-  color: #3680C1;
+  color: #3680c1;
   text-align: center;
   margin-top: 75px;
 }
 
-.outside-blur>*:not(.form-div) {
+.outside-blur > *:not(.form-div) {
   filter: blur(1px);
   -webkit-filter: blur(1px);
   transition: 0.3s ease;
@@ -277,7 +278,7 @@ body {
   bottom: 0;
   position: absolute;
   font-size: 18px;
-  color: #3680C1;
+  color: #3680c1;
   padding-bottom: 15px;
   animation: arrow-animation 1s infinite;
 }
@@ -440,7 +441,7 @@ body {
   border: none;
   background-color: rgb(245, 245, 245);
   width: 100%;
-  font-size: 20px;
+  font-size: 17px;
   color: #333;
 }
 

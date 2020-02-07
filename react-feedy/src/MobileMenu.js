@@ -18,6 +18,7 @@ const MobileMenu = props => {
         <button
           className="mobile-menu-button"
           onClick={() => FormOpen("register")}
+          style={{marginTop: 10}}
         >
           Registo
         </button>
