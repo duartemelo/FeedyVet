@@ -10,6 +10,13 @@ import MobileMenu from "./MobileMenu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import AOS from "aos";
+import "aos/dist/aos.css"; // You can also use <link> for styles
+AOS.init({
+  disable: "mobile",
+  disable: "tablet",
+  disable: "phone"
+});
 
 class App extends Component {
   constructor(props) {
@@ -106,7 +113,11 @@ class App extends Component {
           </div>
         </div>
         <div className={"information-container " + this.state.blurClasses}>
-          <div className="left-column">
+          <div
+            className="left-column"
+            data-aos="fade-right"
+            data-aos-easing="ease-in-out"
+          >
             <div className="info-text-container">
               <div className="info-main-text">Sempre ao teu dispor</div>
               <div className="info-sub-text">
@@ -117,15 +128,29 @@ class App extends Component {
             </div>
           </div>
           <div className="right-column">
-            <img src={updated} alt="Updated image" className="info-image"></img>
+            <img
+              src={updated}
+              alt="Updated image"
+              className="info-image"
+              data-aos="fade-left"
+              data-aos-easing="ease-in-out"
+            ></img>
           </div>
         </div>
 
         <div className={"information-container " + this.state.blurClasses}>
-          <div className="left-column-i">
+          <div
+            className="left-column-i"
+            data-aos="fade-right"
+            data-aos-easing="ease-in-out"
+          >
             <img src={appimage} alt="App image" className="info-image"></img>
           </div>
-          <div className="right-column-i">
+          <div
+            className="right-column-i"
+            data-aos="fade-left"
+            data-aos-easing="ease-in-out"
+          >
             <div className="info-text-container">
               <div className="info-main-text">Simples e prático</div>
               <div className="info-sub-text">
