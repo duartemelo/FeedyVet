@@ -4,6 +4,7 @@ import logo from "./Images/Logo_2_1600.png";
 import dogchilling from "./Images/dog_chilling.png";
 import updated from "./Images/updated.png";
 import appimage from "./Images/app2.png";
+import address from "./Images/address.png";
 import Login from "./Login";
 import Register from "./Register";
 import MobileMenu from "./MobileMenu";
@@ -166,6 +167,16 @@ class App extends Component {
         <div className={"promo-container " + this.state.blurClasses}>
           <div className="container-title">
             <a className="fw400">Veterinários</a>, do que é que estão à espera?
+          </div>
+          <img className="promo-address-image" src={address}></img>
+          <div className="promo-text-main">Vamos trocar ideias!</div>
+          <div className="promo-text-second">
+            <a
+              className="text-dec-none"
+              href="mailto:duarteribeirodemelo@hotmail.com"
+            >
+              duarteribeirodemelo@hotmail.com
+            </a>
           </div>
         </div>
       </div>
