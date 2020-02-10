@@ -14,28 +14,32 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
 AOS.init({
-  disable: "mobile",
-  disable: "tablet",
-  disable: "phone"
+  disable: "mobile"
 });
+
+const prestate = {
+  displayLogin: false,
+  displayRegister: false,
+  displayMobileMenu: false /*Change to false later*/,
+  navbarButtonsDisable: false,
+  loginButtonClasses: "button login",
+  registerButtonClasses: "button register",
+  blurClasses: "",
+  landingContainerClasses: "landing-container",
+  informationContainerClasses: "",
+  MobileMenuClasses: "mobile-menu",
+  MobileMenuIconClasses: "mobile-menu-icon",
+  formsClasses: "form-div"
+};
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      displayLogin: false,
-      displayRegister: false,
-      displayMobileMenu: false /*Change to false later*/,
-      navbarButtonsDisable: false,
-      loginButtonClasses: "button login",
-      registerButtonClasses: "button register",
-      blurClasses: "",
-      landingContainerClasses: "landing-container",
-      informationContainerClasses: "",
-      MobileMenuClasses: "mobile-menu",
-      MobileMenuIconClasses: "mobile-menu-icon",
-      formsClasses: "form-div"
-    };
+    this.state = prestate;
+  }
+
+  resetState() {
+    this.setState(prestate);
   }
 
   render() {
@@ -212,15 +216,7 @@ class App extends Component {
     setTimeout(
       function() {
         if (this.state.navbarButtonsDisable === true) {
-          this.setState({
-            displayLogin: false,
-            navbarButtonsDisable: false,
-            loginButtonClasses: "button login",
-            registerButtonClasses: "button register",
-            formsClasses: "form-div",
-            MobileMenuIconClasses: "mobile-menu-icon",
-            blurClasses: ""
-          });
+          this.resetState();
           this.LockScroll(false);
         }
       }.bind(this),
@@ -255,15 +251,7 @@ class App extends Component {
     setTimeout(
       function() {
         if (this.state.navbarButtonsDisable === true) {
-          this.setState({
-            displayRegister: false,
-            navbarButtonsDisable: false,
-            loginButtonClasses: "button login",
-            registerButtonClasses: "button register",
-            formsClasses: "form-div",
-            MobileMenuIconClasses: "mobile-menu-icon",
-            blurClasses: ""
-          });
+          this.resetState();
           this.LockScroll(false);
         }
       }.bind(this),
