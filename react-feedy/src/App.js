@@ -169,7 +169,7 @@ class App extends Component {
             <a className="fw400">Veterinários</a>, do que é que estão à espera?
           </div>
           <img className="promo-address-image" src={address}></img>
-          <div className="promo-text-main">Vamos trocar ideias!</div>
+          <div className="promo-text-main">Vamos trabalhar juntos!</div>
           <div className="promo-text-second">
             <a
               className="text-dec-none"
