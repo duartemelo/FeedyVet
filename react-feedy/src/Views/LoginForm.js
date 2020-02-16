@@ -2,13 +2,13 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
-const Register = props => {
+const LoginForm = props => {
   return (
     <div className={props.stateClasses} style={{ height: props.height }}>
       <div className="close-button" onClick={() => props.handlerDown()}>
         <FontAwesomeIcon icon={faTimesCircle} />
       </div>
-      <div className="form-title">Bem-vindo!</div>
+      <div className="form-title">Estamos quase lá...</div>
       <input
         className="input"
         placeholder="Utilizador"
@@ -16,25 +16,13 @@ const Register = props => {
       ></input>
       <input
         className="input"
-        placeholder="E-mail"
-        style={{ marginTop: 15 }}
-        type="email"
-      ></input>
-      <input
-        className="input"
         placeholder="Palavra-passe"
         style={{ marginTop: 15 }}
         type="password"
       ></input>
-      <input
-        className="input"
-        placeholder="Confirmar palavra-passe"
-        style={{ marginTop: 15 }}
-        type="password"
-      ></input>
-      <button className="form-login-button">Registo</button>
+      <button className="form-login-button">Login</button>
     </div>
   );
 };
 
-export default Register;
+export default LoginForm;

@@ -5,9 +5,9 @@ import dogchilling from "./Images/dog_chilling.png";
 import updated from "./Images/updated.png";
 import appimage from "./Images/app2.png";
 import address from "./Images/address.png";
-import Login from "./Login";
-import Register from "./Register";
-import MobileMenu from "./MobileMenu";
+import DisplayMobileMenu from "./Handlers/DisplayMobileMenu";
+import DisplayLoginForm from "./Handlers/DisplayLoginForm";
+import DisplayRegisterForm from "./Handlers/DisplayRegisterForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
@@ -87,32 +87,28 @@ class App extends Component {
             </div>
           </div>
 
-          {this.state.displayMobileMenu === true ? (
-            <MobileMenu
-              handlerDown={this.MobileMenuClose}
-              stateClasses={this.state.MobileMenuClasses}
-              loginHandler={this.LoginButtonHandlerTrue}
-              registerHandler={this.RegisterButtonHandlerTrue}
-            ></MobileMenu>
-          ) : null}
-          {this.state.displayLogin === true ? (
-            <Login
-              handlerDown={this.LogginButtonHandlerFalse}
-              height={350}
-              stateClasses={this.state.formsClasses}
-            >
-              >
-            </Login>
-          ) : null}
-          {this.state.displayRegister === true ? (
-            <Register
-              handlerDown={this.RegisterButtonHandlerFalse}
-              height={450}
-              stateClasses={this.state.formsClasses}
-            >
-              >
-            </Register>
-          ) : null}
+          <DisplayMobileMenu
+            getState={this.state.displayMobileMenu}
+            getHandlerDown={this.MobileMenuClose}
+            getStateClasses={this.state.MobileMenuClasses}
+            getLoginHandler={this.LoginButtonHandlerTrue}
+            getRegisterHandler={this.RegisterButtonHandlerTrue}
+          />
+
+          <DisplayLoginForm
+            getState={this.state.displayLogin}
+            getHandlerDown={this.LogginButtonHandlerFalse}
+            getHeight={350}
+            getStateClasses={this.state.formsClasses}
+          />
+
+          <DisplayRegisterForm
+            getState={this.state.displayRegister}
+            getHandlerDown={this.RegisterButtonHandlerFalse}
+            getHeight={450}
+            getStateClasses={this.state.formsClasses}
+          />
+
           <div className="arrow-div">
             <FontAwesomeIcon icon={faArrowDown} />
           </div>

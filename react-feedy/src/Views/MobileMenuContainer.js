@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
-const MobileMenu = props => {
+const MobileMenuContainer = props => {
   return (
     <div className={props.stateClasses}>
       <div className="close-button" onClick={() => props.handlerDown()}>
@@ -41,4 +41,4 @@ const MobileMenu = props => {
   }
 };
 
-export default MobileMenu;
+export default MobileMenuContainer;
