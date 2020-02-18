@@ -29,7 +29,8 @@ const prestate = {
   informationContainerClasses: "",
   MobileMenuClasses: "mobile-menu",
   MobileMenuIconClasses: "mobile-menu-icon",
-  formsClasses: "form-div"
+  formsClasses: "form-div",
+  arrowOpacity: 1
 };
 
 class App extends Component {
@@ -43,6 +44,18 @@ class App extends Component {
   }
 
   render() {
+    const ChangeOpacityScroll = () => {
+      let scrollTop = window.pageYOffset;
+      let elmnt = document.getElementById("arrow-div");
+      let elementHeight = elmnt.offsetHeight;
+      this.setState({
+        arrowOpacity: 1 - (scrollTop - elementHeight) / elementHeight
+      });
+    };
+
+    window.onscroll = function() {
+      ChangeOpacityScroll();
+    };
     return (
       <div className={this.bodyClasses}>
         <div className={"landing-container " + this.state.blurClasses}>
@@ -109,7 +122,11 @@ class App extends Component {
             getStateClasses={this.state.formsClasses}
           />
 
-          <div className="arrow-div">
+          <div
+            className="arrow-div"
+            id="arrow-div"
+            style={{ opacity: this.state.arrowOpacity }}
+          >
             <FontAwesomeIcon icon={faArrowDown} />
           </div>
         </div>
@@ -168,7 +185,11 @@ class App extends Component {
           <div className="container-title">
             <b className="fw400">Veterinários</b>, do que é que estão à espera?
           </div>
-          <img className="promo-address-image" src={address}></img>
+          <img
+            className="promo-address-image"
+            src={address}
+            alt="Address"
+          ></img>
           <div className="promo-text-main">Vamos trabalhar juntos!</div>
           <div className="promo-text-second">
             <a
