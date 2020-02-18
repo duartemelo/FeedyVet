@@ -24,7 +24,7 @@ const prestate = {
   navbarButtonsDisable: false,
   loginButtonClasses: "button login",
   registerButtonClasses: "button register",
-  blurClasses: "",
+  blurClasses: "outside-not-blur",
   landingContainerClasses: "landing-container",
   informationContainerClasses: "",
   MobileMenuClasses: "mobile-menu",
@@ -131,7 +131,7 @@ class App extends Component {
           <div className="right-column">
             <img
               src={updated}
-              alt="Updated image"
+              alt="Updated"
               className="info-image"
               data-aos="fade-left"
               data-aos-easing="ease-in-out"
@@ -145,7 +145,7 @@ class App extends Component {
             data-aos="fade-right"
             data-aos-easing="ease-in-out"
           >
-            <img src={appimage} alt="App image" className="info-image"></img>
+            <img src={appimage} alt="App" className="info-image"></img>
           </div>
           <div
             className="right-column-i"
@@ -166,7 +166,7 @@ class App extends Component {
 
         <div className={"promo-container " + this.state.blurClasses}>
           <div className="container-title">
-            <a className="fw400">Veterinários</a>, do que é que estão à espera?
+            <b className="fw400">Veterinários</b>, do que é que estão à espera?
           </div>
           <img className="promo-address-image" src={address}></img>
           <div className="promo-text-main">Vamos trabalhar juntos!</div>
@@ -195,7 +195,7 @@ class App extends Component {
             this.state.registerButtonClasses + " cursor-not-allowed",
           MobileMenuIconClasses:
             this.state.MobileMenuIconClasses + " cursor-not-allowed",
-          blurClasses: this.state.blurClasses + "outside-blur"
+          blurClasses: "outside-blur"
         });
 
         if (window.innerHeight > 350) {
@@ -204,9 +204,11 @@ class App extends Component {
       }
     }
   };
+  /*change this function so blur works on reverse*/
   LogginButtonHandlerFalse = () => {
     this.setState({
-      formsClasses: this.state.formsClasses + " form-div-disappearing"
+      formsClasses: this.state.formsClasses + " form-div-disappearing",
+      blurClasses: prestate.blurClasses
     });
 
     setTimeout(
@@ -231,7 +233,7 @@ class App extends Component {
             this.state.registerButtonClasses + " cursor-not-allowed",
           MobileMenuIconClasses:
             this.state.MobileMenuIconClasses + " cursor-not-allowed",
-          blurClasses: this.state.blurClasses + "outside-blur"
+          blurClasses: "outside-blur"
         });
         if (window.innerHeight > 450) {
           this.LockScroll(true);
@@ -241,7 +243,8 @@ class App extends Component {
   };
   RegisterButtonHandlerFalse = () => {
     this.setState({
-      formsClasses: this.state.formsClasses + " form-div-disappearing"
+      formsClasses: this.state.formsClasses + " form-div-disappearing",
+      blurClasses: prestate.blurClasses
     });
 
     setTimeout(

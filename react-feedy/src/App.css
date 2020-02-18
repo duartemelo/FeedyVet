@@ -265,6 +265,12 @@ body {
   margin-top: 75px;
 }
 
+.outside-not-blur>*:not(.form-div) {
+  filter: blur(0px);
+  -webkit-filter: blur(0px);
+  transition: 0.3s ease;
+}
+
 .outside-blur>*:not(.form-div) {
   filter: blur(1px);
   -webkit-filter: blur(1px);
