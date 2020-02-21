@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import "./App.css";
 import logo from "./Images/Logo_2_1600.png";
 import dogchilling from "./Images/dog_chilling.png";
@@ -68,14 +69,14 @@ class App extends Component {
                 className={this.state.loginButtonClasses}
                 onClick={this.LoginButtonHandlerTrue}
               >
-                Login
+                Entrar
               </button>
 
               <button
                 className={this.state.registerButtonClasses}
                 onClick={this.RegisterButtonHandlerTrue}
               >
-                Registo
+                Registar
               </button>
               <div className="mobile-menu-icon-div">
                 <FontAwesomeIcon
