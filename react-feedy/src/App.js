@@ -20,7 +20,7 @@ AOS.init({
 const prestate = {
   displayLogin: false,
   displayRegister: false,
-  displayMobileMenu: false /*Change to false later*/,
+  displayMobileMenu: false,
   navbarButtonsDisable: false,
   loginButtonClasses: "button login",
   registerButtonClasses: "button register",
