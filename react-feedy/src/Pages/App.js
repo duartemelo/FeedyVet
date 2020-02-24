@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 
-import "./App.css";
-import logo from "./Images/Logo_2_1600.png";
-import dogchilling from "./Images/dog_chilling.png";
-import updated from "./Images/updated.png";
-import appimage from "./Images/app2.png";
-import address from "./Images/address.png";
-import DisplayMobileMenu from "./Handlers/DisplayMobileMenu";
-import DisplayLoginForm from "./Handlers/DisplayLoginForm";
-import DisplayRegisterForm from "./Handlers/DisplayRegisterForm";
+import "../App.css";
+import logo from "../Images/Logo_2_1600.png";
+import dogchilling from "../Images/dog_chilling.png";
+import updated from "../Images/updated.png";
+import appimage from "../Images/app2.png";
+import address from "../Images/address.png";
+import DisplayMobileMenu from "../Handlers/DisplayMobileMenu";
+import DisplayLoginForm from "../Handlers/DisplayLoginForm";
+import DisplayRegisterForm from "../Handlers/DisplayRegisterForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
