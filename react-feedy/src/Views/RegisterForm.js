@@ -1,10 +1,12 @@
 import React, { useCallback } from "react";
 import { withRouter } from "react-router";
+import { useHistory } from "react-router-dom";
 import app from "../firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
-const RegisterForm = (props, { history }) => {
+const RegisterForm = props => {
+  let history = useHistory();
   const handleSignUp = useCallback(
     async event => {
       event.preventDefault();
@@ -13,7 +15,8 @@ const RegisterForm = (props, { history }) => {
         await app
           .auth()
           .createUserWithEmailAndPassword(email.value, password.value);
-        history.push("/");
+        window.location.reload();
+        alert("Registo feito.");
       } catch (error) {
         alert(error);
       }
@@ -30,27 +33,19 @@ const RegisterForm = (props, { history }) => {
       <form onSubmit={handleSignUp}>
         <input
           className="input"
-          placeholder="Utilizador"
-          style={{ marginTop: 20 }}
-        ></input>
-        <input
-          className="input"
           placeholder="E-mail"
           style={{ marginTop: 15 }}
+          name="email"
           type="email"
         ></input>
         <input
           className="input"
           placeholder="Palavra-passe"
           style={{ marginTop: 15 }}
+          name="password"
           type="password"
         ></input>
-        <input
-          className="input"
-          placeholder="Confirmar palavra-passe"
-          style={{ marginTop: 15 }}
-          type="password"
-        ></input>
+
         <button type="submit" className="form-login-button">
           Registo
         </button>
@@ -60,3 +55,19 @@ const RegisterForm = (props, { history }) => {
 };
 
 export default withRouter(RegisterForm);
+
+/*
+<input
+          className="input"
+          placeholder="Utilizador"
+          style={{ marginTop: 20 }}
+        ></input>
+*/
+
+/* 
+<input
+          className="input"
+          placeholder="Confirmar palavra-passe"
+          style={{ marginTop: 15 }}
+        ></input>
+*/

@@ -121,6 +121,7 @@ class App extends Component {
             getHandlerDown={this.RegisterButtonHandlerFalse}
             getHeight={450}
             getStateClasses={this.state.formsClasses}
+            
           />
 
           <div
@@ -309,6 +310,7 @@ class App extends Component {
       document.body.style.overflow = "unset";
     }
   };
+  
 }
 
 export default App;
