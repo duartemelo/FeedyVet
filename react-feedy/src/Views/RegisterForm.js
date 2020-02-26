@@ -15,8 +15,7 @@ const RegisterForm = props => {
         await app
           .auth()
           .createUserWithEmailAndPassword(email.value, password.value);
-        window.location.reload();
-        alert("Registo feito.");
+        history.push("/home");
       } catch (error) {
         alert(error);
       }
@@ -47,7 +46,7 @@ const RegisterForm = props => {
         ></input>
 
         <button type="submit" className="form-login-button">
-          Registo
+          Registar
         </button>
       </form>
     </div>

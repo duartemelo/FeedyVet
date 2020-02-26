@@ -119,9 +119,8 @@ class App extends Component {
           <DisplayRegisterForm
             getState={this.state.displayRegister}
             getHandlerDown={this.RegisterButtonHandlerFalse}
-            getHeight={450}
+            getHeight={350}
             getStateClasses={this.state.formsClasses}
-            
           />
 
           <div
@@ -310,7 +309,6 @@ class App extends Component {
       document.body.style.overflow = "unset";
     }
   };
-  
 }
 
 export default App;
