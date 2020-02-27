@@ -15,7 +15,7 @@ const RegisterForm = props => {
         await app
           .auth()
           .createUserWithEmailAndPassword(email.value, password.value);
-        history.push("/home");
+        window.location.reload();
       } catch (error) {
         alert(error);
       }
