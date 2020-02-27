@@ -10,34 +10,27 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: undefined
+      user: this.getUser()
     };
   }
+
   render() {
-
-    /*Not working*/
-    const getUser = () => {
-      var ref = new app("https://feedyvet-dff30.firebaseio.com");
-      var authData = ref.getAuth();
-
-      if (authData) {
-        this.setState({
-          user: authData.provider
-        });
-      } else {
-        console.log("Not logged in");
-      }
-    };
-
     return (
       <div>
         <div className="centered-container">
           <div>Hello {this.state.user}</div>
         </div>
-        {/*<button onClick={() => app.auth().signOut()}>Sign out</button>*/}
+        <button onClick={() => app.auth().signOut()}>Sign out</button>
       </div>
     );
   }
+
+  getUser = () => {
+    let userVar = app.auth().currentUser.email;
+    let getChar = userVar.indexOf("@")
+    let userFinal = userVar.slice(0, getChar);
+    return userFinal;
+  };
 }
 
 export default Home;

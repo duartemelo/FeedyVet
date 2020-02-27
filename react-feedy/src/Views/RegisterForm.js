@@ -16,6 +16,7 @@ const RegisterForm = props => {
           .auth()
           .createUserWithEmailAndPassword(email.value, password.value);
         window.location.reload();
+        alert("Registo feito, entre com as credenciais.")
       } catch (error) {
         alert(error);
       }
