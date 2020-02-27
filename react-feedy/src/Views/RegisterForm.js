@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { withRouter } from "react-router";
 import { useHistory } from "react-router-dom";
 import app from "../firebase";
+import * as firebase from "firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
@@ -15,8 +16,15 @@ const RegisterForm = props => {
         await app
           .auth()
           .createUserWithEmailAndPassword(email.value, password.value);
+        let userid = app.auth().currentUser.uid;
+        await firebase
+          .database()
+          .ref("/users/" + userid)
+          .set({
+            isadmin: false
+          });
         window.location.reload();
-        alert("Registo feito, entre com as credenciais.")
+        alert("Registo feito, entre com as credenciais.");
       } catch (error) {
         alert(error);
       }
