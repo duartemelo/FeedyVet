@@ -18,7 +18,16 @@ class Home extends Component {
     return (
       <div>
         <div className="centered-container">
-          <div>Hello {this.state.user}</div>
+          <div className="content-container">
+            <div className="hello-user">Hello {this.state.user}</div>
+            <div className="user-menu">
+              <div
+                className="user-menu-option"
+                style={{ marginRight: 40 }}
+              ></div>
+              <div className="user-menu-option"></div>
+            </div>
+          </div>
         </div>
         <button onClick={() => app.auth().signOut()}>Sign out</button>
       </div>
@@ -27,7 +36,7 @@ class Home extends Component {
 
   getUser = () => {
     let userVar = app.auth().currentUser.email;
-    let getChar = userVar.indexOf("@")
+    let getChar = userVar.indexOf("@");
     let userFinal = userVar.slice(0, getChar);
     return userFinal;
   };

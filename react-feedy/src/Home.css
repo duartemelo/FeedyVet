@@ -1,8 +1,37 @@
 .centered-container {
     width: 100vw;
     height: 400px;
-    background-color: red;
+    /*background-color: red;*/
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+}
+
+.content-container {
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    width: 100vw;
+}
+
+.hello-user {
+    text-align: center;
+    font-size: 35px;
+    color: #3680C1;
+}
+
+.user-menu {
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 440px;
+}
+
+.user-menu-option {
+    background-color: #F0F0F0;
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    border-radius: 5px;
+    cursor: pointer;
 }
