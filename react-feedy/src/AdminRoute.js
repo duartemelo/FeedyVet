@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { AuthContext } from "./auth";
 import app from "./firebase";
+import Loader from "react-loader-spinner";
+import "./Loader.css";
 
 const AdminRoute = ({ component: RouteComponent, ...rest }) => {
   const [userID, setuserID] = useState(undefined);
@@ -24,7 +26,9 @@ const AdminRoute = ({ component: RouteComponent, ...rest }) => {
   return (
     <div>
       {getAdmin === undefined ? (
-        <h2>Loading perms</h2>
+        <div class="loader-container">
+          <Loader type="TailSpin" color="#3680C1" width={100} height={100} />
+        </div>
       ) : (
         <Route
           {...rest}
@@ -32,7 +36,7 @@ const AdminRoute = ({ component: RouteComponent, ...rest }) => {
             getAdmin === true ? (
               <RouteComponent {...routeProps} />
             ) : (
-              <Redirect to={"/"} />
+              <Redirect to={"/404"} />
             )
           }
         />
