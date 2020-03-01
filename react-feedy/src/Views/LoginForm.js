@@ -16,7 +16,7 @@ const LoginForm = props => {
         await app
           .auth()
           .signInWithEmailAndPassword(email.value, password.value);
-        history.push("/home")
+        history.push("/home");
       } catch (error) {
         alert(error);
       }

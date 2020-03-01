@@ -1,36 +1,43 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { AuthContext } from "./auth";
 import app from "./firebase";
 
 const AdminRoute = ({ component: RouteComponent, ...rest }) => {
-  let userID;
-  let getAdmin;
-  app.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      console.log(user);
-      userID = user.uid;
-      var databaseRef = app.database().ref("users/" + userID + "/isadmin");
-      databaseRef.on("value", function(snapshot) {
-        getAdmin = snapshot.val();
-        console.log(getAdmin);
-      });
-    } else {
-      console.log("No user");
-    }
-  });
+  const [userID, setuserID] = useState(undefined);
+  const [getAdmin, setgetAdmin] = useState(undefined);
+
+  useEffect(() => {
+    app.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        setuserID(user.uid);
+        var databaseRef = app.database().ref("users/" + user.uid + "/isadmin");
+        databaseRef.on("value", function(snapshot) {
+          setgetAdmin(snapshot.val());
+        });
+      } else {
+        console.log("No user");
+      }
+    });
+  }, []);
 
   return (
-    <Route
-      {...rest}
-      render={routeProps =>
-        true === true ? (
-          <RouteComponent {...routeProps} />
-        ) : (
-          <Redirect to={"/"} />
-        )
-      }
-    />
+    <div>
+      {getAdmin === undefined ? (
+        <h2>Loading perms</h2>
+      ) : (
+        <Route
+          {...rest}
+          render={routeProps =>
+            getAdmin === true ? (
+              <RouteComponent {...routeProps} />
+            ) : (
+              <Redirect to={"/"} />
+            )
+          }
+        />
+      )}
+    </div>
   );
 };
 
