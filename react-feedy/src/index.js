@@ -5,10 +5,12 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./index.css";
 import App from "./Pages/App";
 import Home from "./Pages/Home";
+import Admin from "./Pages/Admin";
 import * as serviceWorker from "./serviceWorker";
 import NotFound from "./notfound";
 import { AuthProvider } from "./auth";
 import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
 
 const routing = (
   <AuthProvider>
@@ -18,6 +20,8 @@ const routing = (
           <Route exact path="/" component={App} />
 
           <PrivateRoute exact path="/home" component={Home} />
+
+          <AdminRoute exact path="/admin" component={Admin} />
 
           <Route component={NotFound} />
         </Switch>
