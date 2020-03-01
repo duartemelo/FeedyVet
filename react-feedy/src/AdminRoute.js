@@ -27,7 +27,7 @@ const AdminRoute = ({ component: RouteComponent, ...rest }) => {
         true === true ? (
           <RouteComponent {...routeProps} />
         ) : (
-          <Redirect to={"/"} />
+          <Redirect to={"/noperms"} />
         )
       }
     />
