@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import "../App.css";
 
-class TestAdminPage extends Component{
+class Profile extends Component{
 
 
 
     render() {
         return(
             <div>
-                <h1>Admin Test</h1>
+                <h1>Profile Page Test</h1>
                 <p>This is a test page</p>
             </div>
         )
     }
 }
 
-export default TestAdminPage;
+export default Profile;

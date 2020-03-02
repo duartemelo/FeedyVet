@@ -20,8 +20,24 @@ class Home extends Component {
     };
   }
 
+  redirectToAnimal = () => {
+    const { history } = this.props;
+    if (history) history.push("/animal");
+  };
+
+  redirectToContact = () => {
+    const { history } = this.props;
+    if (history) history.push("/contact");
+  };
+
+  redirectToProfile = () => {
+    const { history } = this.props;
+    if (history) history.push("/profile");
+  };
+
+
+
   render() {
-    
     let message = "Olá " + this.state.user + "!";
 
     return (
@@ -30,17 +46,21 @@ class Home extends Component {
           <div className="content-container">
             <div className="hello-user">{message}</div>
             <div className="user-menu">
-              <div className="user-menu-option" style={{ marginRight: 40 }}>
+              <div
+                className="user-menu-option"
+                style={{ marginRight: 40 }}
+                onClick={this.redirectToAnimal}
+              >
                 <div className="icon-div">
                   <FontAwesomeIcon icon={faPaw} />
                 </div>
               </div>
-              <div className="user-menu-option" style={{ marginRight: 40 }}>
+              <div className="user-menu-option" style={{ marginRight: 40 }} onClick={this.redirectToContact}>
                 <div className="icon-div">
                   <FontAwesomeIcon icon={faEnvelope} />
                 </div>
               </div>
-              <div className="user-menu-option">
+              <div className="user-menu-option" onClick={this.redirectToProfile}>
                 <div className="icon-div">
                   <FontAwesomeIcon icon={faUserCog} />
                 </div>
@@ -52,7 +72,7 @@ class Home extends Component {
           className="button signout-btn"
           onClick={() => app.auth().signOut()}
         >
-          Sign out
+          Sair
         </button>
       </div>
     );

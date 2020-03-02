@@ -6,13 +6,15 @@ import "./index.css";
 import App from "./Pages/App";
 import Home from "./Pages/Home";
 import Admin from "./Pages/Admin";
+import Animal from "./Pages/Animal";
+import Contact from "./Pages/Contact";
+import Profile from "./Pages/Profile";
 import TestAdminPage from "./Pages/TestAdminPage";
 import * as serviceWorker from "./serviceWorker";
 import NotFound from "./notfound";
 import { AuthProvider } from "./auth";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
-
 
 const routing = (
   <AuthProvider>
@@ -22,6 +24,12 @@ const routing = (
           <Route exact path="/" component={App} />
 
           <PrivateRoute exact path="/home" component={Home} />
+
+          <PrivateRoute exact path="/animal" component={Animal} />
+
+          <PrivateRoute exact path="/contact" component={Contact} />
+
+          <PrivateRoute exact path="/profile" component={Profile} />
 
           <AdminRoute exact path="/admin" component={Admin} />
 
