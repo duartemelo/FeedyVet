@@ -1,10 +1,8 @@
 .centered-container {
     width: 100vw;
     height: 400px;
-    /*background-color: red;*/
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    margin-top: 100px;
 }
 
 .content-container {
@@ -36,6 +34,32 @@
     cursor: pointer;
     float: left;
     position: relative;
+}
+
+@media only screen and (max-width: 720px) {
+    .centered-container {
+        height: 1000px;
+    }
+    .content-container {
+        top: unset;
+        transform: unset;
+        position: absolute;
+        width: 100vw;
+    }
+    .user-menu {
+        width: 100%;
+    }
+    .user-menu-option {
+        float: none;
+        margin-left: auto;
+        margin-right: auto !important;
+    }
+    .user-menu-option:not(:first-child) {
+        margin-top: 20px;
+    }
+    .hello-user {
+        margin-top: 60px;
+    }
 }
 
 .signout-btn {

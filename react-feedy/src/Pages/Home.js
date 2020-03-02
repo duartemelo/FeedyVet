@@ -35,13 +35,17 @@ class Home extends Component {
     if (history) history.push("/profile");
   };
 
-
-
   render() {
     let message = "Olá " + this.state.user + "!";
 
     return (
       <div>
+        <button
+          className="button signout-btn"
+          onClick={() => app.auth().signOut()}
+        >
+          Sair
+        </button>
         <div className="centered-container">
           <div className="content-container">
             <div className="hello-user">{message}</div>
@@ -55,12 +59,19 @@ class Home extends Component {
                   <FontAwesomeIcon icon={faPaw} />
                 </div>
               </div>
-              <div className="user-menu-option" style={{ marginRight: 40 }} onClick={this.redirectToContact}>
+              <div
+                className="user-menu-option"
+                style={{ marginRight: 40 }}
+                onClick={this.redirectToContact}
+              >
                 <div className="icon-div">
                   <FontAwesomeIcon icon={faEnvelope} />
                 </div>
               </div>
-              <div className="user-menu-option" onClick={this.redirectToProfile}>
+              <div
+                className="user-menu-option"
+                onClick={this.redirectToProfile}
+              >
                 <div className="icon-div">
                   <FontAwesomeIcon icon={faUserCog} />
                 </div>
@@ -68,12 +79,6 @@ class Home extends Component {
             </div>
           </div>
         </div>
-        <button
-          className="button signout-btn"
-          onClick={() => app.auth().signOut()}
-        >
-          Sair
-        </button>
       </div>
     );
   }

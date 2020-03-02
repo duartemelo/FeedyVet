@@ -55,7 +55,7 @@ class App extends Component {
     };
 
     window.onscroll = function() {
-      ChangeOpacityScroll();
+      /*ChangeOpacityScroll(); DISABLED DUE TO BUG*/
     };
     return (
       <div className={this.bodyClasses}>
