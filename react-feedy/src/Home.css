@@ -24,14 +24,34 @@
     margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
-    width: 440px;
+    width: 680px;
 }
 
 .user-menu-option {
     background-color: #F0F0F0;
     width: 200px;
     height: 200px;
-    display: inline-block;
+    display: block;
     border-radius: 5px;
     cursor: pointer;
+    float: left;
+    position: relative;
+}
+
+.signout-btn {
+    background-color: #3680c1;
+    color: #fff;
+    float: right;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.icon-div {
+    text-align: center;
+    width: 100%;
+    font-size: 50px;
+    color: #333;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }

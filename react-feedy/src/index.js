@@ -6,11 +6,13 @@ import "./index.css";
 import App from "./Pages/App";
 import Home from "./Pages/Home";
 import Admin from "./Pages/Admin";
+import TestAdminPage from "./Pages/TestAdminPage";
 import * as serviceWorker from "./serviceWorker";
 import NotFound from "./notfound";
 import { AuthProvider } from "./auth";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
+
 
 const routing = (
   <AuthProvider>
@@ -22,6 +24,8 @@ const routing = (
           <PrivateRoute exact path="/home" component={Home} />
 
           <AdminRoute exact path="/admin" component={Admin} />
+
+          <AdminRoute exact path="/testadmin" component={TestAdminPage} />
 
           <Route component={NotFound} />
         </Switch>
