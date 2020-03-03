@@ -27,7 +27,7 @@ const LoginForm = props => {
   const { currentUser } = useContext(AuthContext);
 
   if (currentUser) {
-    return <Redirect to="/home" />;
+    history.push("/home");
   }
 
   return (

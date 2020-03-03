@@ -16,9 +16,15 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: this.getUser()
+      user: this.getUser(),
+      isadmin: this.props.isAdmin
     };
   }
+
+  
+
+  
+
 
   redirectToAnimal = () => {
     const { history } = this.props;
@@ -89,13 +95,6 @@ class Home extends Component {
     let userFinal = userVar.slice(0, getChar);
     return userFinal;
   };
-
-  getUserFontSize = (username) => {
-    var length = username.length;
-    if (length > 35){
-      return 30;
-    }
-  }
 }
 
 export default Home;
