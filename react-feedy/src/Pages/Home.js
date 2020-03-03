@@ -89,6 +89,13 @@ class Home extends Component {
     let userFinal = userVar.slice(0, getChar);
     return userFinal;
   };
+
+  getUserFontSize = (username) => {
+    var length = username.length;
+    if (length > 35){
+      return 30;
+    }
+  }
 }
 
 export default Home;
