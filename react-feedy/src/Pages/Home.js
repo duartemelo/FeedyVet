@@ -9,7 +9,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPaw,
   faEnvelope,
-  faUserCog
+  faUserCog,
+  faColumns
 } from "@fortawesome/free-solid-svg-icons";
 
 class Home extends Component {
@@ -20,11 +21,6 @@ class Home extends Component {
       isadmin: this.props.isAdmin
     };
   }
-
-  
-
-  
-
 
   redirectToAnimal = () => {
     const { history } = this.props;
@@ -39,6 +35,11 @@ class Home extends Component {
   redirectToProfile = () => {
     const { history } = this.props;
     if (history) history.push("/profile");
+  };
+
+  redirectToAdmin = () => {
+    const { history } = this.props;
+    if (history) history.push("/admin");
   };
 
   render() {
@@ -56,32 +57,48 @@ class Home extends Component {
           <div className="content-container">
             <div className="hello-user">{message}</div>
             <div className="user-menu">
-              <div
-                className="user-menu-option"
-                style={{ marginRight: 40 }}
-                onClick={this.redirectToAnimal}
-              >
-                <div className="icon-div">
-                  <FontAwesomeIcon icon={faPaw} />
+              {this.state.isadmin === false ? (
+                <div>
+                  <div
+                    className="user-menu-option"
+                    style={{ marginRight: 40 }}
+                    onClick={this.redirectToAnimal}
+                  >
+                    <div className="icon-div">
+                      <FontAwesomeIcon icon={faPaw} />
+                    </div>
+                  </div>
+                  <div
+                    className="user-menu-option"
+                    style={{ marginRight: 40 }}
+                    onClick={this.redirectToContact}
+                  >
+                    <div className="icon-div">
+                      <FontAwesomeIcon icon={faEnvelope} />
+                    </div>
+                  </div>
+                  <div
+                    className="user-menu-option"
+                    onClick={this.redirectToProfile}
+                  >
+                    <div className="icon-div">
+                      <FontAwesomeIcon icon={faUserCog} />
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div
-                className="user-menu-option"
-                style={{ marginRight: 40 }}
-                onClick={this.redirectToContact}
-              >
-                <div className="icon-div">
-                  <FontAwesomeIcon icon={faEnvelope} />
+              ) : (
+                <div>
+                  <div
+                    className="user-menu-option"
+                    style={{ float: "none", margin: "0 auto" }}
+                    onClick={this.redirectToAdmin}
+                  >
+                    <div className="icon-div">
+                      <FontAwesomeIcon icon={faColumns} />
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div
-                className="user-menu-option"
-                onClick={this.redirectToProfile}
-              >
-                <div className="icon-div">
-                  <FontAwesomeIcon icon={faUserCog} />
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
