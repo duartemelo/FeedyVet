@@ -19,13 +19,15 @@ const AdminRoute = ({ component: RouteComponent, ...rest }) => {
         });
       } else {
         console.log("No user");
+        setgetAdmin("noadmin");
+        setuserID("nouser.")
       }
     });
   }, []);
 
   return (
     <div>
-      {getAdmin === undefined ? (
+      {userID === undefined || getAdmin === undefined ? (
         <div class="loader-container">
           <Loader type="TailSpin" color="#3680C1" width={100} height={100} />
         </div>
