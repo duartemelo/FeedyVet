@@ -13,8 +13,8 @@ import TestAdminPage from "./Pages/TestAdminPage";
 import * as serviceWorker from "./serviceWorker";
 import NotFound from "./notfound";
 import { AuthProvider } from "./auth";
-import PrivateRoute from "./PrivateRoute";
-import AdminRoute from "./AdminRoute";
+import PrivateRoute from "./Routes/PrivateRoute";
+import AdminRoute from "./Routes//AdminRoute";
 
 const routing = (
   <AuthProvider>
