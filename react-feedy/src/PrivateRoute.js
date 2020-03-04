@@ -31,7 +31,7 @@ const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
   return (
     <div>
       {admin === undefined || userID === undefined ? (
-        <div class="loader-container">
+        <div className="loader-container">
           <Loader type="TailSpin" color="#3680C1" width={100} height={100} />
         </div>
       ) : (
