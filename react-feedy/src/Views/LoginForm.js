@@ -1,5 +1,4 @@
 import React, { useCallback, useContext } from "react";
-import { withRouter, Redirect } from "react-router";
 import { useHistory } from "react-router-dom";
 import app from "../firebase";
 import { AuthContext } from "../auth";

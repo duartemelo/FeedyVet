@@ -1,10 +1,7 @@
-import React, { useCallback, useContext, Component } from "react";
-import * as firebase from "firebase";
+import React, {  Component } from "react";
 import app from "../firebase";
-import { AuthContext } from "../auth";
-import "../App.css";
-import "../Home.css";
-import { useHistory } from "react-router-dom";
+import "../styles/global/Main.css";
+import "../styles/independent/Home.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPaw,

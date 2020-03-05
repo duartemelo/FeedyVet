@@ -1,16 +1,15 @@
-import React, { useState, useContext, useEffect, Component } from "react";
+import React, { useState,  useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
-import { AuthContext } from "../auth";
+
 import app from "../firebase";
 import Loader from "react-loader-spinner";
-import "../Loader.css";
+import "../styles/global/Loader.css";
 
 const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
   /*const { currentUser } = useContext(AuthContext);*/
   const [user, setUser] = useState(undefined);
   const [admin, setAdmin] = useState(undefined);
   const [userID, setuserID] = useState(undefined);
-  const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
     app.auth().onAuthStateChanged(function(user) {

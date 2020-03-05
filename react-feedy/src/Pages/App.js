@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
-import "../App.css";
+import "../styles/global/Main.css";
+import "../styles/independent/App.css";
 import logo from "../Images/Logo_2_1600.png";
 import dogchilling from "../Images/dog_chilling.png";
 import updated from "../Images/updated.png";
@@ -45,14 +46,14 @@ class App extends Component {
   }
 
   render() {
-    const ChangeOpacityScroll = () => {
+    /*const ChangeOpacityScroll = () => {
       let scrollTop = window.pageYOffset;
       let elmnt = document.getElementById("arrow-div");
       let elementHeight = elmnt.offsetHeight;
       this.setState({
         arrowOpacity: 1 - (scrollTop - elementHeight) / elementHeight
       });
-    };
+    };*/
 
     window.onscroll = function() {
       /*ChangeOpacityScroll(); DISABLED DUE TO BUG*/

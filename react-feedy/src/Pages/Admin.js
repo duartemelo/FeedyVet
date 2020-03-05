@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../App.css";
+import "../styles/global/Main.css";
 import app from "../firebase";
 
 class Admin extends Component {

@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
-import { AuthContext } from "../auth";
 import app from "../firebase";
 import Loader from "react-loader-spinner";
-import "../Loader.css";
+import "../styles/global/Loader.css";
 
 const AdminRoute = ({ component: RouteComponent, ...rest }) => {
   const [userID, setuserID] = useState(undefined);
