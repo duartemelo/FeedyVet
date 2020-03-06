@@ -15,29 +15,27 @@ class Admin extends Component {
     };
   }
 
-  
+  componentDidMount() {
+    this.getEvents();
+  }
 
-
-  render() {
+  getEvents = () => {
     const db = app.database();
     const ref = db.ref("events");
 
-    const addEvent = () => {
-      ref.orderByChild("datetime").on("child_added", function(snapshot) {
-        console.log(
-          "The key is: " +
-            snapshot.key +
-            " and the userID is " +
-            snapshot.val().userID +
-            " and the type of event is " +
-            snapshot.val().type
-        );
-        
-      });
-    };
+    ref.orderByChild("datetime").on("child_added", function(snapshot) {
+      console.log(
+        "The key is: " +
+          snapshot.key +
+          " and the userID is " +
+          snapshot.val().userID +
+          " and the type of event is " +
+          snapshot.val().type
+      );
+    });
+  };
 
-    addEvent();
-
+  render() {
     return (
       <div>
         <h1>Admin Panel</h1>
@@ -45,8 +43,6 @@ class Admin extends Component {
       </div>
     );
   }
-
-  
 }
 
 export default Admin;
