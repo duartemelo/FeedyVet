@@ -4,16 +4,22 @@ import "../styles/independent/Admin.css";
 import app from "../firebase";
 import TestAdminPage from "./TestAdminPage";
 
+const prestate = {
+  eventsID: [],
+  eventsAnimal: [],
+  eventsDateTime: [],
+  eventsType: [],
+  eventsUserID: []
+};
+
 class Admin extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      eventsID: [],
-      eventsAnimal: [],
-      eventsDateTime: [],
-      eventsType: [],
-      eventsUserID: []
-    };
+    this.state = prestate;
+  }
+
+  resetState() {
+    this.setState(prestate);
   }
 
   componentDidMount() {
@@ -21,10 +27,12 @@ class Admin extends Component {
   }
 
   getEvents() {
+    this.resetState();
     const db = app.database();
     const ref = db.ref("events");
     let currentComponent = this;
 
+    
     ref.orderByChild("datetime").on("child_added", function(snapshot) {
       currentComponent.setState({
         eventsID: currentComponent.state.eventsID.concat(snapshot.key),
@@ -44,10 +52,38 @@ class Admin extends Component {
     });
 
     ref.orderByChild("datetime").on("child_removed", function(snapshot) {
-      const eventID = snapshot.key;
-      /* const index = */
+      const removedIndex = currentComponent.state.eventsID.indexOf(
+        snapshot.key
+      );
+      
 
-      /* obter index do eventid no array eventsid do state, e remover com esse index os elementos dos restantes arrays */
+      let copiedeventsID = [...currentComponent.state.eventsID];
+      let copiedeventsAnimal = [...currentComponent.state.eventsAnimal];
+      let copiedeventsDateTime = [...currentComponent.state.eventsDateTime];
+      let copiedeventsType = [...currentComponent.state.eventsType];
+      let copiedeventsUserID = [...currentComponent.state.eventsUserID];
+
+     
+
+      copiedeventsID.splice(removedIndex, 1);
+      copiedeventsAnimal.splice(removedIndex, 1);
+      copiedeventsDateTime.splice(removedIndex, 1);
+      copiedeventsType.splice(removedIndex, 1);
+      copiedeventsUserID.splice(removedIndex, 1);
+
+      
+
+      currentComponent.setState({
+        eventsID: copiedeventsID,
+        eventsAnimal: copiedeventsAnimal,
+        eventsDateTime: copiedeventsDateTime,
+        eventsType: copiedeventsType,
+        eventsUserID: copiedeventsUserID
+      });
+
+      
+
+      
     });
   }
 
