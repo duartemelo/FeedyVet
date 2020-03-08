@@ -3,6 +3,7 @@ import "../styles/global/Main.css";
 import "../styles/independent/Admin.css";
 import app from "../firebase";
 import TestAdminPage from "./TestAdminPage";
+import moment from "moment";
 
 const prestate = {
   eventsID: [],
@@ -37,13 +38,17 @@ class Admin extends Component {
     let currentComponent = this;
 
     ref.orderByChild("datetime").on("child_added", function(snapshot) {
+      var momentDate = moment(snapshot.val().datetime);
+      momentDate.toDate();
+      console.log(momentDate);
+
       currentComponent.setState({
         eventsID: currentComponent.state.eventsID.concat(snapshot.key),
         eventsAnimal: currentComponent.state.eventsAnimal.concat(
           snapshot.val().animal
         ),
         eventsDateTime: currentComponent.state.eventsDateTime.concat(
-          snapshot.val().datetime
+          momentDate.format("DD-MM-YYYY, H:mm")
         ),
         eventsType: currentComponent.state.eventsType.concat(
           snapshot.val().type
