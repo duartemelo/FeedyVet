@@ -3,16 +3,23 @@ import ReactDOM from "react-dom";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import "./index.css";
+
+/*Pages*/
+
 import App from "./Pages/App";
 import Home from "./Pages/Home";
 import Admin from "./Pages/Admin";
 import Animal from "./Pages/Animal";
 import Contact from "./Pages/Contact";
 import Profile from "./Pages/Profile";
+import NotFound from "./Pages/notfound";
 import TestAdminPage from "./Pages/TestAdminPage";
 import * as serviceWorker from "./serviceWorker";
-import NotFound from "./notfound";
+
 import { AuthProvider } from "./auth";
+
+/* Routes */
+
 import PrivateRoute from "./Routes/PrivateRoute";
 import AdminRoute from "./Routes//AdminRoute";
 

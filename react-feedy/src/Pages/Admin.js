@@ -9,7 +9,8 @@ const prestate = {
   eventsAnimal: [],
   eventsDateTime: [],
   eventsType: [],
-  eventsUserID: []
+  eventsUserID: [],
+  eventsUserName: []
 };
 
 class Admin extends Component {
@@ -23,7 +24,10 @@ class Admin extends Component {
   }
 
   componentDidMount() {
-    this.getEvents();
+    let currentComponent = this;
+    setTimeout(function() {
+      currentComponent.getEvents();
+    }, 10);
   }
 
   getEvents() {
@@ -32,7 +36,6 @@ class Admin extends Component {
     const ref = db.ref("events");
     let currentComponent = this;
 
-    
     ref.orderByChild("datetime").on("child_added", function(snapshot) {
       currentComponent.setState({
         eventsID: currentComponent.state.eventsID.concat(snapshot.key),
@@ -47,6 +50,9 @@ class Admin extends Component {
         ),
         eventsUserID: currentComponent.state.eventsUserID.concat(
           snapshot.val().userID
+        ),
+        eventsUserName: currentComponent.state.eventsUserName.concat(
+          snapshot.val().userName
         )
       });
     });
@@ -55,35 +61,29 @@ class Admin extends Component {
       const removedIndex = currentComponent.state.eventsID.indexOf(
         snapshot.key
       );
-      
 
       let copiedeventsID = [...currentComponent.state.eventsID];
       let copiedeventsAnimal = [...currentComponent.state.eventsAnimal];
       let copiedeventsDateTime = [...currentComponent.state.eventsDateTime];
       let copiedeventsType = [...currentComponent.state.eventsType];
       let copiedeventsUserID = [...currentComponent.state.eventsUserID];
-
-     
+      let copiedeventsUserName = [...currentComponent.state.eventsUserName];
 
       copiedeventsID.splice(removedIndex, 1);
       copiedeventsAnimal.splice(removedIndex, 1);
       copiedeventsDateTime.splice(removedIndex, 1);
       copiedeventsType.splice(removedIndex, 1);
       copiedeventsUserID.splice(removedIndex, 1);
-
-      
+      copiedeventsUserName.splice(removedIndex, 1);
 
       currentComponent.setState({
         eventsID: copiedeventsID,
         eventsAnimal: copiedeventsAnimal,
         eventsDateTime: copiedeventsDateTime,
         eventsType: copiedeventsType,
-        eventsUserID: copiedeventsUserID
+        eventsUserID: copiedeventsUserID,
+        eventsUserName: copiedeventsUserName
       });
-
-      
-
-      
     });
   }
 
@@ -101,7 +101,8 @@ class Admin extends Component {
               <div className="event-info-sub-container">
                 {this.state.eventsDateTime[index]} |{" "}
                 {this.state.eventsType[index]} |{" "}
-                {this.state.eventsUserID[index]}
+                {this.state.eventsUserID[index]} |{" "}
+                {this.state.eventsUserName[index]}
               </div>
 
               <p></p>
