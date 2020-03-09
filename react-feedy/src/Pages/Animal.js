@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "../styles/global/Main.css";
 import app from "../firebase";
 import moment from "moment";
-import { auth } from "firebase";
 
 const prestate = {
   eventsID: [],
@@ -35,12 +34,12 @@ class Animal extends Component {
     const db = app.database();
     const ref = db.ref("events");
     let currentComponent = this;
-    console.log(app.auth().currentUser.uid);
+    
     ref.orderByChild("datetime").on("child_added", function(snapshot) {
       if (snapshot.val().userID === app.auth().currentUser.uid) {
         var momentDate = moment(snapshot.val().datetime);
         momentDate.toDate();
-        console.log(momentDate);
+        
 
         currentComponent.setState({
           eventsID: currentComponent.state.eventsID.concat(snapshot.key),

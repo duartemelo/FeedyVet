@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "../styles/global/Main.css";
 import "../styles/independent/Admin.css";
 import app from "../firebase";
-import TestAdminPage from "./TestAdminPage";
 import moment from "moment";
 
 const prestate = {
@@ -100,8 +99,8 @@ class Admin extends Component {
           {this.state.eventsID.map((id, index) => (
             <div className="event-container" key={id}>
               <div className="event-name-img-sub-container">
-                <img></img>
-                <a>{this.state.eventsAnimal[index]}</a>
+                
+                <span>{this.state.eventsAnimal[index]}</span>
               </div>
               <div className="event-info-sub-container">
                 {this.state.eventsDateTime[index]} |{" "}
