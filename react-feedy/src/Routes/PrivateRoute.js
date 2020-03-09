@@ -6,7 +6,6 @@ import Loader from "react-loader-spinner";
 import "../styles/global/Loader.css";
 
 const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
-  /*const { currentUser } = useContext(AuthContext);*/
   const [user, setUser] = useState(undefined);
   const [admin, setAdmin] = useState(undefined);
   const [userID, setuserID] = useState(undefined);
