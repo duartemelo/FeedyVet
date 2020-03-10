@@ -10,7 +10,9 @@ const prestate = {
   eventsDateTime: [],
   eventsType: [],
   eventsUserID: [],
-  eventsUserName: []
+  eventsUserName: [],
+  addEventView: false,
+  addEventButtonText: "Adicionar evento"
 };
 
 class Admin extends Component {
@@ -39,7 +41,6 @@ class Admin extends Component {
     ref.orderByChild("datetime").on("child_added", function(snapshot) {
       var momentDate = moment(snapshot.val().datetime);
       momentDate.toDate();
-      console.log(momentDate);
 
       currentComponent.setState({
         eventsID: currentComponent.state.eventsID.concat(snapshot.key),
@@ -92,6 +93,12 @@ class Admin extends Component {
   }
 
   render() {
+    let addEvent = null;
+
+    if (this.state.addEventView === true) {
+      addEvent = <div className="add-event-container"></div>;
+    }
+
     return (
       <div>
         <h1>Admin Panel</h1>
@@ -99,7 +106,6 @@ class Admin extends Component {
           {this.state.eventsID.map((id, index) => (
             <div className="event-container" key={id}>
               <div className="event-name-img-sub-container">
-                
                 <span>{this.state.eventsAnimal[index]}</span>
               </div>
               <div className="event-info-sub-container">
@@ -108,14 +114,32 @@ class Admin extends Component {
                 {this.state.eventsUserID[index]} |{" "}
                 {this.state.eventsUserName[index]}
               </div>
-
-              <p></p>
             </div>
           ))}
+          <button onClick={this.changeAddEventViewState}>
+            {this.state.addEventButtonText}
+          </button>
+
+          {addEvent}
         </div>
       </div>
     );
   }
+
+  changeAddEventViewState = () => {
+    let viewState = this.state.addEventView;
+    viewState = !viewState;
+    let textButton = null;
+    if (viewState === true) {
+      textButton = "Fechar janela";
+    } else {
+      textButton = prestate.addEventButtonText;
+    }
+    this.setState({
+      addEventView: viewState,
+      addEventButtonText: textButton
+    });
+  };
 }
 
 export default Admin;

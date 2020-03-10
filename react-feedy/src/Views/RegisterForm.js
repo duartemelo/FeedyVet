@@ -1,13 +1,12 @@
 import React, { useCallback } from "react";
 import { withRouter } from "react-router";
-import { useHistory } from "react-router-dom";
 import app from "../firebase";
 import * as firebase from "firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 const RegisterForm = props => {
-  let history = useHistory();
+  
   const handleSignUp = useCallback(
     async event => {
       event.preventDefault();
@@ -29,7 +28,7 @@ const RegisterForm = props => {
         alert(error);
       }
     },
-    [history]
+    []
   );
 
   return (

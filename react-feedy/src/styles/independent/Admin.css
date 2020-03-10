@@ -17,8 +17,6 @@
     }
 }
 
-
-
 .event-container:nth-child(1) {
     margin-top: 30px;
 }
@@ -35,4 +33,19 @@
 .event-info-sub-container {
     /*background-color: rgb(167, 167, 255);*/
     display: inline-block;
+}
+
+.add-event-container {
+    position: fixed;
+    width: 100%;
+    max-width: 350px;
+    height: 500px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    background-color: #f0f0f0;
+    box-shadow: 2px 2px 5px rgb(165, 165, 165);
+    border-radius: 5px;
+    animation: form-appearing 0.7s ease;
 }
