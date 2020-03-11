@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, useCallback } from "react";
 import "../styles/global/Main.css";
 import "../styles/independent/Admin.css";
 import app from "../firebase";
 import moment from "moment";
+import AddEventForm from "../Views/AddEventForm";
 
 const prestate = {
   eventsID: [],
@@ -58,7 +59,8 @@ class Admin extends Component {
         ),
         eventsUserName: currentComponent.state.eventsUserName.concat(
           snapshot.val().userName
-        )
+        ),
+        
       });
     });
 
@@ -95,36 +97,6 @@ class Admin extends Component {
   render() {
     let addEvent = null;
 
-    if (this.state.addEventView === true) {
-      addEvent = (
-        <div className="add-event-container">
-          <form>
-            <input
-              className="input"
-              placeholder="Utilizador"
-              name="username"
-            ></input>
-            <input className="input" placeholder="Animal" name="animal"></input>
-            <input
-              className="input"
-              placeholder="Comentário"
-              name="comment"
-            ></input>
-            <input className="input" placeholder="Tipo" name="type"></input>
-            <input
-              className="input"
-              placeholder="Data e hora"
-              name="datetime"
-            ></input>
-
-            <button className="form-login-button" type="submit">
-              Enviar
-            </button>
-          </form>
-        </div>
-      );
-    }
-
     return (
       <div>
         <h1>Admin Panel</h1>
@@ -147,6 +119,7 @@ class Admin extends Component {
           </button>
 
           {addEvent}
+          <AddEventForm getState={this.state.addEventView} />
         </div>
       </div>
     );
