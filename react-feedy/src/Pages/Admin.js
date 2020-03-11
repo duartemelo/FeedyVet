@@ -96,7 +96,33 @@ class Admin extends Component {
     let addEvent = null;
 
     if (this.state.addEventView === true) {
-      addEvent = <div className="add-event-container"></div>;
+      addEvent = (
+        <div className="add-event-container">
+          <form>
+            <input
+              className="input"
+              placeholder="Utilizador"
+              name="username"
+            ></input>
+            <input className="input" placeholder="Animal" name="animal"></input>
+            <input
+              className="input"
+              placeholder="Comentário"
+              name="comment"
+            ></input>
+            <input className="input" placeholder="Tipo" name="type"></input>
+            <input
+              className="input"
+              placeholder="Data e hora"
+              name="datetime"
+            ></input>
+
+            <button className="form-login-button" type="submit">
+              Enviar
+            </button>
+          </form>
+        </div>
+      );
     }
 
     return (
