@@ -1,0 +1,6 @@
+.add-event-form {
+    display: block;
+    top: 50%;
+    transform: translateY(-50%);
+    position: relative;
+}

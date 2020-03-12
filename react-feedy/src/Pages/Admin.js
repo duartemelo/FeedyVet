@@ -59,8 +59,7 @@ class Admin extends Component {
         ),
         eventsUserName: currentComponent.state.eventsUserName.concat(
           snapshot.val().userName
-        ),
-        
+        )
       });
     });
 
