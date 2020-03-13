@@ -5,16 +5,23 @@ import "../styles/independent/AddEventForm.css";
 import { faBorderNone } from "@fortawesome/free-solid-svg-icons";
 
 const AddEventForm = props => {
+  const nextKey = props.eventsID.length;
   const addEventHandler = useCallback(async event => {
+    console.log(nextKey);
     event.preventDefault();
     const { username, animal, comment, type, datetime } = event.target.elements;
-
-    console.log(username, animal, comment, type, datetime);
+    console.log(
+      username.value,
+      animal.value,
+      comment.value,
+      type.value,
+      datetime.value
+    );
 
     try {
       await firebase
         .database()
-        .ref("/events/" + 5)
+        .ref("/events/" + nextKey)
         .set({
           animal: animal.value,
           comment: comment.value,
