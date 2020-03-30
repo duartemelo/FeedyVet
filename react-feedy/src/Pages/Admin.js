@@ -30,11 +30,8 @@ class Admin extends Component {
     let currentComponent = this;
     setTimeout(function() {
       currentComponent.getEvents();
-      
     }, 10);
   }
-
-  
 
   getEvents() {
     this.resetState();
@@ -97,8 +94,6 @@ class Admin extends Component {
   }
 
   render() {
-    let addEvent = null;
-
     return (
       <div>
         <h1>Admin Panel</h1>
@@ -120,11 +115,13 @@ class Admin extends Component {
             {this.state.addEventButtonText}
           </button>
 
-          {addEvent}
-          <AddEventForm
-            getState={this.state.addEventView}
-            eventsID={this.state.eventsID}
-          />
+          {this.state.addEventView === true ? (
+            <AddEventForm
+              getState={this.state.addEventView}
+              eventsID={this.state.eventsID}
+              eventsLength={this.state.eventsID.length}
+            />
+          ) : null}
         </div>
       </div>
     );
