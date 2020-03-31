@@ -74,7 +74,6 @@ const AddEventForm = props => {
         <button className="form-login-button" type="submit">
           Enviar
         </button>
-        {nextEvent}
       </form>
     </div>
   );

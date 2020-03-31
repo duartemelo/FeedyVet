@@ -4,6 +4,8 @@ import "../styles/independent/Admin.css";
 import app from "../firebase";
 import moment from "moment";
 import AddEventForm from "../Views/AddEventForm";
+import RemoveEventForm from "../Views/RemoveEventForm";
+import Loader from "react-loader-spinner";
 
 const prestate = {
   eventsID: [],
@@ -13,7 +15,10 @@ const prestate = {
   eventsUserID: [],
   eventsUserName: [],
   addEventView: false,
-  addEventButtonText: "Adicionar evento"
+  addEventButtonText: "Adicionar evento",
+  removeEventView: false,
+  eventBeingRemoved: null,
+  buttonRemove: true
 };
 
 class Admin extends Component {
@@ -98,28 +103,54 @@ class Admin extends Component {
       <div>
         <h1>Admin Panel</h1>
         <div>
-          {this.state.eventsID.map((id, index) => (
-            <div className="event-container" key={id}>
-              <div className="event-name-img-sub-container">
-                <span>{this.state.eventsAnimal[index]}</span>
-              </div>
-              <div className="event-info-sub-container">
-                {this.state.eventsDateTime[index]} |{" "}
-                {this.state.eventsType[index]} |{" "}
-                {this.state.eventsUserID[index]} |{" "}
-                {this.state.eventsUserName[index]}
-              </div>
+          {this.state.eventsID.length === 0 ? (
+            <div className="eventsLoadingContainer">
+              <Loader type="TailSpin" color="#3680C1" width={50} height={50} />
             </div>
-          ))}
-          <button onClick={this.changeAddEventViewState}>
-            {this.state.addEventButtonText}
-          </button>
+          ) : (
+            this.state.eventsID.map((id, index) => (
+              <div className="event-container" key={id}>
+                <div className="event-name-img-sub-container">
+                  <span>{this.state.eventsAnimal[index]}</span>
+                </div>
+                <div className="event-info-sub-container">
+                  {this.state.eventsDateTime[index]} |{" "}
+                  {this.state.eventsType[index]} |{" "}
+                  {this.state.eventsUserID[index]} |{" "}
+                  {this.state.eventsUserName[index]}
+                  {this.state.buttonRemove === true ? (
+                    <button
+                      className="button-delete-event"
+                      onClick={() => this.changeRemoveEventViewState(id)}
+                    >
+                      Eliminar
+                    </button>
+                  ) : null}
+                </div>
+              </div>
+            ))
+          )}
+
+          <div className="admin-buttons-div">
+            <button
+              className="button addEvent"
+              onClick={this.changeAddEventViewState}
+            >
+              {this.state.addEventButtonText}
+            </button>
+          </div>
 
           {this.state.addEventView === true ? (
             <AddEventForm
               getState={this.state.addEventView}
               eventsID={this.state.eventsID}
               eventsLength={this.state.eventsID.length}
+            />
+          ) : null}
+          {this.state.removeEventView === true ? (
+            <RemoveEventForm
+              eventBeingRemoved={this.state.eventBeingRemoved}
+              turnOffViewState={this.turnOffViewState}
             />
           ) : null}
         </div>
@@ -139,6 +170,22 @@ class Admin extends Component {
     this.setState({
       addEventView: viewState,
       addEventButtonText: textButton
+    });
+  };
+  changeRemoveEventViewState = id => {
+    let viewState = this.state.removeEventView;
+    viewState = true;
+    this.setState({
+      removeEventView: viewState,
+      eventBeingRemoved: id,
+      buttonRemove: false
+    });
+  };
+  turnOffViewState = () => {
+    let viewState = false;
+    this.setState({
+      removeEventView: viewState,
+      buttonRemove: true
     });
   };
 }

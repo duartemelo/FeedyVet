@@ -34,12 +34,11 @@ class Animal extends Component {
     const db = app.database();
     const ref = db.ref("events");
     let currentComponent = this;
-    
+
     ref.orderByChild("datetime").on("child_added", function(snapshot) {
       if (snapshot.val().userID === app.auth().currentUser.uid) {
         var momentDate = moment(snapshot.val().datetime);
         momentDate.toDate();
-        
 
         currentComponent.setState({
           eventsID: currentComponent.state.eventsID.concat(snapshot.key),
