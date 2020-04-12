@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../styles/global/Main.css";
+import "../styles/independent/Animal.css";
 import app from "../firebase";
 import moment from "moment";
 
@@ -9,7 +10,10 @@ const prestate = {
   eventsDateTime: [],
   eventsType: [],
   eventsUserID: [],
-  eventsUserName: []
+  eventsUserName: [],
+  timeSelectPastClasses: "time-select-left-btn",
+  timeSelectTodayClasses: "time-select-middle-btn time-select-active",
+  timeSelectFutureClasses: "time-select-right-btn",
 };
 
 class Animal extends Component {
@@ -24,7 +28,7 @@ class Animal extends Component {
 
   componentDidMount() {
     let currentComponent = this;
-    setTimeout(function() {
+    setTimeout(function () {
       currentComponent.getEvents();
     }, 10);
   }
@@ -35,7 +39,7 @@ class Animal extends Component {
     const ref = db.ref("events");
     let currentComponent = this;
 
-    ref.orderByChild("datetime").on("child_added", function(snapshot) {
+    ref.orderByChild("datetime").on("child_added", function (snapshot) {
       if (snapshot.val().userID === app.auth().currentUser.uid) {
         var momentDate = moment(snapshot.val().datetime);
         momentDate.toDate();
@@ -56,7 +60,7 @@ class Animal extends Component {
           ),
           eventsUserName: currentComponent.state.eventsUserName.concat(
             snapshot.val().userName
-          )
+          ),
         });
       }
     });
@@ -65,11 +69,20 @@ class Animal extends Component {
   render() {
     return (
       <div>
-        <h1>Animal Page Test</h1>
+        <h1 className="events-container-title">Eventos</h1>
+        <div className="time-select-container">
+          <button
+            className={this.state.timeSelectPastClasses}
+            onClick={this.pastClick}
+          >
+            Passado
+          </button>
+          <button className={this.state.timeSelectTodayClasses}>Hoje</button>
+          <button className={this.state.timeSelectFutureClasses}>Futuro</button>
+        </div>
         <div>
           {this.state.eventsID.map((id, index) => (
-            <div key={id}>
-              <div></div>
+            <div key={id} className="event-container">
               <div>
                 {this.state.eventsDateTime[index]} |{" "}
                 {this.state.eventsType[index]} |{" "}
@@ -82,6 +95,9 @@ class Animal extends Component {
       </div>
     );
   }
+  pastClick = () => {
+    alert("Test");
+  };
 }
 
 export default Animal;
