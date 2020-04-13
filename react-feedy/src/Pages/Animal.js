@@ -5,12 +5,27 @@ import app from "../firebase";
 import moment from "moment";
 
 const prestate = {
-  eventsID: [],
-  eventsAnimal: [],
-  eventsDateTime: [],
-  eventsType: [],
-  eventsUserID: [],
-  eventsUserName: [],
+  pasteventsID: [],
+  pasteventsAnimal: [],
+  pasteventsDateTime: [],
+  pasteventsType: [],
+  pasteventsUserID: [],
+  pasteventsUserName: [],
+
+  presenteventsID: [],
+  presenteventsAnimal: [],
+  presenteventsDateTime: [],
+  presenteventsType: [],
+  presenteventsUserID: [],
+  presenteventsUserName: [],
+
+  futureeventsID: [],
+  futureeventsAnimal: [],
+  futureeventsDateTime: [],
+  futureeventsType: [],
+  futureeventsUserID: [],
+  futureeventsUserName: [],
+
   timeSelectPastClasses: "time-select-left-btn",
   timeSelectTodayClasses: "time-select-middle-btn time-select-active",
   timeSelectFutureClasses: "time-select-right-btn",
@@ -22,6 +37,7 @@ class Animal extends Component {
     this.state = prestate;
   }
 
+  //resetState precisa de update
   resetState() {
     this.setState({
       eventsID: [],
@@ -40,108 +56,90 @@ class Animal extends Component {
   componentDidMount() {
     let currentComponent = this;
     setTimeout(function () {
-      currentComponent.getEvents("today");
+      currentComponent.getEvents();
     }, 10);
   }
 
-  getEvents(timeSelected) {
+  getEvents() {
     const db = app.database();
     const ref = db.ref("events");
     let currentComponent = this;
+    var today = moment();
+    var todayFormated = today.format("DD-MM-YYYY");
 
-    if (timeSelected === "past") {
-      ref.orderByChild("datetime").on("child_added", function (snapshot) {
-        if (snapshot.val().userID === app.auth().currentUser.uid) {
-          var eventDate = moment(snapshot.val().datetime);
-          eventDate.toDate();
-          var today = moment();
-          var todayFormated = today.format("DD-MM-YYYY");
-
-          if (eventDate.format("DD-MM-YYYY") < todayFormated) {
-            currentComponent.setState({
-              eventsID: currentComponent.state.eventsID.concat(snapshot.key),
-              eventsAnimal: currentComponent.state.eventsAnimal.concat(
-                snapshot.val().animal
-              ),
-              eventsDateTime: currentComponent.state.eventsDateTime.concat(
-                eventDate.format("DD-MM-YYYY, H:mm")
-              ),
-              eventsType: currentComponent.state.eventsType.concat(
-                snapshot.val().type
-              ),
-              eventsUserID: currentComponent.state.eventsUserID.concat(
-                snapshot.val().userID
-              ),
-              eventsUserName: currentComponent.state.eventsUserName.concat(
-                snapshot.val().userName
-              ),
-            });
-          }
+    ref.orderByChild("datetime").on("child_added", function (snapshot) {
+      if (snapshot.val().userID === app.auth().currentUser.uid) {
+        var eventDate = moment(snapshot.val().datetime);
+        eventDate.toDate();
+        if (eventDate.format("DD-MM-YYYY") < todayFormated) {
+          //adiciona a array passado
+          currentComponent.setState({
+            pasteventsID: currentComponent.state.pasteventsID.concat(
+              snapshot.key
+            ),
+            pasteventsAnimal: currentComponent.state.pasteventsAnimal.concat(
+              snapshot.val().animal
+            ),
+            pasteventsDateTime: currentComponent.state.pasteventsDateTime.concat(
+              eventDate.format("DD-MM-YYYY, H:mm")
+            ),
+            pasteventsType: currentComponent.state.pasteventsType.concat(
+              snapshot.val().type
+            ),
+            pasteventsUserID: currentComponent.state.pasteventsUserID.concat(
+              snapshot.val().userID
+            ),
+            pasteventsUserName: currentComponent.state.pasteventsUserName.concat(
+              snapshot.val().userName
+            ),
+          });
+        } else if (eventDate.format("DD-MM-YYYY") === todayFormated) {
+          //adiciona a array presente
+          currentComponent.setState({
+            presenteventsID: currentComponent.state.presenteventsID.concat(
+              snapshot.key
+            ),
+            presenteventsAnimal: currentComponent.state.presenteventsAnimal.concat(
+              snapshot.val().animal
+            ),
+            presenteventsDateTime: currentComponent.state.presenteventsDateTime.concat(
+              eventDate.format("DD-MM-YYYY, H:mm")
+            ),
+            presenteventsType: currentComponent.state.presenteventsType.concat(
+              snapshot.val().type
+            ),
+            presenteventsUserID: currentComponent.state.presenteventsUserID.concat(
+              snapshot.val().userID
+            ),
+            presenteventsUserName: currentComponent.state.presenteventsUserName.concat(
+              snapshot.val().userName
+            ),
+          });
+        } else if (eventDate.format("DD-MM-YYYY") > todayFormated) {
+          //adiciona a array futuro
+          currentComponent.setState({
+            futureeventsID: currentComponent.state.futureeventsID.concat(
+              snapshot.key
+            ),
+            futureeventsAnimal: currentComponent.state.futureeventsAnimal.concat(
+              snapshot.val().animal
+            ),
+            futureeventsDateTime: currentComponent.state.futureeventsDateTime.concat(
+              eventDate.format("DD-MM-YYYY, H:mm")
+            ),
+            futureeventsType: currentComponent.state.futureeventsType.concat(
+              snapshot.val().type
+            ),
+            futureeventsUserID: currentComponent.state.futureeventsUserID.concat(
+              snapshot.val().userID
+            ),
+            futureeventsUserName: currentComponent.state.futureeventsUserName.concat(
+              snapshot.val().userName
+            ),
+          });
         }
-      });
-    }
-    if (timeSelected === "today") {
-      ref.orderByChild("datetime").on("child_added", function (snapshot) {
-        if (snapshot.val().userID === app.auth().currentUser.uid) {
-          var eventDate = moment(snapshot.val().datetime);
-          eventDate.toDate();
-          var today = moment();
-          var todayFormated = today.format("DD-MM-YYYY");
-
-          if (eventDate.format("DD-MM-YYYY") === todayFormated) {
-            currentComponent.setState({
-              eventsID: currentComponent.state.eventsID.concat(snapshot.key),
-              eventsAnimal: currentComponent.state.eventsAnimal.concat(
-                snapshot.val().animal
-              ),
-              eventsDateTime: currentComponent.state.eventsDateTime.concat(
-                eventDate.format("DD-MM-YYYY, H:mm")
-              ),
-              eventsType: currentComponent.state.eventsType.concat(
-                snapshot.val().type
-              ),
-              eventsUserID: currentComponent.state.eventsUserID.concat(
-                snapshot.val().userID
-              ),
-              eventsUserName: currentComponent.state.eventsUserName.concat(
-                snapshot.val().userName
-              ),
-            });
-          }
-        }
-      });
-    }
-    if (timeSelected === "future") {
-      ref.orderByChild("datetime").on("child_added", function (snapshot) {
-        if (snapshot.val().userID === app.auth().currentUser.uid) {
-          var eventDate = moment(snapshot.val().datetime);
-          eventDate.toDate();
-          var today = moment();
-          var todayFormated = today.format("DD-MM-YYYY");
-
-          if (eventDate.format("DD-MM-YYYY") > todayFormated) {
-            currentComponent.setState({
-              eventsID: currentComponent.state.eventsID.concat(snapshot.key),
-              eventsAnimal: currentComponent.state.eventsAnimal.concat(
-                snapshot.val().animal
-              ),
-              eventsDateTime: currentComponent.state.eventsDateTime.concat(
-                eventDate.format("DD-MM-YYYY, H:mm")
-              ),
-              eventsType: currentComponent.state.eventsType.concat(
-                snapshot.val().type
-              ),
-              eventsUserID: currentComponent.state.eventsUserID.concat(
-                snapshot.val().userID
-              ),
-              eventsUserName: currentComponent.state.eventsUserName.concat(
-                snapshot.val().userName
-              ),
-            });
-          }
-        }
-      });
-    }
+      }
+    });
   }
 
   render() {
@@ -169,16 +167,42 @@ class Animal extends Component {
           </button>
         </div>
         <div>
-          {this.state.eventsID.map((id, index) => (
-            <div key={id} className="event-container">
-              <div>
-                {this.state.eventsDateTime[index]} |{" "}
-                {this.state.eventsType[index]} |{" "}
-                {this.state.eventsUserID[index]} |{" "}
-                {this.state.eventsUserName[index]}
-              </div>
-            </div>
-          ))}
+          {this.state.timeSelectPastClasses.includes("time-select-active")
+            ? this.state.pasteventsID.map((id, index) => (
+                <div key={id} className="event-container">
+                  <div>
+                    {this.state.pasteventsDateTime[index]} |{" "}
+                    {this.state.pasteventsType[index]} |{" "}
+                    {this.state.pasteventsUserID[index]} |{" "}
+                    {this.state.pasteventsUserName[index]}
+                  </div>
+                </div>
+              ))
+            : null}
+          {this.state.timeSelectTodayClasses.includes("time-select-active")
+            ? this.state.presenteventsID.map((id, index) => (
+                <div key={id} className="event-container">
+                  <div>
+                    {this.state.presenteventsDateTime[index]} |{" "}
+                    {this.state.presenteventsType[index]} |{" "}
+                    {this.state.presenteventsUserID[index]} |{" "}
+                    {this.state.presenteventsUserName[index]}
+                  </div>
+                </div>
+              ))
+            : null}
+          {this.state.timeSelectFutureClasses.includes("time-select-active")
+            ? this.state.futureeventsID.map((id, index) => (
+                <div key={id} className="event-container">
+                  <div>
+                    {this.state.futureeventsDateTime[index]} |{" "}
+                    {this.state.futureeventsType[index]} |{" "}
+                    {this.state.futureeventsUserID[index]} |{" "}
+                    {this.state.futureeventsUserName[index]}
+                  </div>
+                </div>
+              ))
+            : null}
         </div>
       </div>
     );
@@ -201,7 +225,6 @@ class Animal extends Component {
         this.state.timeSelectPastClasses + " time-select-active",
     });
     this.resetState();
-    this.getEvents("past");
   };
 
   todayClick = () => {
@@ -222,7 +245,6 @@ class Animal extends Component {
         this.state.timeSelectTodayClasses + " time-select-active",
     });
     this.resetState();
-    this.getEvents("today");
   };
 
   futureClick = () => {
@@ -243,7 +265,6 @@ class Animal extends Component {
         this.state.timeSelectFutureClasses + " time-select-active",
     });
     this.resetState();
-    this.getEvents("future");
   };
 }
 
