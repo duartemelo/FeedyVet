@@ -56,3 +56,19 @@
 button:focus {
     outline: none;
 }
+
+.event-container-top-child {
+    background-color: lightblue;
+    width: 450px;
+    height: 50px;
+    position: absolute;
+    margin-top: 15px;
+}
+
+.event-container-bottom-child {
+    background-color: lightcoral;
+    width: 450px;
+    height: 40px;
+    position: absolute;
+    margin-top: 95px;
+}

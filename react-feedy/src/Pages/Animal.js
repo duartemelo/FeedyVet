@@ -203,6 +203,63 @@ class Animal extends Component {
                 </div>
               ))
             : null}
+          <div className="event-container">
+            <div className="event-container-top-child">
+              <div>
+                <div
+                  style={{
+                    width: "max-content",
+                    float: "left",
+                    fontSize: "19px",
+                    paddingLeft: "20px",
+                  }}
+                >
+                  Consulta
+                </div>
+                <div
+                  style={{
+                    width: "max-content",
+                    float: "right",
+                    fontSize: "16px",
+                    paddingRight: "20px",
+                  }}
+                >
+                  19:00h
+                </div>
+              </div>
+              <div
+                style={{
+                  clear: "both",
+                  paddingLeft: "20px",
+                }}
+              >
+                Consulta de rotina
+              </div>
+            </div>
+            <div className="event-container-bottom-child">
+              <div
+                style={{
+                  width: "max-content",
+                  float: "left",
+                  fontSize: "15px",
+                  paddingLeft: "20px",
+                  marginTop: "10px",
+                  bottom: "0",
+                }}
+              >
+                Fenix
+              </div>
+              <div
+                style={{
+                  width: "max-content",
+                  float: "right",
+                  paddingRight: "20px",
+                }}
+              >
+                Close
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
