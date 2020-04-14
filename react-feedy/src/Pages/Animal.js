@@ -249,15 +249,7 @@ class Animal extends Component {
               >
                 Fenix
               </div>
-              <div
-                style={{
-                  width: "max-content",
-                  float: "right",
-                  paddingRight: "20px",
-                }}
-              >
-                Close
-              </div>
+              <button className="event-delete-btn"></button>
             </div>
           </div>
         </div>

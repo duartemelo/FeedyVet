@@ -2,11 +2,10 @@
     background-color: #D8D8D8;
     margin: 0 auto;
     max-width: 450px;
-    height: 150px;
+    height: 180px;
     border-radius: 5px;
     color: #333;
     margin-bottom: 20px;
-    
 }
 
 .event-container:nth-child(1) {
