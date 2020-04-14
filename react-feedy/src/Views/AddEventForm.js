@@ -4,9 +4,9 @@ import * as firebase from "firebase";
 import "../styles/independent/AddEventForm.css";
 import { faBorderNone } from "@fortawesome/free-solid-svg-icons";
 
-const AddEventForm = props => {
+const AddEventForm = (props) => {
   let nextEvent = props.eventsLength + 1;
-  const addEventHandler = useCallback(async event => {
+  const addEventHandler = useCallback(async (event) => {
     event.preventDefault();
     const { username, animal, comment, type, datetime } = event.target.elements;
     console.log(
@@ -26,7 +26,7 @@ const AddEventForm = props => {
           comment: comment.value,
           datetime: datetime.value,
           type: type.value,
-          userName: username.value
+          userName: username.value,
         });
       nextEvent += 1;
     } catch (error) {
@@ -35,7 +35,7 @@ const AddEventForm = props => {
   }, []);
 
   const mt10 = {
-    marginTop: 10
+    marginTop: 10,
   };
 
   return (
@@ -73,6 +73,13 @@ const AddEventForm = props => {
 
         <button className="form-login-button" type="submit">
           Enviar
+        </button>
+        <button
+          className="form-login-button"
+          style={{ marginTop: "10px", backgroundColor: "#910000" }}
+          onClick={props.turnOffHandler}
+        >
+          Fechar
         </button>
       </form>
     </div>

@@ -7,6 +7,7 @@ import moment from "moment";
 const prestate = {
   pasteventsID: [],
   pasteventsAnimal: [],
+  pasteventsComment: [],
   pasteventsDateTime: [],
   pasteventsType: [],
   pasteventsUserID: [],
@@ -14,6 +15,7 @@ const prestate = {
 
   presenteventsID: [],
   presenteventsAnimal: [],
+  presenteventsComment: [],
   presenteventsDateTime: [],
   presenteventsType: [],
   presenteventsUserID: [],
@@ -21,6 +23,7 @@ const prestate = {
 
   futureeventsID: [],
   futureeventsAnimal: [],
+  futureeventsComment: [],
   futureeventsDateTime: [],
   futureeventsType: [],
   futureeventsUserID: [],
@@ -80,6 +83,9 @@ class Animal extends Component {
             pasteventsAnimal: currentComponent.state.pasteventsAnimal.concat(
               snapshot.val().animal
             ),
+            pasteventsComment: currentComponent.state.pasteventsComment.concat(
+              snapshot.val().comment
+            ),
             pasteventsDateTime: currentComponent.state.pasteventsDateTime.concat(
               eventDate.format("DD-MM-YYYY, H:mm")
             ),
@@ -101,6 +107,9 @@ class Animal extends Component {
             ),
             presenteventsAnimal: currentComponent.state.presenteventsAnimal.concat(
               snapshot.val().animal
+            ),
+            presenteventsComment: currentComponent.state.presenteventsComment.concat(
+              snapshot.val().comment
             ),
             presenteventsDateTime: currentComponent.state.presenteventsDateTime.concat(
               eventDate.format("DD-MM-YYYY, H:mm")
@@ -124,6 +133,9 @@ class Animal extends Component {
             futureeventsAnimal: currentComponent.state.futureeventsAnimal.concat(
               snapshot.val().animal
             ),
+            futureeventsComment: currentComponent.state.futureeventsComment.concat(
+              snapshot.val().comment
+            ),
             futureeventsDateTime: currentComponent.state.futureeventsDateTime.concat(
               eventDate.format("DD-MM-YYYY, H:mm")
             ),
@@ -145,6 +157,13 @@ class Animal extends Component {
   render() {
     return (
       <div>
+        <button
+          className="button signout-btn"
+          onClick={() => app.auth().signOut()}
+          style={{ position: "absolute", right: "0", top: "0" }}
+        >
+          Sair
+        </button>
         <h1 className="events-container-title">Eventos</h1>
         <div className="time-select-container">
           <button
@@ -167,91 +186,166 @@ class Animal extends Component {
           </button>
         </div>
         <div>
+          
           {this.state.timeSelectPastClasses.includes("time-select-active")
             ? this.state.pasteventsID.map((id, index) => (
-                <div key={id} className="event-container">
-                  <div>
-                    {this.state.pasteventsDateTime[index]} |{" "}
-                    {this.state.pasteventsType[index]} |{" "}
-                    {this.state.pasteventsUserID[index]} |{" "}
-                    {this.state.pasteventsUserName[index]}
+                <div className="event-container">
+                  <div className="event-container-top-child">
+                    <div>
+                      <div
+                        style={{
+                          width: "max-content",
+                          float: "left",
+                          fontSize: "19px",
+                          paddingLeft: "20px",
+                        }}
+                      >
+                        {this.state.pasteventsType[index]}
+                      </div>
+                      <div
+                        style={{
+                          width: "max-content",
+                          float: "right",
+                          fontSize: "16px",
+                          paddingRight: "20px",
+                        }}
+                      >
+                        {this.state.pasteventsDateTime[index]}h
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        clear: "both",
+                        paddingLeft: "20px",
+                      }}
+                    >
+                      {this.state.pasteventsComment[index]}
+                    </div>
+                  </div>
+                  <div className="event-container-bottom-child">
+                    <div
+                      style={{
+                        width: "max-content",
+                        float: "left",
+                        fontSize: "15px",
+                        paddingLeft: "20px",
+                        marginTop: "10px",
+                        bottom: "0",
+                      }}
+                    >
+                      {this.state.pasteventsAnimal[index]}
+                    </div>
+                    <button className="event-delete-btn"></button>
                   </div>
                 </div>
               ))
             : null}
           {this.state.timeSelectTodayClasses.includes("time-select-active")
             ? this.state.presenteventsID.map((id, index) => (
-                <div key={id} className="event-container">
-                  <div>
-                    {this.state.presenteventsDateTime[index]} |{" "}
-                    {this.state.presenteventsType[index]} |{" "}
-                    {this.state.presenteventsUserID[index]} |{" "}
-                    {this.state.presenteventsUserName[index]}
+                <div className="event-container">
+                  <div className="event-container-top-child">
+                    <div>
+                      <div
+                        style={{
+                          width: "max-content",
+                          float: "left",
+                          fontSize: "19px",
+                          paddingLeft: "20px",
+                        }}
+                      >
+                        {this.state.presenteventsType[index]}
+                      </div>
+                      <div
+                        style={{
+                          width: "max-content",
+                          float: "right",
+                          fontSize: "16px",
+                          paddingRight: "20px",
+                        }}
+                      >
+                        {this.state.presenteventsDateTime[index]}h
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        clear: "both",
+                        paddingLeft: "20px",
+                      }}
+                    >
+                      {this.state.presenteventsComment[index]}
+                    </div>
+                  </div>
+                  <div className="event-container-bottom-child">
+                    <div
+                      style={{
+                        width: "max-content",
+                        float: "left",
+                        fontSize: "15px",
+                        paddingLeft: "20px",
+                        marginTop: "10px",
+                        bottom: "0",
+                      }}
+                    >
+                      {this.state.presenteventsAnimal[index]}
+                    </div>
+                    <button className="event-delete-btn"></button>
                   </div>
                 </div>
               ))
             : null}
           {this.state.timeSelectFutureClasses.includes("time-select-active")
             ? this.state.futureeventsID.map((id, index) => (
-                <div key={id} className="event-container">
-                  <div>
-                    {this.state.futureeventsDateTime[index]} |{" "}
-                    {this.state.futureeventsType[index]} |{" "}
-                    {this.state.futureeventsUserID[index]} |{" "}
-                    {this.state.futureeventsUserName[index]}
+                <div className="event-container">
+                  <div className="event-container-top-child">
+                    <div>
+                      <div
+                        style={{
+                          width: "max-content",
+                          float: "left",
+                          fontSize: "19px",
+                          paddingLeft: "20px",
+                        }}
+                      >
+                        {this.state.futureeventsType[index]}
+                      </div>
+                      <div
+                        style={{
+                          width: "max-content",
+                          float: "right",
+                          fontSize: "16px",
+                          paddingRight: "20px",
+                        }}
+                      >
+                        {this.state.futureeventsDateTime[index]}h
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        clear: "both",
+                        paddingLeft: "20px",
+                      }}
+                    >
+                      {this.state.futureeventsComment[index]}
+                    </div>
+                  </div>
+                  <div className="event-container-bottom-child">
+                    <div
+                      style={{
+                        width: "max-content",
+                        float: "left",
+                        fontSize: "15px",
+                        paddingLeft: "20px",
+                        marginTop: "10px",
+                        bottom: "0",
+                      }}
+                    >
+                      {this.state.futureeventsAnimal[index]}
+                    </div>
+                    <button className="event-delete-btn"></button>
                   </div>
                 </div>
               ))
             : null}
-          <div className="event-container">
-            <div className="event-container-top-child">
-              <div>
-                <div
-                  style={{
-                    width: "max-content",
-                    float: "left",
-                    fontSize: "19px",
-                    paddingLeft: "20px",
-                  }}
-                >
-                  Consulta
-                </div>
-                <div
-                  style={{
-                    width: "max-content",
-                    float: "right",
-                    fontSize: "16px",
-                    paddingRight: "20px",
-                  }}
-                >
-                  19:00h
-                </div>
-              </div>
-              <div
-                style={{
-                  clear: "both",
-                  paddingLeft: "20px",
-                }}
-              >
-                Consulta de rotina
-              </div>
-            </div>
-            <div className="event-container-bottom-child">
-              <div
-                style={{
-                  width: "max-content",
-                  float: "left",
-                  fontSize: "15px",
-                  paddingLeft: "20px",
-                  marginTop: "10px",
-                  bottom: "0",
-                }}
-              >
-                Fenix
-              </div>
-              <button className="event-delete-btn"></button>
-            </div>
-          </div>
         </div>
       </div>
     );
@@ -273,7 +367,7 @@ class Animal extends Component {
       timeSelectPastClasses:
         this.state.timeSelectPastClasses + " time-select-active",
     });
-    this.resetState();
+    
   };
 
   todayClick = () => {
@@ -293,7 +387,7 @@ class Animal extends Component {
       timeSelectTodayClasses:
         this.state.timeSelectTodayClasses + " time-select-active",
     });
-    this.resetState();
+    
   };
 
   futureClick = () => {
@@ -313,7 +407,7 @@ class Animal extends Component {
       timeSelectFutureClasses:
         this.state.timeSelectFutureClasses + " time-select-active",
     });
-    this.resetState();
+    
   };
 }
 
