@@ -1,77 +1,77 @@
 .event-container {
-    background-color: #D8D8D8;
-    margin: 0 auto;
-    max-width: 450px;
-    height: 180px;
-    border-radius: 5px;
-    color: #333;
-    margin-bottom: 20px;
+  background-color: #d8d8d8;
+  margin: 0 auto;
+  max-width: 450px;
+  height: 180px;
+  border-radius: 5px;
+  color: #333;
+  margin-bottom: 20px;
 }
 
 .event-container:nth-child(1) {
-    margin-top: 50px;
+  margin-top: 10px;
 }
 
 .event-name-img-sub-container {
-    /*background-color: rgb(255, 136, 136);*/
-    width: 100px;
-    height: 100%;
-    display: inline-block;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+  /*background-color: rgb(255, 136, 136);*/
+  width: 100px;
+  height: 100%;
+  display: inline-block;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .event-info-sub-container {
-    /*background-color: rgb(167, 167, 255);*/
-    display: inline-block;
+  /*background-color: rgb(167, 167, 255);*/
+  display: inline-block;
 }
 
 .add-event-container {
-    position: fixed;
-    width: 100%;
-    max-width: 350px;
-    height: 500px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 999;
-    background-color: #f0f0f0;
-    box-shadow: 2px 2px 5px rgb(165, 165, 165);
-    border-radius: 5px;
-    animation: form-appearing 0.7s ease;
+  position: fixed;
+  width: 100%;
+  max-width: 350px;
+  height: 500px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  background-color: #f0f0f0;
+  box-shadow: 2px 2px 5px rgb(165, 165, 165);
+  border-radius: 5px;
+  animation: form-appearing 0.7s ease;
 }
 
 .eventsLoadingContainer {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 30px;
-    display: block;
-    width: 50px;
-    height: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  display: block;
+  width: 50px;
+  height: 50px;
 }
 
 .addEvent {
-    background-color: #3680C1;
-    color: #fff;
-    width: 150px;
+  background-color: #3680c1;
+  color: #fff;
+  width: 150px;
 }
 
 .admin-buttons-div {
-    width: fit-content;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 40px;
+  width: fit-content;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
 }
 
 .button-delete-event {
-    border-radius: 5px;
-    border: none;
-    font-size: 15px;
-    background-color: #c23127;
-    color: #fff;
+  border-radius: 5px;
+  border: none;
+  font-size: 15px;
+  background-color: #c23127;
+  color: #fff;
 }
 
 .button-delete-event:focus {
-    outline: 0;
+  outline: 0;
 }

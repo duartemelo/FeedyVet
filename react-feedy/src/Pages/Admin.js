@@ -7,6 +7,8 @@ import moment from "moment";
 import AddEventForm from "../Views/AddEventForm";
 import RemoveEventForm from "../Views/RemoveEventForm";
 import Loader from "react-loader-spinner";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 const prestate = {
   /*to be removed later*/
@@ -220,10 +222,31 @@ class Admin extends Component {
           </button>
         </div>
         <div>
+          <div className="admin-buttons-div">
+            <button
+              className="button addEvent"
+              onClick={this.changeAddEventViewState}
+              style={{ marginBottom: "40px" }}
+            >
+              Adicionar evento
+            </button>
+          </div>
           <div>
+            {this.state.pasteventsID.length === 0 &&
+            this.state.presenteventsID.length === 0 &&
+            this.state.futureeventsID.length === 0 ? (
+              <div className="eventsLoadingContainer">
+                <Loader
+                  type="TailSpin"
+                  color="#3680C1"
+                  width={50}
+                  height={50}
+                />
+              </div>
+            ) : null}
             {this.state.timeSelectPastClasses.includes("time-select-active")
               ? this.state.pasteventsID.map((id, index) => (
-                  <div className="event-container">
+                  <div className="event-container" key={id}>
                     <div className="event-container-top-child">
                       <div>
                         <div
@@ -269,14 +292,29 @@ class Admin extends Component {
                       >
                         {this.state.pasteventsAnimal[index]}
                       </div>
-                      <button className="event-delete-btn"></button>
+
+                      <button
+                        className="event-delete-btn"
+                        onClick={() => this.changeRemoveEventViewState(id)}
+                      >
+                        <FontAwesomeIcon
+                          icon={faTimes}
+                          style={{ color: "#fff" }}
+                        />
+                      </button>
+                      <button className="event-edit-btn">
+                        <FontAwesomeIcon
+                          icon={faPencilAlt}
+                          style={{ color: "#fff" }}
+                        />
+                      </button>
                     </div>
                   </div>
                 ))
               : null}
             {this.state.timeSelectTodayClasses.includes("time-select-active")
               ? this.state.presenteventsID.map((id, index) => (
-                  <div className="event-container">
+                  <div className="event-container" key={id}>
                     <div className="event-container-top-child">
                       <div>
                         <div
@@ -322,14 +360,29 @@ class Admin extends Component {
                       >
                         {this.state.presenteventsAnimal[index]}
                       </div>
-                      <button className="event-delete-btn"></button>
+
+                      <button
+                        className="event-delete-btn"
+                        onClick={() => this.changeRemoveEventViewState(id)}
+                      >
+                        <FontAwesomeIcon
+                          icon={faTimes}
+                          style={{ color: "#fff" }}
+                        />
+                      </button>
+                      <button className="event-edit-btn">
+                        <FontAwesomeIcon
+                          icon={faPencilAlt}
+                          style={{ color: "#fff" }}
+                        />
+                      </button>
                     </div>
                   </div>
                 ))
               : null}
             {this.state.timeSelectFutureClasses.includes("time-select-active")
               ? this.state.futureeventsID.map((id, index) => (
-                  <div className="event-container">
+                  <div className="event-container" key={id}>
                     <div className="event-container-top-child">
                       <div>
                         <div
@@ -375,20 +428,28 @@ class Admin extends Component {
                       >
                         {this.state.futureeventsAnimal[index]}
                       </div>
-                      <button className="event-delete-btn"></button>
+
+                      <button
+                        className="event-delete-btn"
+                        onClick={() => this.changeRemoveEventViewState(id)}
+                      >
+                        <FontAwesomeIcon
+                          icon={faTimes}
+                          style={{
+                            color: "#fff",
+                          }}
+                        />
+                      </button>
+                      <button className="event-edit-btn">
+                        <FontAwesomeIcon
+                          icon={faPencilAlt}
+                          style={{ color: "#fff" }}
+                        />
+                      </button>
                     </div>
                   </div>
                 ))
               : null}
-          </div>
-
-          <div className="admin-buttons-div">
-            <button
-              className="button addEvent"
-              onClick={this.changeAddEventViewState}
-            >
-              Adicionar evento
-            </button>
           </div>
 
           {this.state.addEventView === true ? (
@@ -430,14 +491,12 @@ class Admin extends Component {
     this.setState({
       removeEventView: viewState,
       eventBeingRemoved: id,
-      buttonRemove: false,
     });
   };
   turnOffRemoveEventViewState = () => {
     let viewState = false;
     this.setState({
       removeEventView: viewState,
-      buttonRemove: true,
     });
   };
   pastClick = () => {

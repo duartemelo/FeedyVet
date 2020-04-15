@@ -3,6 +3,7 @@ import "../styles/global/Main.css";
 import "../styles/independent/Animal.css";
 import app from "../firebase";
 import moment from "moment";
+import Loader from "react-loader-spinner";
 
 const prestate = {
   pasteventsID: [],
@@ -186,7 +187,13 @@ class Animal extends Component {
           </button>
         </div>
         <div>
-          
+          {this.state.pasteventsID.length === 0 &&
+          this.state.presenteventsID.length === 0 &&
+          this.state.futureeventsID.length === 0 ? (
+            <div className="eventsLoadingContainer">
+              <Loader type="TailSpin" color="#3680C1" width={50} height={50} />
+            </div>
+          ) : null}
           {this.state.timeSelectPastClasses.includes("time-select-active")
             ? this.state.pasteventsID.map((id, index) => (
                 <div className="event-container">
@@ -240,6 +247,7 @@ class Animal extends Component {
                 </div>
               ))
             : null}
+
           {this.state.timeSelectTodayClasses.includes("time-select-active")
             ? this.state.presenteventsID.map((id, index) => (
                 <div className="event-container">
@@ -293,6 +301,7 @@ class Animal extends Component {
                 </div>
               ))
             : null}
+
           {this.state.timeSelectFutureClasses.includes("time-select-active")
             ? this.state.futureeventsID.map((id, index) => (
                 <div className="event-container">
@@ -367,7 +376,6 @@ class Animal extends Component {
       timeSelectPastClasses:
         this.state.timeSelectPastClasses + " time-select-active",
     });
-    
   };
 
   todayClick = () => {
@@ -387,7 +395,6 @@ class Animal extends Component {
       timeSelectTodayClasses:
         this.state.timeSelectTodayClasses + " time-select-active",
     });
-    
   };
 
   futureClick = () => {
@@ -407,7 +414,6 @@ class Animal extends Component {
       timeSelectFutureClasses:
         this.state.timeSelectFutureClasses + " time-select-active",
     });
-    
   };
 }
 
