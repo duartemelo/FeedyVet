@@ -289,7 +289,8 @@ class Admin extends Component {
                           bottom: "0",
                         }}
                       >
-                        {this.state.pasteventsAnimal[index]}
+                        {this.state.pasteventsAnimal[index]} (
+                        {this.state.pasteventsUserName[index]})
                       </div>
 
                       <button
@@ -358,7 +359,8 @@ class Admin extends Component {
                           bottom: "0",
                         }}
                       >
-                        {this.state.presenteventsAnimal[index]}
+                        {this.state.presenteventsAnimal[index]} (
+                        {this.state.presenteventsUserName[index]})
                       </div>
 
                       <button
@@ -427,7 +429,8 @@ class Admin extends Component {
                           bottom: "0",
                         }}
                       >
-                        {this.state.futureeventsAnimal[index]}
+                        {this.state.futureeventsAnimal[index]} (
+                        {this.state.futureeventsUserName[index]})
                       </div>
 
                       <button
@@ -456,7 +459,12 @@ class Admin extends Component {
           {/* Caso o state da propriedade addEventView seja true, mostra o addeventform*/}
           {this.state.addEventView === true ? (
             <AddEventForm
-              eventsLength={this.state.pasteventsID.length + this.state.presenteventsID.length + this.state.futureeventsID.length}
+              eventsLength={
+                this.state.pasteventsID.length +
+                this.state.presenteventsID.length +
+                this.state.futureeventsID.length +
+                1
+              }
               turnOffHandler={this.turnOffAddEventViewState}
             />
           ) : null}
