@@ -5,6 +5,7 @@ import app from "../firebase";
 import moment from "moment";
 import Loader from "react-loader-spinner";
 
+//objetos que fazem parte do state desta página, eventos do passado, presente e futuro. Assim como as classes do seletor de tempo
 const prestate = {
   pasteventsID: [],
   pasteventsAnimal: [],
@@ -38,25 +39,16 @@ const prestate = {
 class Animal extends Component {
   constructor(props) {
     super(props);
+    //define o state para o prestate, definido acima
     this.state = prestate;
   }
 
-  //resetState precisa de update
+  //reset ao state para o prestate
   resetState() {
-    this.setState({
-      eventsID: [],
-      eventsAnimal: [],
-      eventsDateTime: [],
-      eventsType: [],
-      eventsUserID: [],
-      eventsUserName: [],
-    });
+    this.setState(prestate);
   }
 
-  testResetState() {
-    alert("test");
-  }
-
+  //quando o componente dá load / pagina da load, obtem os eventos passados 10 milisegundos, isto para esperar que o state seja definido
   componentDidMount() {
     let currentComponent = this;
     setTimeout(function () {
@@ -64,18 +56,20 @@ class Animal extends Component {
     }, 10);
   }
 
+  //funcao para obter eventos
   getEvents() {
     const db = app.database();
     const ref = db.ref("events");
     let currentComponent = this;
+
+    //data de hoje
     var today = moment();
-    var todayFormated = today.format("DD-MM-YYYY");
 
     ref.orderByChild("datetime").on("child_added", function (snapshot) {
       if (snapshot.val().userID === app.auth().currentUser.uid) {
         var eventDate = moment(snapshot.val().datetime);
         eventDate.toDate();
-        if (eventDate.format("DD-MM-YYYY") < todayFormated) {
+        if (eventDate.isBefore(today, "day")) {
           //adiciona a array passado
           currentComponent.setState({
             pasteventsID: currentComponent.state.pasteventsID.concat(
@@ -100,7 +94,7 @@ class Animal extends Component {
               snapshot.val().userName
             ),
           });
-        } else if (eventDate.format("DD-MM-YYYY") === todayFormated) {
+        } else if (eventDate.isSame(today, "day")) {
           //adiciona a array presente
           currentComponent.setState({
             presenteventsID: currentComponent.state.presenteventsID.concat(
@@ -125,7 +119,7 @@ class Animal extends Component {
               snapshot.val().userName
             ),
           });
-        } else if (eventDate.format("DD-MM-YYYY") > todayFormated) {
+        } else if (eventDate.isAfter(today, "day")) {
           //adiciona a array futuro
           currentComponent.setState({
             futureeventsID: currentComponent.state.futureeventsID.concat(
@@ -187,6 +181,7 @@ class Animal extends Component {
           </button>
         </div>
         <div>
+          {/* Caso os três arrays estejam vazios, ativa o spinner de loading */}
           {this.state.pasteventsID.length === 0 &&
           this.state.presenteventsID.length === 0 &&
           this.state.futureeventsID.length === 0 ? (
@@ -194,9 +189,10 @@ class Animal extends Component {
               <Loader type="TailSpin" color="#3680C1" width={50} height={50} />
             </div>
           ) : null}
+          {/* Caso o seletor de tempo esteja no passado, mostra eventos do passado */}
           {this.state.timeSelectPastClasses.includes("time-select-active")
             ? this.state.pasteventsID.map((id, index) => (
-                <div className="event-container">
+                <div className="event-container-user">
                   <div className="event-container-top-child">
                     <div>
                       <div
@@ -248,9 +244,10 @@ class Animal extends Component {
               ))
             : null}
 
+          {/* Caso o seletor de tempo esteja no presente, mostra eventos do presente */}
           {this.state.timeSelectTodayClasses.includes("time-select-active")
             ? this.state.presenteventsID.map((id, index) => (
-                <div className="event-container">
+                <div className="event-container-user">
                   <div className="event-container-top-child">
                     <div>
                       <div
@@ -302,9 +299,10 @@ class Animal extends Component {
               ))
             : null}
 
+          {/* Caso o seletor de tempo esteja no futuro, mostra eventos do futuro */}
           {this.state.timeSelectFutureClasses.includes("time-select-active")
             ? this.state.futureeventsID.map((id, index) => (
-                <div className="event-container">
+                <div className="event-container-user">
                   <div className="event-container-top-child">
                     <div>
                       <div
@@ -359,6 +357,8 @@ class Animal extends Component {
       </div>
     );
   }
+
+  //funçao quando seleciona o passado no seletor de tempo
   pastClick = () => {
     if (this.state.timeSelectTodayClasses.includes("time-select-active")) {
       this.setState({
@@ -378,6 +378,7 @@ class Animal extends Component {
     });
   };
 
+  //funçao quando seleciona o presente no seletor de tempo
   todayClick = () => {
     if (this.state.timeSelectPastClasses.includes("time-select-active")) {
       this.setState({
@@ -397,6 +398,7 @@ class Animal extends Component {
     });
   };
 
+  //funçao quando seleciona o futuro no seletor de tempo
   futureClick = () => {
     if (this.state.timeSelectPastClasses.includes("time-select-active")) {
       this.setState({

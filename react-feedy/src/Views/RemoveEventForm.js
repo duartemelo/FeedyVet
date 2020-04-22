@@ -4,8 +4,10 @@ import * as firebase from "firebase";
 import "../styles/independent/AddEventForm.css";
 import { faBorderNone } from "@fortawesome/free-solid-svg-icons";
 
-const RemoveEventForm = props => {
-  const RemoveEventHandler = useCallback(async event => {
+const RemoveEventForm = (props) => {
+
+  //funcao de remover evento, obtem o id a partir das props que são passadas pelo outro componente que chama este (admin)
+  const RemoveEventHandler = useCallback(async (event) => {
     try {
       await firebase
         .database()
@@ -16,13 +18,25 @@ const RemoveEventForm = props => {
     }
   });
   return (
-    <div className="add-event-container">
-      <h3>Apagar evento</h3>
-      <p>
+    <div className="remove-event-container">
+      <h3 style={{ marginTop: "40px" }}>Apagar evento</h3>
+      <p className="remove-event-text">
         Tem a certeza que quer apagar evento com id: {props.eventBeingRemoved}?
       </p>
-      <button onClick={RemoveEventHandler}>Apagar</button>
-      <button onClick={props.turnOffViewState}>Cancelar</button>
+      <button
+        className="form-login-button"
+        onClick={RemoveEventHandler}
+        style={{ marginTop: "40px", backgroundColor: "#910000" }}
+      >
+        Apagar
+      </button>
+      <button
+        className="form-login-button"
+        onClick={props.turnOffViewState}
+        style={{ marginBottom: "80px" }}
+      >
+        Cancelar
+      </button>
     </div>
   );
 };

@@ -5,9 +5,14 @@ import "../styles/independent/AddEventForm.css";
 import { faBorderNone } from "@fortawesome/free-solid-svg-icons";
 
 const AddEventForm = (props) => {
+
+  /*variavel que define o numero do proximo evento na base de dados*/
   let nextEvent = props.eventsLength + 1;
+
+  //funçao de adicionar evento
   const addEventHandler = useCallback(async (event) => {
     event.preventDefault();
+    //obtem os valores do form
     const { username, animal, comment, type, datetime } = event.target.elements;
     console.log(
       username.value,
@@ -17,6 +22,7 @@ const AddEventForm = (props) => {
       datetime.value
     );
 
+    //adiciona o evento à BD
     try {
       await firebase
         .database()
@@ -28,6 +34,7 @@ const AddEventForm = (props) => {
           type: type.value,
           userName: username.value,
         });
+      //incrementa a variavel next event, no caso de o utilizador querer adicionar outro evento sem fechar/dar reload a pagina
       nextEvent += 1;
     } catch (error) {
       alert(error);

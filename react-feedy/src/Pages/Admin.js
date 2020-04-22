@@ -10,15 +10,8 @@ import Loader from "react-loader-spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
+//objetos que fazem parte do state desta página, eventos do passado, presente e futuro. Assim como as classes do seletor de tempo, o estado do component de adicionar e remover eventos, eventid a ser removido
 const prestate = {
-  /*to be removed later*/
-  eventsID: [],
-  eventsAnimal: [],
-  eventsDateTime: [],
-  eventsType: [],
-  eventsUserID: [],
-  eventsUserName: [],
-
   pasteventsID: [],
   pasteventsAnimal: [],
   pasteventsComment: [],
@@ -46,7 +39,6 @@ const prestate = {
   addEventView: false,
   removeEventView: false,
   eventBeingRemoved: null,
-  buttonRemove: true,
 
   timeSelectPastClasses: "time-select-left-btn",
   timeSelectTodayClasses: "time-select-middle-btn time-select-active",
@@ -56,13 +48,16 @@ const prestate = {
 class Admin extends Component {
   constructor(props) {
     super(props);
+    //define o state para o prestate, definido acima
     this.state = prestate;
   }
 
+  //reset ao state para o prestate
   resetState() {
     this.setState(prestate);
   }
 
+  //quando o componente dá load / pagina da load, obtem os eventos passados 10 milisegundos, isto para esperar que o state seja definido
   componentDidMount() {
     let currentComponent = this;
     setTimeout(function () {
@@ -70,18 +65,20 @@ class Admin extends Component {
     }, 10);
   }
 
+  //funcao para obter eventos
   getEvents() {
     const db = app.database();
     const ref = db.ref("events");
     let currentComponent = this;
+
+    //data de hoje
     var today = moment();
-    var todayFormated = today.format("DD-MM-YYYY");
 
     ref.orderByChild("datetime").on("child_added", function (snapshot) {
       var eventDate = moment(snapshot.val().datetime);
       eventDate.toDate();
 
-      if (eventDate.format("DD-MM-YYYY") < todayFormated) {
+      if (eventDate.isBefore(today, "day")) {
         //adiciona a array passado
         currentComponent.setState({
           pasteventsID: currentComponent.state.pasteventsID.concat(
@@ -106,7 +103,7 @@ class Admin extends Component {
             snapshot.val().userName
           ),
         });
-      } else if (eventDate.format("DD-MM-YYYY") === todayFormated) {
+      } else if (eventDate.isSame(today, "day")) {
         //adiciona a array presente
         currentComponent.setState({
           presenteventsID: currentComponent.state.presenteventsID.concat(
@@ -131,7 +128,7 @@ class Admin extends Component {
             snapshot.val().userName
           ),
         });
-      } else if (eventDate.format("DD-MM-YYYY") > todayFormated) {
+      } else if (eventDate.isAfter(today, "day")) {
         //adiciona a array futuro
         currentComponent.setState({
           futureeventsID: currentComponent.state.futureeventsID.concat(
@@ -232,6 +229,7 @@ class Admin extends Component {
             </button>
           </div>
           <div>
+            {/* Caso os três arrays estejam vazios, ativa o spinner de loading */}
             {this.state.pasteventsID.length === 0 &&
             this.state.presenteventsID.length === 0 &&
             this.state.futureeventsID.length === 0 ? (
@@ -244,6 +242,7 @@ class Admin extends Component {
                 />
               </div>
             ) : null}
+            {/* Caso o seletor de tempo esteja no passado, mostra eventos do passado */}
             {this.state.timeSelectPastClasses.includes("time-select-active")
               ? this.state.pasteventsID.map((id, index) => (
                   <div className="event-container" key={id}>
@@ -312,6 +311,7 @@ class Admin extends Component {
                   </div>
                 ))
               : null}
+            {/* Caso o seletor de tempo esteja no presente, mostra eventos do presente */}
             {this.state.timeSelectTodayClasses.includes("time-select-active")
               ? this.state.presenteventsID.map((id, index) => (
                   <div className="event-container" key={id}>
@@ -380,6 +380,7 @@ class Admin extends Component {
                   </div>
                 ))
               : null}
+            {/* Caso o seletor de tempo esteja no futuro, mostra eventos do futuro */}
             {this.state.timeSelectFutureClasses.includes("time-select-active")
               ? this.state.futureeventsID.map((id, index) => (
                   <div className="event-container" key={id}>
@@ -452,14 +453,14 @@ class Admin extends Component {
               : null}
           </div>
 
+          {/* Caso o state da propriedade addEventView seja true, mostra o addeventform*/}
           {this.state.addEventView === true ? (
             <AddEventForm
-              getState={this.state.addEventView}
-              eventsID={this.state.eventsID}
-              eventsLength={this.state.eventsID.length}
+              eventsLength={this.state.pasteventsID.length + this.state.presenteventsID.length + this.state.futureeventsID.length}
               turnOffHandler={this.turnOffAddEventViewState}
             />
           ) : null}
+          {/* Caso o state da propriedade removeEventView seja true, mostra o removeeventform*/}
           {this.state.removeEventView === true ? (
             <RemoveEventForm
               eventBeingRemoved={this.state.eventBeingRemoved}
@@ -471,6 +472,7 @@ class Admin extends Component {
     );
   }
 
+  /*muda o state do addeventview para o contrário, ou seja para true */
   changeAddEventViewState = () => {
     let viewState = this.state.addEventView;
     viewState = !viewState;
@@ -478,6 +480,8 @@ class Admin extends Component {
       addEventView: viewState,
     });
   };
+
+  /*muda o state do addeventview para false*/
   turnOffAddEventViewState = () => {
     let viewState = false;
     this.setState({
@@ -485,6 +489,7 @@ class Admin extends Component {
     });
   };
 
+  /*muda o state do removeeventview para true, e passa o id para o eventbeingremoved, que depois é passado para o component de remover evento*/
   changeRemoveEventViewState = (id) => {
     let viewState = this.state.removeEventView;
     viewState = true;
@@ -493,12 +498,16 @@ class Admin extends Component {
       eventBeingRemoved: id,
     });
   };
+
+  /*muda o state do component de remover evento para false*/
   turnOffRemoveEventViewState = () => {
     let viewState = false;
     this.setState({
       removeEventView: viewState,
     });
   };
+
+  //funçao quando seleciona o passado no seletor de tempo
   pastClick = () => {
     if (this.state.timeSelectTodayClasses.includes("time-select-active")) {
       this.setState({
@@ -518,6 +527,7 @@ class Admin extends Component {
     });
   };
 
+  //funçao quando seleciona o presente no seletor de tempo
   todayClick = () => {
     if (this.state.timeSelectPastClasses.includes("time-select-active")) {
       this.setState({
@@ -537,6 +547,7 @@ class Admin extends Component {
     });
   };
 
+  //funçao quando seleciona o futuro no seletor de tempo
   futureClick = () => {
     if (this.state.timeSelectPastClasses.includes("time-select-active")) {
       this.setState({
