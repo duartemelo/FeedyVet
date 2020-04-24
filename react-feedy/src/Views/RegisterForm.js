@@ -5,31 +5,30 @@ import * as firebase from "firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
-const RegisterForm = props => {
-  
-  const handleSignUp = useCallback(
-    async event => {
-      event.preventDefault();
-      const { email, password } = event.target.elements;
-      try {
-        await app
-          .auth()
-          .createUserWithEmailAndPassword(email.value, password.value);
-        let userid = app.auth().currentUser.uid;
-        await firebase
-          .database()
-          .ref("/users/" + userid)
-          .set({
-            isadmin: false
-          });
-        window.location.reload();
-        alert("Registo feito, entre com as credenciais.");
-      } catch (error) {
-        alert(error);
-      }
-    },
-    []
-  );
+const RegisterForm = (props) => {
+  const handleSignUp = useCallback(async (event) => {
+    event.preventDefault();
+    const { email, password } = event.target.elements;
+    try {
+      await app
+        .auth()
+        .createUserWithEmailAndPassword(email.value, password.value);
+      let userid = app.auth().currentUser.uid;
+      let username = email.value.slice(0, email.value.indexOf("@"));
+      await firebase
+        .database()
+        .ref("/users/" + userid)
+        .set({
+          isadmin: false,
+          username: username,
+        });
+
+      window.location.reload();
+      alert("Registo feito, entre com as credenciais.");
+    } catch (error) {
+      alert(error);
+    }
+  }, []);
 
   return (
     <div className={props.stateClasses} style={{ height: props.height }}>

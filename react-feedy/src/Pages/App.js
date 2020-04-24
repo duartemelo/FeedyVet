@@ -56,7 +56,7 @@ class App extends Component {
     };*/
 
     window.onscroll = function() {
-      /*ChangeOpacityScroll(); DISABLED DUE TO BUG*/
+      /*ChangeOpacityScroll(); Desativado devido a bug */
     };
     return (
       <div className={this.bodyClasses}>
@@ -102,6 +102,7 @@ class App extends Component {
             </div>
           </div>
 
+          {/* Componente que verifica o state, caso seja true, mostra o mobile menu */}
           <DisplayMobileMenu
             getState={this.state.displayMobileMenu}
             getHandlerDown={this.MobileMenuClose}
@@ -110,6 +111,7 @@ class App extends Component {
             getRegisterHandler={this.RegisterButtonHandlerTrue}
           />
 
+          {/* Componente que verifica o state, caso seja true, mostra o login form */}
           <DisplayLoginForm
             getState={this.state.displayLogin}
             getHandlerDown={this.LogginButtonHandlerFalse}
@@ -117,6 +119,7 @@ class App extends Component {
             getStateClasses={this.state.formsClasses}
           />
 
+          {/* Componente que verifica o state, caso seja true, mostra o register form */}
           <DisplayRegisterForm
             getState={this.state.displayRegister}
             getHandlerDown={this.RegisterButtonHandlerFalse}
@@ -206,6 +209,7 @@ class App extends Component {
     );
   }
 
+  /* Mudar o state do login para true, de forma a mostrar o form */
   LoginButtonHandlerTrue = () => {
     if (this.state.navbarButtonsDisable === false) {
       if (this.state.displayRegister === false) {
@@ -227,7 +231,9 @@ class App extends Component {
       }
     }
   };
-  /*change this function so blur works on reverse*/
+  
+
+  /* Mudar o state do login para false, de forma a mostrar o form */
   LogginButtonHandlerFalse = () => {
     this.setState({
       formsClasses: this.state.formsClasses + " form-div-disappearing",
@@ -244,6 +250,8 @@ class App extends Component {
       400
     );
   };
+
+  /* Mudar o state do register para true, de forma a mostrar o form */
   RegisterButtonHandlerTrue = () => {
     if (this.state.navbarButtonsDisable === false) {
       if (this.state.displayLogin === false) {
@@ -264,6 +272,8 @@ class App extends Component {
       }
     }
   };
+
+  /* Mudar o state do register para false, de forma a mostrar o form */
   RegisterButtonHandlerFalse = () => {
     this.setState({
       formsClasses: this.state.formsClasses + " form-div-disappearing",
@@ -280,12 +290,16 @@ class App extends Component {
       400
     );
   };
+
+  //abrir mobile menu
   MobileMenuOpen = () => {
     this.setState({
       displayMobileMenu: true
     });
     this.LockScroll(true);
   };
+
+  //fechar mobile menu
   MobileMenuClose = () => {
     this.setState({
       MobileMenuClasses:
@@ -303,6 +317,8 @@ class App extends Component {
       400
     );
   };
+
+  //dar lock ao scroll
   LockScroll = varbool => {
     if (varbool === true) {
       document.body.style.overflow = "hidden";

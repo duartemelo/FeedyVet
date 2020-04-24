@@ -19,21 +19,25 @@ class Home extends Component {
     };
   }
 
+  //direcionar para animal
   redirectToAnimal = () => {
     const { history } = this.props;
     if (history) history.push("/animal");
   };
 
+  //direcionar para contacto
   redirectToContact = () => {
     const { history } = this.props;
     if (history) history.push("/contact");
   };
 
+  //direcionar para perfil
   redirectToProfile = () => {
     const { history } = this.props;
     if (history) history.push("/profile");
   };
 
+  //direcionar para admin
   redirectToAdmin = () => {
     const { history } = this.props;
     if (history) history.push("/admin");
@@ -54,6 +58,7 @@ class Home extends Component {
           <div className="content-container">
             <div className="hello-user">{message}</div>
             <div className="user-menu">
+              {/* caso o user nao seja admin, mostra uma serie de botoes, caso seja admin mostra o botao para ir para o painel de admin */}
               {this.state.isadmin === false ? (
                 <div>
                   <div
@@ -103,6 +108,7 @@ class Home extends Component {
     );
   }
 
+  //obter o nome do utilizador, removendo o "@mail.com"
   getUser = () => {
     let userVar = app.auth().currentUser.email;
     let getChar = userVar.indexOf("@");
