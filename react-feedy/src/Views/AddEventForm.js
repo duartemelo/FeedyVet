@@ -5,7 +5,6 @@ import "../styles/independent/AddEventForm.css";
 import { faBorderNone } from "@fortawesome/free-solid-svg-icons";
 
 const AddEventForm = (props) => {
-
   /*variavel que define o numero do proximo evento na base de dados*/
   let nextEvent = props.eventsLength + 1;
 
@@ -14,13 +13,6 @@ const AddEventForm = (props) => {
     event.preventDefault();
     //obtem os valores do form
     const { username, animal, comment, type, datetime } = event.target.elements;
-    console.log(
-      username.value,
-      animal.value,
-      comment.value,
-      type.value,
-      datetime.value
-    );
 
     //adiciona o evento à BD
     try {
@@ -36,6 +28,7 @@ const AddEventForm = (props) => {
         });
       //incrementa a variavel next event, no caso de o utilizador querer adicionar outro evento sem fechar/dar reload a pagina
       nextEvent += 1;
+      document.getElementById("closebutton").click();
     } catch (error) {
       alert(error);
     }
@@ -85,6 +78,7 @@ const AddEventForm = (props) => {
           className="form-login-button"
           style={{ marginTop: "10px", backgroundColor: "#910000" }}
           onClick={props.turnOffHandler}
+          id="closebutton"
         >
           Fechar
         </button>

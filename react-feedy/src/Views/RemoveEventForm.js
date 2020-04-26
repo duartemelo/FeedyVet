@@ -5,7 +5,6 @@ import "../styles/independent/AddEventForm.css";
 import { faBorderNone } from "@fortawesome/free-solid-svg-icons";
 
 const RemoveEventForm = (props) => {
-
   //funcao de remover evento, obtem o id a partir das props que são passadas pelo outro componente que chama este (admin)
   const RemoveEventHandler = useCallback(async (event) => {
     try {
@@ -13,10 +12,12 @@ const RemoveEventForm = (props) => {
         .database()
         .ref("/events/" + props.eventBeingRemoved)
         .remove();
+      document.getElementById("cancelbutton").click();
     } catch (error) {
       alert(error);
     }
   });
+
   return (
     <div className="remove-event-container">
       <h3 style={{ marginTop: "40px" }}>Apagar evento</h3>
@@ -34,6 +35,7 @@ const RemoveEventForm = (props) => {
         className="form-login-button"
         onClick={props.turnOffViewState}
         style={{ marginBottom: "80px" }}
+        id="cancelbutton"
       >
         Cancelar
       </button>

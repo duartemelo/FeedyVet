@@ -156,35 +156,135 @@ class Admin extends Component {
       }
     });
 
-    /* NEEDS UPDATE */
-    /*ref.orderByChild("datetime").on("child_removed", function (snapshot) {
-      const removedIndex = currentComponent.state.eventsID.indexOf(
-        snapshot.key
+    ref.orderByChild("datetime").on("child_removed", function (snapshot) {
+      //obter o ID do evento a partir do Firebase
+      const eventID = snapshot.key;
+
+      //verifica em que array do state se encontrar o evento, no passado, presente ou futuro
+      const pastIncludesEventID = currentComponent.state.pasteventsID.includes(
+        eventID
+      );
+      const presentIncludesEventID = currentComponent.state.presenteventsID.includes(
+        eventID
+      );
+      const futureIncludesEventID = currentComponent.state.futureeventsID.includes(
+        eventID
       );
 
-      let copiedeventsID = [...currentComponent.state.eventsID];
-      let copiedeventsAnimal = [...currentComponent.state.eventsAnimal];
-      let copiedeventsDateTime = [...currentComponent.state.eventsDateTime];
-      let copiedeventsType = [...currentComponent.state.eventsType];
-      let copiedeventsUserID = [...currentComponent.state.eventsUserID];
-      let copiedeventsUserName = [...currentComponent.state.eventsUserName];
+      if (pastIncludesEventID === true) {
+        let removedIndex = currentComponent.state.pasteventsID.indexOf(eventID);
 
-      copiedeventsID.splice(removedIndex, 1);
-      copiedeventsAnimal.splice(removedIndex, 1);
-      copiedeventsDateTime.splice(removedIndex, 1);
-      copiedeventsType.splice(removedIndex, 1);
-      copiedeventsUserID.splice(removedIndex, 1);
-      copiedeventsUserName.splice(removedIndex, 1);
+        let copiedeventsID = [...currentComponent.state.pasteventsID];
+        let copiedeventsAnimal = [...currentComponent.state.pasteventsAnimal];
+        let copiedeventsComment = [...currentComponent.state.pasteventsComment];
+        let copiedeventsDateTime = [
+          ...currentComponent.state.pasteventsDateTime,
+        ];
+        let copiedeventsType = [...currentComponent.state.pasteventsType];
+        let copiedeventsUserID = [...currentComponent.state.pasteventsUserID];
+        let copiedeventsUserName = [
+          ...currentComponent.state.pasteventsUserName,
+        ];
 
-      currentComponent.setState({
-        eventsID: copiedeventsID,
-        eventsAnimal: copiedeventsAnimal,
-        eventsDateTime: copiedeventsDateTime,
-        eventsType: copiedeventsType,
-        eventsUserID: copiedeventsUserID,
-        eventsUserName: copiedeventsUserName,
-      });
-    });*/
+        copiedeventsID.splice(removedIndex, 1);
+        copiedeventsAnimal.splice(removedIndex, 1);
+        copiedeventsComment.splice(removedIndex, 1);
+        copiedeventsDateTime.splice(removedIndex, 1);
+        copiedeventsType.splice(removedIndex, 1);
+        copiedeventsUserID.splice(removedIndex, 1);
+        copiedeventsUserName.splice(removedIndex, 1);
+
+        currentComponent.setState({
+          pasteventsID: copiedeventsID,
+          pasteventsAnimal: copiedeventsAnimal,
+          pasteventsComment: copiedeventsComment,
+          pasteventsDateTime: copiedeventsDateTime,
+          pasteventsType: copiedeventsType,
+          pasteventsUserID: copiedeventsUserID,
+          pasteventsUserName: copiedeventsUserName,
+        });
+      }
+
+      if (presentIncludesEventID === true) {
+        let removedIndex = currentComponent.state.presenteventsID.indexOf(
+          eventID
+        );
+
+        let copiedeventsID = [...currentComponent.state.presenteventsID];
+        let copiedeventsAnimal = [
+          ...currentComponent.state.presenteventsAnimal,
+        ];
+        let copiedeventsComment = [
+          ...currentComponent.state.presenteventsComment,
+        ];
+        let copiedeventsDateTime = [
+          ...currentComponent.state.presenteventsDateTime,
+        ];
+        let copiedeventsType = [...currentComponent.state.presenteventsType];
+        let copiedeventsUserID = [
+          ...currentComponent.state.presenteventsUserID,
+        ];
+        let copiedeventsUserName = [
+          ...currentComponent.state.presenteventsUserName,
+        ];
+
+        copiedeventsID.splice(removedIndex, 1);
+        copiedeventsAnimal.splice(removedIndex, 1);
+        copiedeventsComment.splice(removedIndex, 1);
+        copiedeventsDateTime.splice(removedIndex, 1);
+        copiedeventsType.splice(removedIndex, 1);
+        copiedeventsUserID.splice(removedIndex, 1);
+        copiedeventsUserName.splice(removedIndex, 1);
+
+        currentComponent.setState({
+          presenteventsID: copiedeventsID,
+          presenteventsAnimal: copiedeventsAnimal,
+          presenteventsComment: copiedeventsComment,
+          presenteventsDateTime: copiedeventsDateTime,
+          presenteventsType: copiedeventsType,
+          presenteventsUserID: copiedeventsUserID,
+          presenteventsUserName: copiedeventsUserName,
+        });
+      }
+
+      if (futureIncludesEventID === true) {
+        let removedIndex = currentComponent.state.futureeventsID.indexOf(
+          eventID
+        );
+
+        let copiedeventsID = [...currentComponent.state.futureeventsID];
+        let copiedeventsAnimal = [...currentComponent.state.futureeventsAnimal];
+        let copiedeventsComment = [
+          ...currentComponent.state.futureeventsComment,
+        ];
+        let copiedeventsDateTime = [
+          ...currentComponent.state.futureeventsDateTime,
+        ];
+        let copiedeventsType = [...currentComponent.state.futureeventsType];
+        let copiedeventsUserID = [...currentComponent.state.futureeventsUserID];
+        let copiedeventsUserName = [
+          ...currentComponent.state.futureeventsUserName,
+        ];
+
+        copiedeventsID.splice(removedIndex, 1);
+        copiedeventsAnimal.splice(removedIndex, 1);
+        copiedeventsComment.splice(removedIndex, 1);
+        copiedeventsDateTime.splice(removedIndex, 1);
+        copiedeventsType.splice(removedIndex, 1);
+        copiedeventsUserID.splice(removedIndex, 1);
+        copiedeventsUserName.splice(removedIndex, 1);
+
+        currentComponent.setState({
+          futureeventsID: copiedeventsID,
+          futureeventsAnimal: copiedeventsAnimal,
+          futureeventsComment: copiedeventsComment,
+          futureeventsDateTime: copiedeventsDateTime,
+          futureeventsType: copiedeventsType,
+          futureeventsUserID: copiedeventsUserID,
+          futureeventsUserName: copiedeventsUserName,
+        });
+      }
+    });
   }
 
   render() {

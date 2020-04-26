@@ -64,9 +64,14 @@ class Animal extends Component {
 
     //data de hoje
     var today = moment();
-
+    /* let username = email.value.slice(0, email.value.indexOf("@")); */
     ref.orderByChild("datetime").on("child_added", function (snapshot) {
-      if (snapshot.val().userID === app.auth().currentUser.uid) {
+      if (
+        snapshot.val().userName ===
+        app
+          .auth()
+          .currentUser.email.slice(0, app.auth().currentUser.email.indexOf("@"))
+      ) {
         var eventDate = moment(snapshot.val().datetime);
         eventDate.toDate();
         if (eventDate.isBefore(today, "day")) {
