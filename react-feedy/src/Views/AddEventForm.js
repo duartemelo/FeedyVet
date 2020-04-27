@@ -6,7 +6,7 @@ import { faBorderNone } from "@fortawesome/free-solid-svg-icons";
 
 const AddEventForm = (props) => {
   /*variavel que define o numero do proximo evento na base de dados*/
-  let nextEvent = props.eventsLength + 1;
+  let nextEvent = props.eventsLength;
 
   //funçao de adicionar evento
   const addEventHandler = useCallback(async (event) => {

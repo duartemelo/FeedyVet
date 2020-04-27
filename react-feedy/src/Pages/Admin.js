@@ -36,6 +36,8 @@ const prestate = {
   futureeventsUserID: [],
   futureeventsUserName: [],
 
+  biggestID: null,
+
   addEventView: false,
   removeEventView: false,
   eventBeingRemoved: null,
@@ -73,10 +75,19 @@ class Admin extends Component {
 
     //data de hoje
     var today = moment();
+    let biggestID = 0;
 
     ref.orderByChild("datetime").on("child_added", function (snapshot) {
       var eventDate = moment(snapshot.val().datetime);
       eventDate.toDate();
+
+      if (snapshot.key > biggestID) {
+        biggestID = snapshot.key;
+      }
+
+      currentComponent.setState({
+        biggestID: biggestID,
+      });
 
       if (eventDate.isBefore(today, "day")) {
         //adiciona a array passado
@@ -559,12 +570,7 @@ class Admin extends Component {
           {/* Caso o state da propriedade addEventView seja true, mostra o addeventform*/}
           {this.state.addEventView === true ? (
             <AddEventForm
-              eventsLength={
-                this.state.pasteventsID.length +
-                this.state.presenteventsID.length +
-                this.state.futureeventsID.length +
-                1
-              }
+              eventsLength={parseInt(this.state.biggestID) + 1}
               turnOffHandler={this.turnOffAddEventViewState}
             />
           ) : null}
