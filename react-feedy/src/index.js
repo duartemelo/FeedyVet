@@ -22,6 +22,8 @@ import { AuthProvider } from "./auth";
 
 import PrivateRoute from "./Routes/PrivateRoute";
 import AdminRoute from "./Routes//AdminRoute";
+import AdminMessages from "./Pages/AdminMessages";
+import AdminSettings from "./Pages/AdminSettings";
 
 const routing = (
   <AuthProvider>
@@ -41,6 +43,10 @@ const routing = (
           <AdminRoute exact path="/admin" component={Admin} />
 
           <AdminRoute exact path="/testadmin" component={TestAdminPage} />
+
+          <AdminRoute exact path="/adminmessages" component={AdminMessages} />
+
+          <AdminRoute exact path="/adminsettings" component={AdminSettings} />
 
           <Route component={NotFound} />
         </Switch>

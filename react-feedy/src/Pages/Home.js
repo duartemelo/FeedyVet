@@ -1,4 +1,4 @@
-import React, {  Component } from "react";
+import React, { Component } from "react";
 import app from "../firebase";
 import "../styles/global/Main.css";
 import "../styles/independent/Home.css";
@@ -7,7 +7,8 @@ import {
   faPaw,
   faEnvelope,
   faUserCog,
-  faColumns
+  faColumns,
+  faCog,
 } from "@fortawesome/free-solid-svg-icons";
 
 class Home extends Component {
@@ -15,32 +16,14 @@ class Home extends Component {
     super(props);
     this.state = {
       user: this.getUser(),
-      isadmin: this.props.isAdmin
+      isadmin: this.props.isAdmin,
     };
   }
 
-  //direcionar para animal
-  redirectToAnimal = () => {
+  //redirecionar para pagina, recebe parametro com a página quando chamada
+  redirectToPage = (page) => {
     const { history } = this.props;
-    if (history) history.push("/animal");
-  };
-
-  //direcionar para contacto
-  redirectToContact = () => {
-    const { history } = this.props;
-    if (history) history.push("/contact");
-  };
-
-  //direcionar para perfil
-  redirectToProfile = () => {
-    const { history } = this.props;
-    if (history) history.push("/profile");
-  };
-
-  //direcionar para admin
-  redirectToAdmin = () => {
-    const { history } = this.props;
-    if (history) history.push("/admin");
+    if (history) history.push(page);
   };
 
   render() {
@@ -64,7 +47,7 @@ class Home extends Component {
                   <div
                     className="user-menu-option"
                     style={{ marginRight: 40 }}
-                    onClick={this.redirectToAnimal}
+                    onClick={() => this.redirectToPage("/animal")}
                   >
                     <div className="icon-div">
                       <FontAwesomeIcon icon={faPaw} />
@@ -73,7 +56,7 @@ class Home extends Component {
                   <div
                     className="user-menu-option"
                     style={{ marginRight: 40 }}
-                    onClick={this.redirectToContact}
+                    onClick={() => this.redirectToPage("/contact")}
                   >
                     <div className="icon-div">
                       <FontAwesomeIcon icon={faEnvelope} />
@@ -81,7 +64,7 @@ class Home extends Component {
                   </div>
                   <div
                     className="user-menu-option"
-                    onClick={this.redirectToProfile}
+                    onClick={() => this.redirectToPage("/profile")}
                   >
                     <div className="icon-div">
                       <FontAwesomeIcon icon={faUserCog} />
@@ -92,11 +75,28 @@ class Home extends Component {
                 <div>
                   <div
                     className="user-menu-option"
-                    style={{ float: "none", margin: "0 auto" }}
-                    onClick={this.redirectToAdmin}
+                    style={{ marginRight: 40 }}
+                    onClick={() => this.redirectToPage("/admin")}
                   >
                     <div className="icon-div">
                       <FontAwesomeIcon icon={faColumns} />
+                    </div>
+                  </div>
+                  <div
+                    className="user-menu-option"
+                    style={{ marginRight: 40 }}
+                    onClick={() => this.redirectToPage("/adminmessages")}
+                  >
+                    <div className="icon-div">
+                      <FontAwesomeIcon icon={faEnvelope} />
+                    </div>
+                  </div>
+                  <div
+                    className="user-menu-option"
+                    onClick={() => this.redirectToPage("/adminsettings")}
+                  >
+                    <div className="icon-div">
+                      <FontAwesomeIcon icon={faCog} />
                     </div>
                   </div>
                 </div>
