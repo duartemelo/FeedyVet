@@ -17,7 +17,6 @@ const AdminRoute = ({ component: RouteComponent, ...rest }) => {
           setgetAdmin(snapshot.val());
         });
       } else {
-        console.log("No user");
         setgetAdmin("noadmin");
         setuserID("nouser.")
       }

@@ -23,7 +23,6 @@ const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
         setUser("nouser");
         setAdmin(false);
         setuserID("nouser");
-        console.log("No user.");
       }
     });
   }, []);

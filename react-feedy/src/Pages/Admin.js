@@ -67,6 +67,12 @@ class Admin extends Component {
     }, 10);
   }
 
+  redirectToIndexAndLogout = (page) => {
+    const { history } = this.props;
+    if (history) history.push("/");
+    app.auth().signOut();
+  };
+
   //funcao para obter eventos
   getEvents() {
     const db = app.database();
@@ -303,7 +309,7 @@ class Admin extends Component {
       <div>
         <button
           className="button signout-btn"
-          onClick={() => app.auth().signOut()}
+          onClick={this.redirectToIndexAndLogout}
           style={{ position: "absolute", right: "0", top: "0" }}
         >
           Sair

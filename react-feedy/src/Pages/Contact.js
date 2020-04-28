@@ -3,6 +3,7 @@ import "../styles/global/Main.css";
 import "../styles/independent/Contact.css";
 import app from "../firebase";
 import * as firebase from "firebase";
+import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
@@ -48,12 +49,16 @@ class Contact extends Component {
 
   async handleSubmit(event) {
     event.preventDefault();
+    let today = String(moment().format("DD-MM-YYYY, H:mm"));
+    let userEmail = app.auth().currentUser.email;
 
     try {
       await firebase.firestore().collection("messages").add({
         message: this.state.messageValue,
+        datetime: today,
+        email: userEmail,
       });
-      alert("Enviado.")
+      alert("Enviado.");
     } catch (error) {
       alert(error);
     }

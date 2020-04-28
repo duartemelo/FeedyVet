@@ -69,6 +69,7 @@ const AddEventForm = (props) => {
           placeholder="Data e hora"
           name="datetime"
           style={mt10}
+          type="datetime-local"
         ></input>
 
         <button className="form-login-button" type="submit">
