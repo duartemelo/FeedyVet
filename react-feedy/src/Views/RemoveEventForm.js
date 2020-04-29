@@ -1,8 +1,6 @@
 import React, { useCallback } from "react";
-import app from "../firebase";
 import * as firebase from "firebase";
 import "../styles/independent/AddEventForm.css";
-import { faBorderNone } from "@fortawesome/free-solid-svg-icons";
 
 const RemoveEventForm = (props) => {
   //funcao de remover evento, obtem o id a partir das props que são passadas pelo outro componente que chama este (admin)

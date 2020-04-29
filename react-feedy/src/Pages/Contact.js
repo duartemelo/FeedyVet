@@ -1,9 +1,8 @@
-import React, { Component, useCallback } from "react";
+import React, { Component } from "react";
 import "../styles/global/Main.css";
 import "../styles/independent/Contact.css";
 import app from "../firebase";
 import * as firebase from "firebase";
-import moment from "moment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
@@ -49,7 +48,6 @@ class Contact extends Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    let today = String(moment().format("DD-MM-YYYY, H:mm"));
     const timestamp = firebase.firestore.FieldValue.serverTimestamp();
     let userEmail = app.auth().currentUser.email;
 

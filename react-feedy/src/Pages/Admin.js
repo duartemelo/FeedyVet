@@ -1,4 +1,4 @@
-import React, { Component, useCallback } from "react";
+import React, { Component} from "react";
 import "../styles/global/Main.css";
 import "../styles/independent/Admin.css";
 import "../styles/independent/Animal.css";

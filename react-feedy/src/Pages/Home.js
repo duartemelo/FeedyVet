@@ -31,14 +31,13 @@ class Home extends Component {
 
     return (
       <div>
-        <button
-          className="button signout-btn"
-          onClick={() => app.auth().signOut()}
-        >
-          Sair
-        </button>
-        
         <div className="centered-container">
+          <button
+            className="button signout-btn"
+            onClick={() => app.auth().signOut()}
+          >
+            Sair
+          </button>
           <div className="content-container">
             <div className="hello-user">{message}</div>
             <div className="user-menu">

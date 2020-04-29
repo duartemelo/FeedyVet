@@ -1,8 +1,6 @@
 import React, { useCallback } from "react";
-import app from "../firebase";
 import * as firebase from "firebase";
 import "../styles/independent/AddEventForm.css";
-import { faBorderNone } from "@fortawesome/free-solid-svg-icons";
 
 const AddEventForm = (props) => {
   /*variavel que define o numero do proximo evento na base de dados*/
@@ -26,8 +24,9 @@ const AddEventForm = (props) => {
           type: type.value,
           userName: username.value,
         });
-      //incrementa a variavel next event, no caso de o utilizador querer adicionar outro evento sem fechar/dar reload a pagina
       nextEvent += 1;
+      //incrementa a variavel next event, no caso de o utilizador querer adicionar outro evento sem fechar/dar reload a pagina
+
       document.getElementById("closebutton").click();
     } catch (error) {
       alert(error);
