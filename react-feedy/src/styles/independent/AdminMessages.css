@@ -1,0 +1,19 @@
+.admin-messages-container-title {
+    font-weight: 400;
+    color: #1466ae;
+    margin-top: 40px;
+}
+
+.message-container {
+    background-color: #d8d8d8;
+    margin: 0 auto;
+    max-width: 450px;
+    height: 180px;
+    border-radius: 5px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.message-container-parent>div:first-child {
+    margin-top: 40px;
+}

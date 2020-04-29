@@ -13,6 +13,7 @@ class Profile extends Component {
         >
           Sair
         </button>
+        <div className="background-div"></div>
         <h1>Profile Page Test</h1>
         <p>This is a test page</p>
       </div>

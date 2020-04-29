@@ -19,6 +19,7 @@ class AdminSettings extends Component {
         >
           Sair
         </button>
+        <div className="background-div"></div>
         <h1>Admin Settings Page</h1>
         <p>This is a test page</p>
       </div>

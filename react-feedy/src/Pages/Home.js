@@ -37,6 +37,7 @@ class Home extends Component {
         >
           Sair
         </button>
+        
         <div className="centered-container">
           <div className="content-container">
             <div className="hello-user">{message}</div>

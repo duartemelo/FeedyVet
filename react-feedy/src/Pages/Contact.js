@@ -50,13 +50,15 @@ class Contact extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     let today = String(moment().format("DD-MM-YYYY, H:mm"));
+    const timestamp = firebase.firestore.FieldValue.serverTimestamp();
     let userEmail = app.auth().currentUser.email;
 
     try {
       await firebase.firestore().collection("messages").add({
         message: this.state.messageValue,
-        datetime: today,
+        datetime: timestamp,
         email: userEmail,
+        messageState: "unread",
       });
       alert("Enviado.");
     } catch (error) {

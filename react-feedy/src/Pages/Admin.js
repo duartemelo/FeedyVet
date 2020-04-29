@@ -314,6 +314,7 @@ class Admin extends Component {
         >
           Sair
         </button>
+        <div className="background-div"></div>
         <h1 className="events-container-title">Eventos (admin)</h1>
         <div className="time-select-container">
           <button

@@ -164,6 +164,7 @@ class Animal extends Component {
         >
           Sair
         </button>
+        <div className="background-div"></div>
         <h1 className="events-container-title">Eventos</h1>
         <div className="time-select-container">
           <button

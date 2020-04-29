@@ -1,15 +1,20 @@
 .centered-container {
     width: 100vw;
-    height: 400px;
+    height: 100vh;
     position: absolute;
-    margin-top: 100px;
 }
 
 .content-container {
-    top: 50%;
+    top: 45%;
     transform: translateY(-50%);
     position: absolute;
     width: 100vw;
+}
+
+@media only screen and (max-height: 600px) {
+    .centered-container {
+        height: 600px;
+    }
 }
 
 .hello-user {
