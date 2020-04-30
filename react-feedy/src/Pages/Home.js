@@ -110,10 +110,14 @@ class Home extends Component {
 
   //obter o nome do utilizador, removendo o "@mail.com"
   getUser = () => {
-    let userVar = app.auth().currentUser.email;
-    let getChar = userVar.indexOf("@");
-    let userFinal = userVar.slice(0, getChar);
-    return userFinal;
+    if (app.auth().currentUser.displayName !== null) {
+      return app.auth().currentUser.displayName;
+    } else {
+      let userVar = app.auth().currentUser.email;
+      let getChar = userVar.indexOf("@");
+      let userFinal = userVar.slice(0, getChar);
+      return userFinal;
+    }
   };
 }
 
