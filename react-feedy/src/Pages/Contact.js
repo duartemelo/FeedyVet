@@ -22,6 +22,15 @@ class Contact extends Component {
   componentDidMount() {
     let currentComponent = this;
     currentComponent.getVetContactInfo();
+    setTimeout(function () {
+      console.log(currentComponent.state.vetContactInfo.length);
+      if (currentComponent.state.vetContactInfo.length < 4) {
+        currentComponent.setState({
+          vetContactInfo: [],
+        });
+        currentComponent.getVetContactInfo();
+      }
+    }, 200);
   }
 
   //obter informações de contacto a partir do Firebase
