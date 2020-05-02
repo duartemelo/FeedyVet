@@ -1,5 +1,4 @@
-import React, { useCallback } from "react";
-import * as firebase from "firebase";
+import React from "react";
 import "../styles/independent/ChangeProfileInfo.css";
 
 const ChangeProfileInfoForm = (props) => {

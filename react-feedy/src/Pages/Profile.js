@@ -37,6 +37,8 @@ class Profile extends Component {
       this.updateProfileName();
       console.log(this.nameInput.current.value);
     }
+    this.closeChangeProfileInfoForm();
+    window.location.reload(false);
   };
 
   imageToFireStorage = () => {

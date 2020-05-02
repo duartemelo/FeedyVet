@@ -1,0 +1,15 @@
+.admin-settings-container-title {
+    font-weight: 400;
+    color: #1466ae;
+    margin-bottom: 0;
+}
+
+.under-navbar {
+    margin-top: 130px;
+    overflow: auto;
+    text-align: center;
+}
+
+.info-text {
+    font-size: 17px;
+}

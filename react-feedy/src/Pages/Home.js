@@ -93,10 +93,19 @@ class Home extends Component {
                   </div>
                   <div
                     className="user-menu-option"
+                    style={{ marginRight: 40 }}
                     onClick={() => this.redirectToPage("/adminsettings")}
                   >
                     <div className="icon-div">
                       <FontAwesomeIcon icon={faCog} />
+                    </div>
+                  </div>
+                  <div
+                    className="user-menu-option"
+                    onClick={() => this.redirectToPage("/profile")}
+                  >
+                    <div className="icon-div">
+                      <FontAwesomeIcon icon={faUserCog} />
                     </div>
                   </div>
                 </div>
