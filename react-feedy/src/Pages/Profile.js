@@ -3,6 +3,7 @@ import "../styles/global/Main.css";
 import "../styles/independent/Profile.css";
 import app from "../firebase";
 import ChangeProfileInfoForm from "../Views/ChangeProfileInfoForm";
+import ChangePasswordForm from "../Views/ChangePasswordForm";
 
 class Profile extends Component {
   constructor(props) {
@@ -11,9 +12,12 @@ class Profile extends Component {
       userName: "",
       userEmail: "",
       changeProfileInfoFormView: false,
+      changePasswordFormView: false,
     };
     this.fileInput = React.createRef();
     this.nameInput = React.createRef();
+    this.password1Input = React.createRef();
+    this.password2Input = React.createRef();
   }
 
   componentDidMount() {
@@ -93,6 +97,39 @@ class Profile extends Component {
       });
   };
 
+  updatePassword = (event) => {
+    event.preventDefault();
+    if (
+      this.password1Input.current.value === "" ||
+      this.password2Input.current.value === ""
+    ) {
+      alert("Preenche todos os campos.");
+    } else if (
+      this.password1Input.current.value !== this.password2Input.current.value
+    ) {
+      alert("Escreve a mesma palavra-passe nos dois campos.");
+    } else if (
+      this.password1Input.current.value === this.password2Input.current.value
+    ) {
+      //update pw
+      let newPassword = this.password1Input.current.value;
+      app
+        .auth()
+        .currentUser.updatePassword(newPassword)
+        .then(
+          () => {
+            alert("Palavra-passe alterada.");
+            this.closeChangePasswordForm();
+          },
+          (error) => {
+            alert("Erro - " + error);
+          }
+        );
+    } else {
+      alert("Erro.");
+    }
+  };
+
   openChangeProfileInfoForm = () => {
     this.setState({
       changeProfileInfoFormView: true,
@@ -102,6 +139,18 @@ class Profile extends Component {
   closeChangeProfileInfoForm = () => {
     this.setState({
       changeProfileInfoFormView: false,
+    });
+  };
+
+  openChangePasswordForm = () => {
+    this.setState({
+      changePasswordFormView: true,
+    });
+  };
+
+  closeChangePasswordForm = () => {
+    this.setState({
+      changePasswordFormView: false,
     });
   };
 
@@ -163,6 +212,7 @@ class Profile extends Component {
               Mudar informações
             </button>
             <button
+              onClick={this.openChangePasswordForm}
               className="button"
               style={{
                 display: "block",
@@ -183,6 +233,15 @@ class Profile extends Component {
               imageInputRef={this.fileInput}
               nameInputRef={this.nameInput}
               submitFunction={this.handleFormSubmit}
+            />
+          ) : null}
+
+          {this.state.changePasswordFormView === true ? (
+            <ChangePasswordForm
+              closeForm={this.closeChangePasswordForm}
+              password1Input={this.password1Input}
+              password2Input={this.password2Input}
+              submitFunction={this.updatePassword}
             />
           ) : null}
         </div>

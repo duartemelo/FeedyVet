@@ -9,7 +9,9 @@ const RemoveEventForm = (props) => {
       await firebase
         .database()
         .ref("/events/" + props.eventBeingRemoved)
-        .remove();
+        .update({
+          state: "archived",
+        });
       document.getElementById("cancelbutton").click();
     } catch (error) {
       alert(error);
@@ -20,14 +22,15 @@ const RemoveEventForm = (props) => {
     <div className="remove-event-container">
       <h3 style={{ marginTop: "40px" }}>Apagar evento</h3>
       <p className="remove-event-text">
-        Tem a certeza que quer apagar evento com id: {props.eventBeingRemoved}?
+        Tem a certeza que quer arquivar evento com id: {props.eventBeingRemoved}
+        ?
       </p>
       <button
         className="form-login-button"
         onClick={RemoveEventHandler}
         style={{ marginTop: "40px", backgroundColor: "#910000" }}
       >
-        Apagar
+        Arquivar
       </button>
       <button
         className="form-login-button"
