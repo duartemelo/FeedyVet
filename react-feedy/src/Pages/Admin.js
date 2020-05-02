@@ -19,6 +19,7 @@ const prestate = {
   pasteventsType: [],
   pasteventsUserID: [],
   pasteventsUserName: [],
+  pasteventsState: [],
 
   presenteventsID: [],
   presenteventsAnimal: [],
@@ -27,6 +28,7 @@ const prestate = {
   presenteventsType: [],
   presenteventsUserID: [],
   presenteventsUserName: [],
+  presenteventsState: [],
 
   futureeventsID: [],
   futureeventsAnimal: [],
@@ -35,6 +37,7 @@ const prestate = {
   futureeventsType: [],
   futureeventsUserID: [],
   futureeventsUserName: [],
+  futureeventsState: [],
 
   biggestID: null,
 
@@ -120,6 +123,9 @@ class Admin extends Component {
             pasteventsUserName: currentComponent.state.pasteventsUserName.concat(
               snapshot.val().userName
             ),
+            pasteventsState: currentComponent.state.pasteventsState.concat(
+              snapshot.val().state
+            ),
           });
         } else if (eventDate.isSame(today, "day")) {
           //adiciona a array presente
@@ -145,6 +151,9 @@ class Admin extends Component {
             presenteventsUserName: currentComponent.state.presenteventsUserName.concat(
               snapshot.val().userName
             ),
+            presenteventsState: currentComponent.state.presenteventsState.concat(
+              snapshot.val().state
+            ),
           });
         } else if (eventDate.isAfter(today, "day")) {
           //adiciona a array futuro
@@ -169,6 +178,9 @@ class Admin extends Component {
             ),
             futureeventsUserName: currentComponent.state.futureeventsUserName.concat(
               snapshot.val().userName
+            ),
+            futureeventsState: currentComponent.state.futureeventsState.concat(
+              snapshot.val().state
             ),
           });
         }
@@ -420,7 +432,8 @@ class Admin extends Component {
                         }}
                       >
                         {this.state.pasteventsAnimal[index]} (
-                        {this.state.pasteventsUserName[index]})
+                        {this.state.pasteventsUserName[index]}) (
+                        {this.state.pasteventsState[index]})
                       </div>
 
                       <button
@@ -490,7 +503,8 @@ class Admin extends Component {
                         }}
                       >
                         {this.state.presenteventsAnimal[index]} (
-                        {this.state.presenteventsUserName[index]})
+                        {this.state.presenteventsUserName[index]}) (
+                        {this.state.presenteventsState[index]})
                       </div>
 
                       <button
@@ -560,7 +574,8 @@ class Admin extends Component {
                         }}
                       >
                         {this.state.futureeventsAnimal[index]} (
-                        {this.state.futureeventsUserName[index]})
+                        {this.state.futureeventsUserName[index]}) (
+                        {this.state.futureeventsState[index]})
                       </div>
 
                       <button

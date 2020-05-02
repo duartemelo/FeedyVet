@@ -20,7 +20,7 @@ const RemoveEventForm = (props) => {
 
   return (
     <div className="remove-event-container">
-      <h3 style={{ marginTop: "40px" }}>Apagar evento</h3>
+      <h3 style={{ marginTop: "40px" }}>Arquivar evento</h3>
       <p className="remove-event-text">
         Tem a certeza que quer arquivar evento com id: {props.eventBeingRemoved}
         ?
@@ -35,7 +35,7 @@ const RemoveEventForm = (props) => {
       <button
         className="form-login-button"
         onClick={props.turnOffViewState}
-        style={{ marginBottom: "80px" }}
+        style={{ marginTop: "10px", marginBottom: "60px" }}
         id="cancelbutton"
       >
         Cancelar

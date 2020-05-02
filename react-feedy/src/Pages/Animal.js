@@ -4,6 +4,9 @@ import "../styles/independent/Animal.css";
 import app from "../firebase";
 import moment from "moment";
 import Loader from "react-loader-spinner";
+import EventArchiveRequestForm from "../Views/EventArchiveRequestForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 //objetos que fazem parte do state desta página, eventos do passado, presente e futuro. Assim como as classes do seletor de tempo
 const prestate = {
@@ -14,6 +17,7 @@ const prestate = {
   pasteventsType: [],
   pasteventsUserID: [],
   pasteventsUserName: [],
+  pasteventsState: [],
 
   presenteventsID: [],
   presenteventsAnimal: [],
@@ -22,6 +26,7 @@ const prestate = {
   presenteventsType: [],
   presenteventsUserID: [],
   presenteventsUserName: [],
+  presenteventsState: [],
 
   futureeventsID: [],
   futureeventsAnimal: [],
@@ -30,10 +35,14 @@ const prestate = {
   futureeventsType: [],
   futureeventsUserID: [],
   futureeventsUserName: [],
+  futureeventsState: [],
 
   timeSelectPastClasses: "time-select-left-btn",
   timeSelectTodayClasses: "time-select-middle-btn time-select-active",
   timeSelectFutureClasses: "time-select-right-btn",
+
+  eventArchiveRequestFormView: false,
+  eventBeingArchived: undefined,
 };
 
 class Animal extends Component {
@@ -68,9 +77,13 @@ class Animal extends Component {
     ref.orderByChild("datetime").on("child_added", function (snapshot) {
       if (
         snapshot.val().userName ===
-        app
-          .auth()
-          .currentUser.email.slice(0, app.auth().currentUser.email.indexOf("@"))
+          app
+            .auth()
+            .currentUser.email.slice(
+              0,
+              app.auth().currentUser.email.indexOf("@")
+            ) &&
+        snapshot.val().state !== "archived"
       ) {
         var eventDate = moment(snapshot.val().datetime);
         eventDate.toDate();
@@ -98,6 +111,9 @@ class Animal extends Component {
             pasteventsUserName: currentComponent.state.pasteventsUserName.concat(
               snapshot.val().userName
             ),
+            pasteventsState: currentComponent.state.pasteventsState.concat(
+              snapshot.val().state
+            ),
           });
         } else if (eventDate.isSame(today, "day")) {
           //adiciona a array presente
@@ -122,6 +138,9 @@ class Animal extends Component {
             ),
             presenteventsUserName: currentComponent.state.presenteventsUserName.concat(
               snapshot.val().userName
+            ),
+            presenteventsState: currentComponent.state.presenteventsState.concat(
+              snapshot.val().state
             ),
           });
         } else if (eventDate.isAfter(today, "day")) {
@@ -148,11 +167,42 @@ class Animal extends Component {
             futureeventsUserName: currentComponent.state.futureeventsUserName.concat(
               snapshot.val().userName
             ),
+            futureeventsState: currentComponent.state.futureeventsState.concat(
+              snapshot.val().state
+            ),
           });
         }
       }
     });
   }
+
+  openEventArchiveRequestForm = (id) => {
+    this.setState({
+      eventArchiveRequestFormView: true,
+      eventBeingArchived: id,
+    });
+  };
+
+  closeEventArchiveRequestForm = () => {
+    this.setState({
+      eventArchiveRequestFormView: false,
+      eventBeingArchived: undefined,
+    });
+  };
+
+  requestArchiveEvent = () => {
+    try {
+      app
+        .database()
+        .ref("/events/" + this.state.eventBeingArchived)
+        .update({
+          state: "clientrequestedcancel",
+        });
+      this.closeEventArchiveRequestForm();
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   render() {
     return (
@@ -244,7 +294,18 @@ class Animal extends Component {
                     >
                       {this.state.pasteventsAnimal[index]}
                     </div>
-                    <button className="event-delete-btn"></button>
+                    {this.state.pasteventsState[index] !==
+                    "clientrequestedcancel" ? (
+                      <button
+                        className="event-delete-btn"
+                        onClick={() => this.openEventArchiveRequestForm(id)}
+                      >
+                        <FontAwesomeIcon
+                          icon={faTimes}
+                          style={{ color: "#fff" }}
+                        />
+                      </button>
+                    ) : null}
                   </div>
                 </div>
               ))
@@ -299,7 +360,18 @@ class Animal extends Component {
                     >
                       {this.state.presenteventsAnimal[index]}
                     </div>
-                    <button className="event-delete-btn"></button>
+                    {this.state.presenteventsState[index] !==
+                    "clientrequestedcancel" ? (
+                      <button
+                        className="event-delete-btn"
+                        onClick={() => this.openEventArchiveRequestForm(id)}
+                      >
+                        <FontAwesomeIcon
+                          icon={faTimes}
+                          style={{ color: "#fff" }}
+                        />
+                      </button>
+                    ) : null}
                   </div>
                 </div>
               ))
@@ -354,12 +426,30 @@ class Animal extends Component {
                     >
                       {this.state.futureeventsAnimal[index]}
                     </div>
-                    <button className="event-delete-btn"></button>
+                    {this.state.futureeventsState[index] !==
+                    "clientrequestedcancel" ? (
+                      <button
+                        className="event-delete-btn"
+                        onClick={() => this.openEventArchiveRequestForm(id)}
+                      >
+                        <FontAwesomeIcon
+                          icon={faTimes}
+                          style={{ color: "#fff" }}
+                        />
+                      </button>
+                    ) : null}
                   </div>
                 </div>
               ))
             : null}
         </div>
+        {this.state.eventArchiveRequestFormView === true ? (
+          <EventArchiveRequestForm
+            closeForm={this.closeEventArchiveRequestForm}
+            eventBeingArchived={this.state.eventBeingArchived}
+            cancelFunction={this.requestArchiveEvent}
+          />
+        ) : null}
       </div>
     );
   }
