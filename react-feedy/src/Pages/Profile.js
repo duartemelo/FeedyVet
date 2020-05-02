@@ -168,6 +168,7 @@ class Profile extends Component {
                 display: "block",
                 margin: "0 auto",
                 marginTop: "10px",
+                marginBottom: "40px",
                 width: "200px",
                 color: "#fff",
                 backgroundColor: "#DC4141",
