@@ -6,6 +6,7 @@ import app from "../firebase";
 import moment from "moment";
 import AddEventForm from "../Views/AddEventForm";
 import RemoveEventForm from "../Views/RemoveEventForm";
+import EditEventForm from "../Views/EditEventForm";
 import Loader from "react-loader-spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
@@ -44,6 +45,8 @@ const prestate = {
   addEventView: false,
   removeEventView: false,
   eventBeingRemoved: null,
+  editEventView: false,
+  eventBeingEdited: null,
 
   timeSelectPastClasses: "time-select-left-btn",
   timeSelectTodayClasses: "time-select-middle-btn time-select-active",
@@ -445,7 +448,10 @@ class Admin extends Component {
                           style={{ color: "#fff" }}
                         />
                       </button>
-                      <button className="event-edit-btn">
+                      <button
+                        className="event-edit-btn"
+                        onClick={() => this.changeEditEventViewState(id)}
+                      >
                         <FontAwesomeIcon
                           icon={faPencilAlt}
                           style={{ color: "#fff" }}
@@ -516,7 +522,10 @@ class Admin extends Component {
                           style={{ color: "#fff" }}
                         />
                       </button>
-                      <button className="event-edit-btn">
+                      <button
+                        className="event-edit-btn"
+                        onClick={() => this.changeEditEventViewState(id)}
+                      >
                         <FontAwesomeIcon
                           icon={faPencilAlt}
                           style={{ color: "#fff" }}
@@ -589,7 +598,10 @@ class Admin extends Component {
                           }}
                         />
                       </button>
-                      <button className="event-edit-btn">
+                      <button
+                        className="event-edit-btn"
+                        onClick={() => this.changeEditEventViewState(id)}
+                      >
                         <FontAwesomeIcon
                           icon={faPencilAlt}
                           style={{ color: "#fff" }}
@@ -613,6 +625,13 @@ class Admin extends Component {
             <RemoveEventForm
               eventBeingRemoved={this.state.eventBeingRemoved}
               turnOffViewState={this.turnOffRemoveEventViewState}
+            />
+          ) : null}
+          {/* Caso o state da propriedade editEventView seja true, mostra o editeventform*/}
+          {this.state.editEventView === true ? (
+            <EditEventForm
+              eventBeingEdited={this.state.eventBeingEdited}
+              turnOffViewState={this.turnOffEditEventViewState}
             />
           ) : null}
         </div>
@@ -652,6 +671,19 @@ class Admin extends Component {
     let viewState = false;
     this.setState({
       removeEventView: viewState,
+    });
+  };
+
+  changeEditEventViewState = (id) => {
+    this.setState({
+      editEventView: true,
+      eventBeingEdited: id,
+    });
+  };
+
+  turnOffEditEventViewState = () => {
+    this.setState({
+      editEventView: false,
     });
   };
 
