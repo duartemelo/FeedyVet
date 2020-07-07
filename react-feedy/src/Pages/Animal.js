@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../styles/global/Main.css";
 import "../styles/independent/Animal.css";
+import logo from "../Images/Logo_2_1600.png";
 import app from "../firebase";
 import moment from "moment";
 import Loader from "react-loader-spinner";
@@ -56,6 +57,11 @@ class Animal extends Component {
   resetState() {
     this.setState(prestate);
   }
+
+  redirectToPage = (page) => {
+    const { history } = this.props;
+    if (history) history.push(page);
+  };
 
   //quando o componente dá load / pagina da load, obtem os eventos passados 10 milisegundos, isto para esperar que o state seja definido
   componentDidMount() {
@@ -207,6 +213,14 @@ class Animal extends Component {
   render() {
     return (
       <div>
+        <a onClick={() => this.redirectToPage("/")}>
+          <img
+            src={logo}
+            alt="Logo"
+            className="feedy-logo-img logo-no-index"
+          ></img>
+        </a>
+
         <button
           className="button signout-btn"
           onClick={() => app.auth().signOut()}

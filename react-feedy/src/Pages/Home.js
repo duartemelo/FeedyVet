@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import app from "../firebase";
 import "../styles/global/Main.css";
 import "../styles/independent/Home.css";
+import logo from "../Images/Logo_2_1600.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPaw,
@@ -10,6 +11,7 @@ import {
   faColumns,
   faCog,
 } from "@fortawesome/free-solid-svg-icons";
+import { useHistory } from "react-router-dom";
 
 class Home extends Component {
   constructor(props) {
@@ -32,6 +34,15 @@ class Home extends Component {
     return (
       <div>
         <div className="centered-container">
+          <a onClick={() => this.redirectToPage("/")}>
+            <img
+              src={logo}
+              alt="Logo"
+              className="feedy-logo-img logo-no-index"
+              style={{ marginLeft: "60px" }}
+            ></img>
+          </a>
+
           <button
             className="button signout-btn"
             onClick={() => app.auth().signOut()}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../styles/global/Main.css";
 import "../styles/independent/Contact.css";
+import logo from "../Images/Logo_2_1600.png";
 import app from "../firebase";
 import * as firebase from "firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,6 +18,11 @@ class Contact extends Component {
     this.MessageToState = this.MessageToState.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  redirectToPage = (page) => {
+    const { history } = this.props;
+    if (history) history.push(page);
+  };
 
   //esperar que o componente renderize para fazer a função de obter as informações de contacto
   componentDidMount() {
@@ -76,6 +82,14 @@ class Contact extends Component {
   render() {
     return (
       <div>
+        <a onClick={() => this.redirectToPage("/")}>
+          <img
+            src={logo}
+            alt="Logo"
+            className="feedy-logo-img logo-no-index"
+          ></img>
+        </a>
+
         <button
           className="button signout-btn"
           onClick={() => app.auth().signOut()}

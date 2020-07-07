@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../styles/global/Main.css";
 import "../styles/independent/Profile.css";
+import logo from "../Images/Logo_2_1600.png";
 import app from "../firebase";
 import ChangeProfileInfoForm from "../Views/ChangeProfileInfoForm";
 import ChangePasswordForm from "../Views/ChangePasswordForm";
@@ -19,6 +20,11 @@ class Profile extends Component {
     this.password1Input = React.createRef();
     this.password2Input = React.createRef();
   }
+
+  redirectToPage = (page) => {
+    const { history } = this.props;
+    if (history) history.push(page);
+  };
 
   componentDidMount() {
     let currentComponent = this;
@@ -157,6 +163,13 @@ class Profile extends Component {
   render() {
     return (
       <div>
+        <a onClick={() => this.redirectToPage("/")}>
+          <img
+            src={logo}
+            alt="Logo"
+            className="feedy-logo-img logo-no-index"
+          ></img>
+        </a>
         <button
           className="button signout-btn"
           onClick={() => app.auth().signOut()}

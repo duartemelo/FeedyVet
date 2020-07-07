@@ -44,3 +44,8 @@ a:hover {
     transform: skewY(-10deg);
     z-index: -1;
 }
+
+.logo-no-index {
+    display: inline-block;
+    margin-left: 60px;
+}
