@@ -123,6 +123,7 @@ class Contact extends Component {
                     placeholder="Mensagem"
                     name="msg"
                     onChange={this.MessageToState}
+                    required
                   ></textarea>
                   <button
                     type="submit"

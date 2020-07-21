@@ -45,12 +45,21 @@ const AddEventForm = (props) => {
           className="input"
           placeholder="Utilizador"
           name="username"
+          required
         ></input>
         <input
           className="input"
           placeholder="Animal"
           name="animal"
           style={mt10}
+          required
+        ></input>
+        <input
+          className="input"
+          placeholder="Tipo"
+          name="type"
+          style={mt10}
+          required
         ></input>
         <input
           className="input"
@@ -58,18 +67,14 @@ const AddEventForm = (props) => {
           name="comment"
           style={mt10}
         ></input>
-        <input
-          className="input"
-          placeholder="Tipo"
-          name="type"
-          style={mt10}
-        ></input>
+
         <input
           className="input"
           placeholder="Data e hora"
           name="datetime"
           style={mt10}
           type="datetime-local"
+          required
         ></input>
 
         <button className="form-login-button" type="submit">
