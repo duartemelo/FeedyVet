@@ -23,6 +23,7 @@ const AddEventForm = (props) => {
           datetime: datetime.value,
           type: type.value,
           userName: username.value,
+          state: "active",
         });
       nextEvent += 1;
       //incrementa a variavel next event, no caso de o utilizador querer adicionar outro evento sem fechar/dar reload a pagina

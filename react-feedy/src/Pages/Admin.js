@@ -93,8 +93,8 @@ class Admin extends Component {
       var eventDate = moment(snapshot.val().datetime);
       eventDate.toDate();
 
-      if (snapshot.key > biggestID) {
-        biggestID = snapshot.key;
+      if (snapshot.key >= biggestID) {
+        biggestID = parseInt(snapshot.key) + 1;
       }
 
       currentComponent.setState({
@@ -616,7 +616,7 @@ class Admin extends Component {
           {/* Caso o state da propriedade addEventView seja true, mostra o addeventform*/}
           {this.state.addEventView === true ? (
             <AddEventForm
-              eventsLength={parseInt(this.state.biggestID) + 1}
+              eventsLength={this.state.biggestID}
               turnOffHandler={this.turnOffAddEventViewState}
             />
           ) : null}
