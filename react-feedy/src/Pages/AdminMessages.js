@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../styles/global/Main.css";
+import logo from "../Images/Logo_2_1600.png";
 import "../styles/independent/AdminMessages.css";
 import app from "../firebase";
 import moment from "moment";
@@ -19,6 +20,11 @@ class AdminMessages extends Component {
       messagesState: [],
     };
   }
+
+  redirectToPage = (page) => {
+    const { history } = this.props;
+    if (history) history.push(page);
+  };
 
   componentDidMount() {
     this.getMessages();
@@ -94,6 +100,13 @@ class AdminMessages extends Component {
   render() {
     return (
       <div>
+        <a onClick={() => this.redirectToPage("/")}>
+          <img
+            src={logo}
+            alt="Logo"
+            className="feedy-logo-img logo-no-index"
+          ></img>
+        </a>
         <button
           className="button signout-btn"
           onClick={this.redirectToIndexAndLogout}

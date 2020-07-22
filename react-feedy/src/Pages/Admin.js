@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../styles/global/Main.css";
+import logo from "../Images/Logo_2_1600.png";
 import "../styles/independent/Admin.css";
 import "../styles/independent/Animal.css";
 import app from "../firebase";
@@ -64,6 +65,11 @@ class Admin extends Component {
   resetState() {
     this.setState(prestate);
   }
+
+  redirectToPage = (page) => {
+    const { history } = this.props;
+    if (history) history.push(page);
+  };
 
   //quando o componente dá load / pagina da load, obtem os eventos passados 10 milisegundos, isto para esperar que o state seja definido
   componentDidMount() {
@@ -334,6 +340,13 @@ class Admin extends Component {
   render() {
     return (
       <div>
+        <a onClick={() => this.redirectToPage("/")}>
+          <img
+            src={logo}
+            alt="Logo"
+            className="feedy-logo-img logo-no-index"
+          ></img>
+        </a>
         <button
           className="button signout-btn"
           onClick={this.redirectToIndexAndLogout}

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../styles/global/Main.css";
+import logo from "../Images/Logo_2_1600.png";
 import "../styles/independent/AdminSettings.css";
 import app from "../firebase";
 import AdminSettingsForm from "../Views/AdminSettingsForm";
@@ -20,6 +21,11 @@ class AdminSettings extends Component {
     this.mobilePhoneInput = React.createRef();
     this.nameInput = React.createRef();
   }
+
+  redirectToPage = (page) => {
+    const { history } = this.props;
+    if (history) history.push(page);
+  };
 
   redirectToIndexAndLogout = (page) => {
     const { history } = this.props;
@@ -117,6 +123,13 @@ class AdminSettings extends Component {
   render() {
     return (
       <div>
+        <a onClick={() => this.redirectToPage("/")}>
+          <img
+            src={logo}
+            alt="Logo"
+            className="feedy-logo-img logo-no-index"
+          ></img>
+        </a>
         <button
           className="button signout-btn"
           onClick={this.redirectToIndexAndLogout}
