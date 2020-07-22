@@ -8,6 +8,7 @@ import * as firebase from "firebase";
 import Loader from "react-loader-spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faComment, faClock } from "@fortawesome/free-solid-svg-icons";
+import MessageArchiveRequestForm from "../Views/MessageArchiveRequestForm";
 
 class AdminMessages extends Component {
   constructor(props) {
@@ -18,8 +19,21 @@ class AdminMessages extends Component {
       messagesBody: [],
       messagesTimeStamp: [],
       messagesState: [],
+      messageArchiveFormState: false,
+      messageToArchive: null,
     };
   }
+
+  changeMessageArchiveFormState = (stateTo, id) => {
+    this.setState({
+      messageArchiveFormState: stateTo,
+    });
+    if (stateTo === true) {
+      this.setState({
+        messageToArchive: id,
+      });
+    }
+  };
 
   redirectToPage = (page) => {
     const { history } = this.props;
@@ -51,15 +65,18 @@ class AdminMessages extends Component {
           );
 
           const finalDate = firestoreDateToDate.toString();
-          this.setState({
-            messagesID: this.state.messagesID.concat(doc.id),
-            messagesEmail: this.state.messagesEmail.concat(doc.data().email),
-            messagesBody: this.state.messagesBody.concat(doc.data().message),
-            messagesTimeStamp: this.state.messagesTimeStamp.concat(finalDate),
-            messagesState: this.state.messagesState.concat(
-              doc.data().messageState
-            ),
-          });
+
+          if (doc.data().messageState !== "archived") {
+            this.setState({
+              messagesID: this.state.messagesID.concat(doc.id),
+              messagesEmail: this.state.messagesEmail.concat(doc.data().email),
+              messagesBody: this.state.messagesBody.concat(doc.data().message),
+              messagesTimeStamp: this.state.messagesTimeStamp.concat(finalDate),
+              messagesState: this.state.messagesState.concat(
+                doc.data().messageState
+              ),
+            });
+          }
         });
       })
       .catch((err) => {
@@ -172,9 +189,28 @@ class AdminMessages extends Component {
                   ? "Marcar como não lida"
                   : "Marcar como lida"}
               </button>
+              <button
+                className="button"
+                style={{
+                  width: "100px",
+                  backgroundColor: "#910000",
+                  color: "#fff",
+                  marginTop: "10px",
+                  marginLeft: "10px",
+                }}
+                onClick={() => this.changeMessageArchiveFormState(true, id)}
+              >
+                Arquivar
+              </button>
             </div>
           ))}
         </div>
+        {this.state.messageArchiveFormState === true ? (
+          <MessageArchiveRequestForm
+            messageBeingArchived={this.state.messageToArchive}
+            closeForm={() => this.changeMessageArchiveFormState(false, null)}
+          />
+        ) : null}
       </div>
     );
   }
