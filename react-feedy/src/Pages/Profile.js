@@ -101,6 +101,12 @@ class Profile extends Component {
       .catch(function (error) {
         console.log("Erro ->" + error);
       });
+    app
+      .database()
+      .ref("/users/" + app.auth().currentUser.uid)
+      .update({
+        displayName: newName,
+      });
   };
 
   updatePassword = (event) => {

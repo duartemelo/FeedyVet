@@ -21,6 +21,7 @@ const RegisterForm = (props) => {
         .set({
           isadmin: false,
           username: username,
+          displayName: "undefined",
         });
 
       window.location.reload();

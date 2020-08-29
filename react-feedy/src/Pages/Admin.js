@@ -87,253 +87,125 @@ class Admin extends Component {
 
   //funcao para obter eventos
   getEvents() {
-    const db = app.database();
-    const ref = db.ref("events");
     let currentComponent = this;
-
-    //data de hoje
+    const eventsRef = app
+      .firestore()
+      .collection("events")
+      .orderBy("datetime", "desc");
     var today = moment();
-    let biggestID = 0;
 
-    ref.orderByChild("datetime").on("child_added", function (snapshot) {
-      var eventDate = moment(snapshot.val().datetime);
-      eventDate.toDate();
+    eventsRef.get().then((snapshot) => {
+      snapshot.forEach((doc) => {
+        let eventDate = moment(doc.data().datetime);
 
-      if (snapshot.key >= biggestID) {
-        biggestID = parseInt(snapshot.key) + 1;
-      }
+        let userName;
 
-      currentComponent.setState({
-        biggestID: biggestID,
+        app
+          .database()
+          .ref("users/" + doc.data().UID)
+          .once("value")
+          .then(function (snapshot) {
+            userName = snapshot.val().username;
+            console.log(userName);
+          });
+
+        setTimeout(function () {
+          if (doc.data().state !== "archived") {
+            //se data for do passado
+            if (eventDate.isBefore(today, "day")) {
+              //adiciona a array passado
+              currentComponent.setState({
+                pasteventsID: currentComponent.state.pasteventsID.concat(
+                  doc.id
+                ),
+                pasteventsAnimal: currentComponent.state.pasteventsAnimal.concat(
+                  doc.data().animal
+                ),
+                pasteventsComment: currentComponent.state.pasteventsComment.concat(
+                  doc.data().comment
+                ),
+                pasteventsDateTime: currentComponent.state.pasteventsDateTime.concat(
+                  eventDate.format("DD-MM-YYYY, H:mm")
+                ),
+                pasteventsType: currentComponent.state.pasteventsType.concat(
+                  doc.data().type
+                ),
+                pasteventsUserID: currentComponent.state.pasteventsUserID.concat(
+                  doc.data().UID
+                ),
+                pasteventsUserName: currentComponent.state.pasteventsUserName.concat(
+                  userName
+                ),
+                pasteventsState: currentComponent.state.pasteventsState.concat(
+                  doc.data().state
+                ),
+              });
+            }
+
+            //se data for de hoje
+            else if (eventDate.isSame(today, "day")) {
+              //adiciona a array de hoje
+              currentComponent.setState({
+                presenteventsID: currentComponent.state.presenteventsID.concat(
+                  doc.id
+                ),
+                presenteventsAnimal: currentComponent.state.presenteventsAnimal.concat(
+                  doc.data().animal
+                ),
+                presenteventsComment: currentComponent.state.presenteventsComment.concat(
+                  doc.data().comment
+                ),
+                presenteventsDateTime: currentComponent.state.presenteventsDateTime.concat(
+                  eventDate.format("DD-MM-YYYY, H:mm")
+                ),
+                presenteventsType: currentComponent.state.presenteventsType.concat(
+                  doc.data().type
+                ),
+                presenteventsUserID: currentComponent.state.presenteventsUserID.concat(
+                  doc.data().UID
+                ),
+                presenteventsUserName: currentComponent.state.presenteventsUserName.concat(
+                  userName
+                ),
+                presenteventsState: currentComponent.state.presenteventsState.concat(
+                  doc.data().state
+                ),
+              });
+            }
+
+            //se data for do futuro
+            else if (eventDate.isAfter(today, "day")) {
+              //adiciona a array futuro
+              currentComponent.setState({
+                futureeventsID: currentComponent.state.futureeventsID.concat(
+                  doc.id
+                ),
+                futureeventsAnimal: currentComponent.state.futureeventsAnimal.concat(
+                  doc.data().animal
+                ),
+                futureeventsComment: currentComponent.state.futureeventsComment.concat(
+                  doc.data().comment
+                ),
+                futureeventsDateTime: currentComponent.state.futureeventsDateTime.concat(
+                  eventDate.format("DD-MM-YYYY, H:mm")
+                ),
+                futureeventsType: currentComponent.state.futureeventsType.concat(
+                  doc.data().type
+                ),
+                futureeventsUserID: currentComponent.state.futureeventsUserID.concat(
+                  doc.data().UID
+                ),
+                futureeventsUserName: currentComponent.state.futureeventsUserName.concat(
+                  userName
+                ),
+                futureeventsState: currentComponent.state.futureeventsState.concat(
+                  doc.data().state
+                ),
+              });
+            }
+          }
+        }, 1000);
       });
-
-      if (snapshot.val().state !== "archived") {
-        if (eventDate.isBefore(today, "day")) {
-          //adiciona a array passado
-          currentComponent.setState({
-            pasteventsID: currentComponent.state.pasteventsID.concat(
-              snapshot.key
-            ),
-            pasteventsAnimal: currentComponent.state.pasteventsAnimal.concat(
-              snapshot.val().animal
-            ),
-            pasteventsComment: currentComponent.state.pasteventsComment.concat(
-              snapshot.val().comment
-            ),
-            pasteventsDateTime: currentComponent.state.pasteventsDateTime.concat(
-              eventDate.format("DD-MM-YYYY, H:mm")
-            ),
-            pasteventsType: currentComponent.state.pasteventsType.concat(
-              snapshot.val().type
-            ),
-            pasteventsUserID: currentComponent.state.pasteventsUserID.concat(
-              snapshot.val().userID
-            ),
-            pasteventsUserName: currentComponent.state.pasteventsUserName.concat(
-              snapshot.val().userName
-            ),
-            pasteventsState: currentComponent.state.pasteventsState.concat(
-              snapshot.val().state
-            ),
-          });
-        } else if (eventDate.isSame(today, "day")) {
-          //adiciona a array presente
-          currentComponent.setState({
-            presenteventsID: currentComponent.state.presenteventsID.concat(
-              snapshot.key
-            ),
-            presenteventsAnimal: currentComponent.state.presenteventsAnimal.concat(
-              snapshot.val().animal
-            ),
-            presenteventsComment: currentComponent.state.presenteventsComment.concat(
-              snapshot.val().comment
-            ),
-            presenteventsDateTime: currentComponent.state.presenteventsDateTime.concat(
-              eventDate.format("DD-MM-YYYY, H:mm")
-            ),
-            presenteventsType: currentComponent.state.presenteventsType.concat(
-              snapshot.val().type
-            ),
-            presenteventsUserID: currentComponent.state.presenteventsUserID.concat(
-              snapshot.val().userID
-            ),
-            presenteventsUserName: currentComponent.state.presenteventsUserName.concat(
-              snapshot.val().userName
-            ),
-            presenteventsState: currentComponent.state.presenteventsState.concat(
-              snapshot.val().state
-            ),
-          });
-        } else if (eventDate.isAfter(today, "day")) {
-          //adiciona a array futuro
-          currentComponent.setState({
-            futureeventsID: currentComponent.state.futureeventsID.concat(
-              snapshot.key
-            ),
-            futureeventsAnimal: currentComponent.state.futureeventsAnimal.concat(
-              snapshot.val().animal
-            ),
-            futureeventsComment: currentComponent.state.futureeventsComment.concat(
-              snapshot.val().comment
-            ),
-            futureeventsDateTime: currentComponent.state.futureeventsDateTime.concat(
-              eventDate.format("DD-MM-YYYY, H:mm")
-            ),
-            futureeventsType: currentComponent.state.futureeventsType.concat(
-              snapshot.val().type
-            ),
-            futureeventsUserID: currentComponent.state.futureeventsUserID.concat(
-              snapshot.val().userID
-            ),
-            futureeventsUserName: currentComponent.state.futureeventsUserName.concat(
-              snapshot.val().userName
-            ),
-            futureeventsState: currentComponent.state.futureeventsState.concat(
-              snapshot.val().state
-            ),
-          });
-        }
-      }
-    });
-
-    ref.orderByChild("datetime").on("child_changed", function (snapshot) {
-      if (snapshot.val().state === "archived") {
-        //obter o ID do evento a partir do Firebase
-        const eventID = snapshot.key;
-
-        //verifica em que array do state se encontrar o evento, no passado, presente ou futuro
-        const pastIncludesEventID = currentComponent.state.pasteventsID.includes(
-          eventID
-        );
-        const presentIncludesEventID = currentComponent.state.presenteventsID.includes(
-          eventID
-        );
-        const futureIncludesEventID = currentComponent.state.futureeventsID.includes(
-          eventID
-        );
-
-        if (pastIncludesEventID === true) {
-          let removedIndex = currentComponent.state.pasteventsID.indexOf(
-            eventID
-          );
-
-          let copiedeventsID = [...currentComponent.state.pasteventsID];
-          let copiedeventsAnimal = [...currentComponent.state.pasteventsAnimal];
-          let copiedeventsComment = [
-            ...currentComponent.state.pasteventsComment,
-          ];
-          let copiedeventsDateTime = [
-            ...currentComponent.state.pasteventsDateTime,
-          ];
-          let copiedeventsType = [...currentComponent.state.pasteventsType];
-          let copiedeventsUserID = [...currentComponent.state.pasteventsUserID];
-          let copiedeventsUserName = [
-            ...currentComponent.state.pasteventsUserName,
-          ];
-
-          copiedeventsID.splice(removedIndex, 1);
-          copiedeventsAnimal.splice(removedIndex, 1);
-          copiedeventsComment.splice(removedIndex, 1);
-          copiedeventsDateTime.splice(removedIndex, 1);
-          copiedeventsType.splice(removedIndex, 1);
-          copiedeventsUserID.splice(removedIndex, 1);
-          copiedeventsUserName.splice(removedIndex, 1);
-
-          currentComponent.setState({
-            pasteventsID: copiedeventsID,
-            pasteventsAnimal: copiedeventsAnimal,
-            pasteventsComment: copiedeventsComment,
-            pasteventsDateTime: copiedeventsDateTime,
-            pasteventsType: copiedeventsType,
-            pasteventsUserID: copiedeventsUserID,
-            pasteventsUserName: copiedeventsUserName,
-          });
-        }
-
-        if (presentIncludesEventID === true) {
-          let removedIndex = currentComponent.state.presenteventsID.indexOf(
-            eventID
-          );
-
-          let copiedeventsID = [...currentComponent.state.presenteventsID];
-          let copiedeventsAnimal = [
-            ...currentComponent.state.presenteventsAnimal,
-          ];
-          let copiedeventsComment = [
-            ...currentComponent.state.presenteventsComment,
-          ];
-          let copiedeventsDateTime = [
-            ...currentComponent.state.presenteventsDateTime,
-          ];
-          let copiedeventsType = [...currentComponent.state.presenteventsType];
-          let copiedeventsUserID = [
-            ...currentComponent.state.presenteventsUserID,
-          ];
-          let copiedeventsUserName = [
-            ...currentComponent.state.presenteventsUserName,
-          ];
-
-          copiedeventsID.splice(removedIndex, 1);
-          copiedeventsAnimal.splice(removedIndex, 1);
-          copiedeventsComment.splice(removedIndex, 1);
-          copiedeventsDateTime.splice(removedIndex, 1);
-          copiedeventsType.splice(removedIndex, 1);
-          copiedeventsUserID.splice(removedIndex, 1);
-          copiedeventsUserName.splice(removedIndex, 1);
-
-          currentComponent.setState({
-            presenteventsID: copiedeventsID,
-            presenteventsAnimal: copiedeventsAnimal,
-            presenteventsComment: copiedeventsComment,
-            presenteventsDateTime: copiedeventsDateTime,
-            presenteventsType: copiedeventsType,
-            presenteventsUserID: copiedeventsUserID,
-            presenteventsUserName: copiedeventsUserName,
-          });
-        }
-
-        if (futureIncludesEventID === true) {
-          let removedIndex = currentComponent.state.futureeventsID.indexOf(
-            eventID
-          );
-
-          let copiedeventsID = [...currentComponent.state.futureeventsID];
-          let copiedeventsAnimal = [
-            ...currentComponent.state.futureeventsAnimal,
-          ];
-          let copiedeventsComment = [
-            ...currentComponent.state.futureeventsComment,
-          ];
-          let copiedeventsDateTime = [
-            ...currentComponent.state.futureeventsDateTime,
-          ];
-          let copiedeventsType = [...currentComponent.state.futureeventsType];
-          let copiedeventsUserID = [
-            ...currentComponent.state.futureeventsUserID,
-          ];
-          let copiedeventsUserName = [
-            ...currentComponent.state.futureeventsUserName,
-          ];
-
-          copiedeventsID.splice(removedIndex, 1);
-          copiedeventsAnimal.splice(removedIndex, 1);
-          copiedeventsComment.splice(removedIndex, 1);
-          copiedeventsDateTime.splice(removedIndex, 1);
-          copiedeventsType.splice(removedIndex, 1);
-          copiedeventsUserID.splice(removedIndex, 1);
-          copiedeventsUserName.splice(removedIndex, 1);
-
-          currentComponent.setState({
-            futureeventsID: copiedeventsID,
-            futureeventsAnimal: copiedeventsAnimal,
-            futureeventsComment: copiedeventsComment,
-            futureeventsDateTime: copiedeventsDateTime,
-            futureeventsType: copiedeventsType,
-            futureeventsUserID: copiedeventsUserID,
-            futureeventsUserName: copiedeventsUserName,
-          });
-        }
-      }
     });
   }
 
