@@ -11,12 +11,15 @@ const EditEventForm = (props) => {
     const { username, animal, comment, type, datetime } = event.target.elements;
 
     if (username.value !== "") {
+      //needs stuff todo
+
       try {
         await firebase
-          .database()
-          .ref("/events/" + eventBeingEdited)
+          .firestore()
+          .collection("events")
+          .doc(eventBeingEdited)
           .update({
-            userName: username.value,
+            UID: "",
           });
       } catch (error) {
         alert(error);
@@ -25,8 +28,9 @@ const EditEventForm = (props) => {
     if (animal.value !== "") {
       try {
         await firebase
-          .database()
-          .ref("/events/" + eventBeingEdited)
+          .firestore()
+          .collection("events")
+          .doc(eventBeingEdited)
           .update({
             animal: animal.value,
           });
@@ -37,8 +41,9 @@ const EditEventForm = (props) => {
     if (comment.value !== "") {
       try {
         await firebase
-          .database()
-          .ref("/events/" + eventBeingEdited)
+          .firestore()
+          .collection("events")
+          .doc(eventBeingEdited)
           .update({
             comment: comment.value,
           });
@@ -49,8 +54,9 @@ const EditEventForm = (props) => {
     if (type.value !== "") {
       try {
         await firebase
-          .database()
-          .ref("/events/" + eventBeingEdited)
+          .firestore()
+          .collection("events")
+          .doc(eventBeingEdited)
           .update({
             type: type.value,
           });
@@ -61,8 +67,9 @@ const EditEventForm = (props) => {
     if (datetime.value !== "") {
       try {
         await firebase
-          .database()
-          .ref("/events/" + eventBeingEdited)
+          .firestore()
+          .collection("events")
+          .doc(eventBeingEdited)
           .update({
             datetime: datetime.value,
           });
@@ -85,21 +92,21 @@ const EditEventForm = (props) => {
           className="input"
           placeholder="Utilizador"
           name="username"
-          required
+          //required
         ></input>
         <input
           className="input"
           placeholder="Animal"
           name="animal"
           style={mt10}
-          required
+          //required
         ></input>
         <input
           className="input"
           placeholder="Tipo"
           name="type"
           style={mt10}
-          required
+          //required
         ></input>
         <input
           className="input"
@@ -113,7 +120,7 @@ const EditEventForm = (props) => {
           name="datetime"
           style={mt10}
           type="datetime-local"
-          required
+          //required
         ></input>
 
         <button className="form-login-button" type="submit">

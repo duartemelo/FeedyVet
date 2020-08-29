@@ -79,7 +79,6 @@ class Animal extends Component {
 
     //data de hoje
     var today = moment();
-    /* let username = email.value.slice(0, email.value.indexOf("@")); */
     ref.orderByChild("datetime").on("child_added", function (snapshot) {
       if (
         snapshot.val().userName ===
