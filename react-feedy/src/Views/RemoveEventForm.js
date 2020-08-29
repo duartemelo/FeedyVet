@@ -7,8 +7,9 @@ const RemoveEventForm = (props) => {
   const RemoveEventHandler = useCallback(async (event) => {
     try {
       await firebase
-        .database()
-        .ref("/events/" + props.eventBeingRemoved)
+        .firestore()
+        .collection("events")
+        .doc(props.eventBeingRemoved)
         .update({
           state: "archived",
         });
