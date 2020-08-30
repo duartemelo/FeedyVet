@@ -15,6 +15,7 @@ const ChangeProfileInfoForm = (props) => {
         <input
           type="text"
           placeholder="Nome"
+          defaultValue={props.userName}
           ref={props.nameInputRef}
           className="input"
           style={{ marginTop: "20px" }}

@@ -248,6 +248,7 @@ class Profile extends Component {
           </div>
           {this.state.changeProfileInfoFormView === true ? (
             <ChangeProfileInfoForm
+              userName={this.state.userName}
               closeForm={this.closeChangeProfileInfoForm}
               imageInputRef={this.fileInput}
               nameInputRef={this.nameInput}
