@@ -1,8 +1,9 @@
 import React, { useCallback } from "react";
 import * as firebase from "firebase";
+import moment from "moment";
 import "../styles/independent/AddEventForm.css";
 
-const EditEventForm = (props) => {
+const EditEventForm   = (props) => {
   let eventBeingEdited = props.eventBeingEdited;
 
   const editEventHandler = useCallback(async (event) => {
@@ -13,7 +14,7 @@ const EditEventForm = (props) => {
     if (username.value !== "") {
       //needs stuff todo
 
-      try {
+      /*try {
         await firebase
           .firestore()
           .collection("events")
@@ -23,7 +24,7 @@ const EditEventForm = (props) => {
           });
       } catch (error) {
         alert(error);
-      }
+      }*/
     }
     if (animal.value !== "") {
       try {
@@ -85,6 +86,28 @@ const EditEventForm = (props) => {
     marginTop: 10,
   };
 
+  let formsValues = props.eventBeingEdited;
+
+  let initialDate = formsValues[5];
+
+  let finalDate =
+    initialDate.slice(6, 10) +
+    "-" +
+    initialDate.slice(3, 5) +
+    "-" +
+    initialDate.slice(0, 2) +
+    "T" +
+    initialDate.slice(12, 14) +
+    ":" +
+    initialDate.slice(15, 17) +
+    ":" +
+    "00";
+
+  /*changeValue(index) {
+    event.preventDefault;
+    formsValues[index] = event.target.value;
+  }*/
+
   return (
     <div className="add-event-container" style={{ height: 450 }}>
       <form onSubmit={editEventHandler} className="add-event-form">
@@ -92,35 +115,40 @@ const EditEventForm = (props) => {
           className="input"
           placeholder="Utilizador"
           name="username"
-          //required
+          value={formsValues[1]}
+          required
         ></input>
         <input
           className="input"
           placeholder="Animal"
           name="animal"
+          value={formsValues[2]}
           style={mt10}
-          //required
+          required
         ></input>
         <input
           className="input"
           placeholder="Tipo"
           name="type"
+          value={formsValues[3]}
           style={mt10}
-          //required
+          required
         ></input>
         <input
           className="input"
           placeholder="Comentário"
           name="comment"
+          value={formsValues[4]}
           style={mt10}
         ></input>
         <input
           className="input"
           placeholder="Data e hora"
           name="datetime"
+          value={finalDate}
           style={mt10}
           type="datetime-local"
-          //required
+          required
         ></input>
 
         <button className="form-login-button" type="submit">

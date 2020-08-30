@@ -41,13 +41,10 @@ const prestate = {
   futureeventsUserName: [],
   futureeventsState: [],
 
-  biggestID: null,
-
   addEventView: false,
   removeEventView: false,
-  eventBeingRemoved: null,
+
   editEventView: false,
-  eventBeingEdited: null,
 
   timeSelectPastClasses: "time-select-left-btn",
   timeSelectTodayClasses: "time-select-middle-btn time-select-active",
@@ -335,7 +332,16 @@ class Admin extends Component {
                       </button>
                       <button
                         className="event-edit-btn"
-                        onClick={() => this.changeEditEventViewState(id)}
+                        onClick={() =>
+                          this.changeEditEventViewState(
+                            id,
+                            this.state.pasteventsUserName[index],
+                            this.state.pasteventsAnimal[index],
+                            this.state.pasteventsType[index],
+                            this.state.pasteventsComment[index],
+                            this.state.pasteventsDateTime[index]
+                          )
+                        }
                       >
                         <FontAwesomeIcon
                           icon={faPencilAlt}
@@ -409,7 +415,16 @@ class Admin extends Component {
                       </button>
                       <button
                         className="event-edit-btn"
-                        onClick={() => this.changeEditEventViewState(id)}
+                        onClick={() =>
+                          this.changeEditEventViewState(
+                            id,
+                            this.state.presenteventsUserName[index],
+                            this.state.presenteventsAnimal[index],
+                            this.state.presenteventsType[index],
+                            this.state.presenteventsComment[index],
+                            this.state.presenteventsDateTime[index]
+                          )
+                        }
                       >
                         <FontAwesomeIcon
                           icon={faPencilAlt}
@@ -485,7 +500,16 @@ class Admin extends Component {
                       </button>
                       <button
                         className="event-edit-btn"
-                        onClick={() => this.changeEditEventViewState(id)}
+                        onClick={() =>
+                          this.changeEditEventViewState(
+                            id,
+                            this.state.futureeventsUserName[index],
+                            this.state.futureeventsAnimal[index],
+                            this.state.futureeventsType[index],
+                            this.state.futureeventsComment[index],
+                            this.state.futureeventsDateTime[index]
+                          )
+                        }
                       >
                         <FontAwesomeIcon
                           icon={faPencilAlt}
@@ -559,10 +583,17 @@ class Admin extends Component {
     });
   };
 
-  changeEditEventViewState = (id) => {
+  changeEditEventViewState = (
+    id,
+    username,
+    animal,
+    type,
+    comment,
+    datetime
+  ) => {
     this.setState({
       editEventView: true,
-      eventBeingEdited: id,
+      eventBeingEdited: [id, username, animal, type, comment, datetime],
     });
   };
 
