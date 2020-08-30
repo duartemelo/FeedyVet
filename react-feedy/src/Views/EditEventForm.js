@@ -3,7 +3,7 @@ import * as firebase from "firebase";
 import moment from "moment";
 import "../styles/independent/AddEventForm.css";
 
-const EditEventForm   = (props) => {
+const EditEventForm = (props) => {
   let eventBeingEdited = props.eventBeingEdited;
 
   const editEventHandler = useCallback(async (event) => {
@@ -11,27 +11,26 @@ const EditEventForm   = (props) => {
 
     const { username, animal, comment, type, datetime } = event.target.elements;
 
-    if (username.value !== "") {
+    /*if (username.value !== "") {
       //needs stuff todo
-
-      /*try {
+      try {
         await firebase
           .firestore()
           .collection("events")
-          .doc(eventBeingEdited)
+          .doc(eventBeingEdited[0])
           .update({
             UID: "",
           });
       } catch (error) {
         alert(error);
-      }*/
-    }
+      }
+    }*/
     if (animal.value !== "") {
       try {
         await firebase
           .firestore()
           .collection("events")
-          .doc(eventBeingEdited)
+          .doc(eventBeingEdited[0])
           .update({
             animal: animal.value,
           });
@@ -44,7 +43,7 @@ const EditEventForm   = (props) => {
         await firebase
           .firestore()
           .collection("events")
-          .doc(eventBeingEdited)
+          .doc(eventBeingEdited[0])
           .update({
             comment: comment.value,
           });
@@ -57,7 +56,7 @@ const EditEventForm   = (props) => {
         await firebase
           .firestore()
           .collection("events")
-          .doc(eventBeingEdited)
+          .doc(eventBeingEdited[0])
           .update({
             type: type.value,
           });
@@ -65,12 +64,13 @@ const EditEventForm   = (props) => {
         alert(error);
       }
     }
+
     if (datetime.value !== "") {
       try {
         await firebase
           .firestore()
           .collection("events")
-          .doc(eventBeingEdited)
+          .doc(eventBeingEdited[0])
           .update({
             datetime: datetime.value,
           });
@@ -80,6 +80,8 @@ const EditEventForm   = (props) => {
     }
 
     document.getElementById("closebutton").click();
+    alert("Evento editado.");
+    window.location.reload();
   }, []);
 
   const mt10 = {
@@ -115,14 +117,14 @@ const EditEventForm   = (props) => {
           className="input"
           placeholder="Utilizador"
           name="username"
-          value={formsValues[1]}
+          defaultValue={formsValues[1]}
           required
         ></input>
         <input
           className="input"
           placeholder="Animal"
           name="animal"
-          value={formsValues[2]}
+          defaultValue={formsValues[2]}
           style={mt10}
           required
         ></input>
@@ -130,7 +132,7 @@ const EditEventForm   = (props) => {
           className="input"
           placeholder="Tipo"
           name="type"
-          value={formsValues[3]}
+          defaultValue={formsValues[3]}
           style={mt10}
           required
         ></input>
@@ -138,14 +140,14 @@ const EditEventForm   = (props) => {
           className="input"
           placeholder="Comentário"
           name="comment"
-          value={formsValues[4]}
+          defaultValue={formsValues[4]}
           style={mt10}
         ></input>
         <input
           className="input"
           placeholder="Data e hora"
           name="datetime"
-          value={finalDate}
+          defaultValue={finalDate}
           style={mt10}
           type="datetime-local"
           required
