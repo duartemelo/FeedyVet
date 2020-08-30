@@ -133,7 +133,7 @@ class AdminMessages extends Component {
         </button>
         <div className="background-div"></div>
 
-        <h1 className="admin-messages-container-title">Admin Messages</h1>
+        <h1 className="admin-messages-container-title">Gestão de mensagens</h1>
 
         {this.state.messagesID.length === 0 &&
         this.state.messagesEmail.length === 0 &&

@@ -139,8 +139,10 @@ class AdminSettings extends Component {
         </button>
         <div className="background-div"></div>
         <div className="under-navbar">
-          <h1 className="admin-settings-container-title">Admin Settings</h1>
-          <h3 style={{ marginTop: "40px" }}>Veterinary info</h3>
+          <h1 className="admin-settings-container-title">
+            Gestão de informações
+          </h1>
+          <h3 style={{ marginTop: "40px" }}>Informações</h3>
           <div style={{ marginTop: "20px" }} className="info-text">
             {this.state.vetContactInfoKey[0] +
               ": " +

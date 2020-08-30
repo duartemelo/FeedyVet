@@ -224,7 +224,7 @@ class Admin extends Component {
           Sair
         </button>
         <div className="background-div"></div>
-        <h1 className="events-container-title">Eventos (admin)</h1>
+        <h1 className="events-container-title">Gestão de eventos</h1>
         <div className="time-select-container">
           <button
             className={this.state.timeSelectPastClasses}
@@ -323,7 +323,16 @@ class Admin extends Component {
 
                       <button
                         className="event-delete-btn"
-                        onClick={() => this.changeRemoveEventViewState(id)}
+                        onClick={() =>
+                          this.changeRemoveEventViewState(
+                            id,
+                            this.state.pasteventsUserName[index],
+                            this.state.pasteventsAnimal[index],
+                            this.state.pasteventsType[index],
+                            this.state.pasteventsComment[index],
+                            this.state.pasteventsDateTime[index]
+                          )
+                        }
                       >
                         <FontAwesomeIcon
                           icon={faTimes}
@@ -406,7 +415,16 @@ class Admin extends Component {
 
                       <button
                         className="event-delete-btn"
-                        onClick={() => this.changeRemoveEventViewState(id)}
+                        onClick={() =>
+                          this.changeRemoveEventViewState(
+                            id,
+                            this.state.presenteventsUserName[index],
+                            this.state.presenteventsAnimal[index],
+                            this.state.presenteventsType[index],
+                            this.state.presenteventsComment[index],
+                            this.state.presenteventsDateTime[index]
+                          )
+                        }
                       >
                         <FontAwesomeIcon
                           icon={faTimes}
@@ -489,7 +507,16 @@ class Admin extends Component {
 
                       <button
                         className="event-delete-btn"
-                        onClick={() => this.changeRemoveEventViewState(id)}
+                        onClick={() =>
+                          this.changeRemoveEventViewState(
+                            id,
+                            this.state.futureeventsUserName[index],
+                            this.state.futureeventsAnimal[index],
+                            this.state.futureeventsType[index],
+                            this.state.futureeventsComment[index],
+                            this.state.futureeventsDateTime[index]
+                          )
+                        }
                       >
                         <FontAwesomeIcon
                           icon={faTimes}
@@ -566,12 +593,12 @@ class Admin extends Component {
   };
 
   /*muda o state do removeeventview para true, e passa o id para o eventbeingremoved, que depois é passado para o component de remover evento*/
-  changeRemoveEventViewState = (id) => {
+  changeRemoveEventViewState = (id, username, animal, type, comment, date) => {
     let viewState = this.state.removeEventView;
     viewState = true;
     this.setState({
       removeEventView: viewState,
-      eventBeingRemoved: id,
+      eventBeingRemoved: [id, username, animal, type, comment, date],
     });
   };
 
