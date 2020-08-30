@@ -9,7 +9,8 @@ const MessageArchiveRequestForm = (props) => {
       messageState: "archived",
     });
     setTimeout(function () {
-      window.location.reload(false);
+      props.refreshMessages();
+      props.closeForm();
     }, 500);
   };
 

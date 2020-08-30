@@ -7,12 +7,18 @@ import moment from "moment";
 import * as firebase from "firebase";
 import Loader from "react-loader-spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faComment, faClock } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faComment,
+  faClock,
+  faTextHeight,
+} from "@fortawesome/free-solid-svg-icons";
 import MessageArchiveRequestForm from "../Views/MessageArchiveRequestForm";
 
 class AdminMessages extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       messagesID: [],
       messagesEmail: [],
@@ -23,6 +29,23 @@ class AdminMessages extends Component {
       messageToArchive: null,
     };
   }
+
+  cleanState = () => {
+    this.setState({
+      messagesID: [],
+      messagesEmail: [],
+      messagesBody: [],
+      messagesTimeStamp: [],
+      messagesState: [],
+      messageArchiveFormState: false,
+      messageToArchive: null,
+    });
+  };
+
+  refreshMessages = () => {
+    this.cleanState();
+    this.getMessages();
+  };
 
   changeMessageArchiveFormState = (stateTo, id) => {
     this.setState({
@@ -209,6 +232,7 @@ class AdminMessages extends Component {
           <MessageArchiveRequestForm
             messageBeingArchived={this.state.messageToArchive}
             closeForm={() => this.changeMessageArchiveFormState(false, null)}
+            refreshMessages={this.refreshMessages}
           />
         ) : null}
       </div>
