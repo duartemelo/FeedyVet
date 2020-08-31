@@ -144,25 +144,18 @@ class AdminSettings extends Component {
           </h1>
           <h3 style={{ marginTop: "40px" }}>Informações</h3>
           <div style={{ marginTop: "20px" }} className="info-text">
-            {this.state.vetContactInfoKey[0] +
-              ": " +
-              this.state.vetContactInfo[0]}
+            Nome: {this.state.vetContactInfo[3]}
           </div>
           <div className="info-text">
-            {this.state.vetContactInfoKey[1] +
-              ": " +
-              this.state.vetContactInfo[1]}
+            Morada: {this.state.vetContactInfo[0]}
           </div>
           <div className="info-text">
-            {this.state.vetContactInfoKey[2] +
-              ": " +
-              this.state.vetContactInfo[2]}
+            E-mail: {this.state.vetContactInfo[1]}
           </div>
           <div className="info-text">
-            {this.state.vetContactInfoKey[3] +
-              ": " +
-              this.state.vetContactInfo[3]}
+            Telemóvel: {this.state.vetContactInfo[2]}
           </div>
+
           <button
             className="button"
             style={{
@@ -182,6 +175,7 @@ class AdminSettings extends Component {
               emailInput={this.emailInput}
               mobilePhoneInput={this.mobilePhoneInput}
               nameInput={this.nameInput}
+              vetContactInfo={this.state.vetContactInfo}
             />
           ) : null}
         </div>

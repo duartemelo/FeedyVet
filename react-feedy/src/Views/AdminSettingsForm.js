@@ -6,28 +6,32 @@ const AdminSettingsForm = (props) => {
     <div className="change-admin-settings-container">
       <form>
         <input
-          placeholder="address"
+          placeholder="Nome"
           className="input"
-          style={{ marginTop: "40px" }}
+          defaultValue={props.vetContactInfo[3]}
+          style={{ marginTop: "50px" }}
+          ref={props.nameInput}
+        />
+        <input
+          placeholder="Morada"
+          className="input"
+          defaultValue={props.vetContactInfo[0]}
+          style={{ marginTop: "10px" }}
           ref={props.addressInput}
         />
         <input
-          placeholder="e-mail"
+          placeholder="E-mail"
           className="input"
+          defaultValue={props.vetContactInfo[1]}
           style={{ marginTop: "10px" }}
           ref={props.emailInput}
         />
         <input
-          placeholder="mobile-phone"
+          placeholder="Telemóvel"
           className="input"
+          defaultValue={props.vetContactInfo[2]}
           style={{ marginTop: "10px" }}
           ref={props.mobilePhoneInput}
-        />
-        <input
-          placeholder="name"
-          className="input"
-          style={{ marginTop: "10px" }}
-          ref={props.nameInput}
         />
 
         <button onClick={props.handleSubmit} className="form-login-button">
