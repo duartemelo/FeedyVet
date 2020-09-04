@@ -96,7 +96,7 @@ class App extends Component {
                 className="dog-image"
               ></img>
             </div>
-            <div className="title">FeedyVet - Aplicação Web e Móvel</div>
+            <div className="title">FeedyVet - Aplicação Web</div>
             <div className="subtitle">
               Diminuir distâncias entre veterinários e clientes.
             </div>
