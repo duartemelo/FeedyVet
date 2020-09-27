@@ -101,7 +101,7 @@ class Contact extends Component {
         <div className="background-div"></div>
 
         <div className="under-navbar">
-          <h1 className="contact-container-title">Contacto</h1>
+          <h1 className="contact-container-title">Contactar veterinário</h1>
 
           <div style={{ marginTop: "30px" }}>
             <div className="contact-form-container">

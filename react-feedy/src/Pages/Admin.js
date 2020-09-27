@@ -82,6 +82,14 @@ class Admin extends Component {
     app.auth().signOut();
   };
 
+  redIfRequestCancel = (state) => {
+    if (state === "clientrequestedcancel") {
+      return <div style={{ color: "red", display: "inline" }}>{state}</div>;
+    } else {
+      return state;
+    }
+  };
+
   //funcao para obter eventos
   getEvents() {
     let currentComponent = this;
@@ -318,7 +326,10 @@ class Admin extends Component {
                       >
                         {this.state.pasteventsAnimal[index]} (
                         {this.state.pasteventsUserName[index]}) (
-                        {this.state.pasteventsState[index]})
+                        {this.redIfRequestCancel(
+                          this.state.pasteventsState[index]
+                        )}
+                        )
                       </div>
 
                       <button
@@ -410,7 +421,10 @@ class Admin extends Component {
                       >
                         {this.state.presenteventsAnimal[index]} (
                         {this.state.presenteventsUserName[index]}) (
-                        {this.state.presenteventsState[index]})
+                        {this.redIfRequestCancel(
+                          this.state.presenteventsState[index]
+                        )}
+                        )
                       </div>
 
                       <button
@@ -502,7 +516,10 @@ class Admin extends Component {
                       >
                         {this.state.futureeventsAnimal[index]} (
                         {this.state.futureeventsUserName[index]}) (
-                        {this.state.futureeventsState[index]})
+                        {this.redIfRequestCancel(
+                          this.state.futureeventsState[index]
+                        )}
+                        )
                       </div>
 
                       <button
