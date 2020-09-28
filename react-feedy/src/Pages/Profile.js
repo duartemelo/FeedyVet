@@ -166,6 +166,22 @@ class Profile extends Component {
     });
   };
 
+  imageDisplayHandler = (path) => {
+    if (path === null) {
+      return <div className="profile-image-div"></div>;
+    } else {
+      return (
+        <div className="profile-image-div">
+          <img
+            src={app.auth().currentUser.photoURL}
+            alt="User"
+            className="profile-image-img"
+          />
+        </div>
+      );
+    }
+  };
+
   render() {
     return (
       <div>
@@ -186,13 +202,6 @@ class Profile extends Component {
         <div className="background-div"></div>
         <div className="under-navbar">
           <h1 className="profile-container-title">Perfil</h1>
-          <div className="profile-image-div">
-            <img
-              src={app.auth().currentUser.photoURL}
-              alt="User"
-              className="profile-image-img"
-            />
-          </div>
           <div className="profile-text-info-container">
             <p
               style={{
