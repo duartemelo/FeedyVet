@@ -19,6 +19,7 @@ class Home extends Component {
     this.state = {
       user: this.getUser(),
       isadmin: this.props.isAdmin,
+      unReadMessagesCounter: 0,
     };
   }
 
@@ -27,6 +28,28 @@ class Home extends Component {
     const { history } = this.props;
     if (history) history.push(page);
   };
+
+  getUnreadMessagesNumber = () => {
+    let currentComponent = this;
+    const messagesRef = app
+      .firestore()
+      .collection("messages")
+      .orderBy("datetime", "desc");
+    messagesRef.get().then((snapshot) => {
+      snapshot.forEach((doc) => {
+        if (doc.data().messageState === "unread") {
+          currentComponent.setState({
+            unReadMessagesCounter:
+              currentComponent.state.unReadMessagesCounter + 1,
+          });
+        }
+      });
+    });
+  };
+
+  componentDidMount() {
+    this.getUnreadMessagesNumber();
+  }
 
   render() {
     let message = "Olá " + this.state.user + "!";
@@ -101,6 +124,7 @@ class Home extends Component {
                     <div className="icon-div">
                       <FontAwesomeIcon icon={faEnvelope} />
                     </div>
+                    {this.state.unReadMessagesCounter}
                   </div>
                   <div
                     className="user-menu-option"
