@@ -1,6 +1,5 @@
 import React, { useCallback } from "react";
 import * as firebase from "firebase";
-import moment from "moment";
 import "../styles/independent/AddEventForm.css";
 
 const EditEventForm = (props) => {
@@ -11,20 +10,25 @@ const EditEventForm = (props) => {
 
     const { username, animal, comment, type, datetime } = event.target.elements;
 
-    /*if (username.value !== "") {
-      //needs stuff todo
-      try {
-        await firebase
-          .firestore()
-          .collection("events")
-          .doc(eventBeingEdited[0])
-          .update({
-            UID: "",
-          });
-      } catch (error) {
-        alert(error);
-      }
-    }*/
+    if (username.value !== "") {
+      var usersRef = firebase.database().ref("users");
+
+      usersRef.on("child_added", function (data) {
+        if (data.val().username === username.value) {
+          try {
+            firebase
+              .firestore()
+              .collection("events")
+              .doc(eventBeingEdited[0])
+              .update({
+                UID: data.key,
+              });
+          } catch (error) {
+            alert(error);
+          }
+        }
+      });
+    }
     if (animal.value !== "") {
       try {
         await firebase
