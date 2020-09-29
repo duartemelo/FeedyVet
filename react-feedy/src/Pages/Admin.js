@@ -76,7 +76,7 @@ class Admin extends Component {
     }, 10);
   }
 
-  redirectToIndexAndLogout = (page) => {
+  redirectToIndexAndLogout = () => {
     const { history } = this.props;
     if (history) history.push("/");
     app.auth().signOut();
